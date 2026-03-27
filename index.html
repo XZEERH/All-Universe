@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Portal IEA - Pusat data luar angkasa paling gokil buat Sobat IEA! Pantau foto NASA tiap hari, cek asteroid yang lagi lewat, sampe intip foto asli dari planet Mars.">
+    <meta name="author" content="Xzam">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xzam730.github.io/PORTAL-IEA/">
+    <meta property="og:title" content="INTERNATIONAL EDUCATION ASTRONOMY">
+    <meta property="og:description" content="Pusat data luar angkasa paling gokil buat Sobat IEA! Pantau foto NASA tiap hari, cek asteroid, dan intip foto asli dari planet Mars.">
+    <meta property="og:image" content="https://xzam730.github.io/PORTAL-IEA/quality_restoration_20260129111635956.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="INTERNATIONAL EDUCATION ASTRONOMY">
+    <meta name="twitter:description" content="Pusat data luar angkasa buat Sobat IEA! Jelajahi semesta bareng kita.">
+    <meta name="twitter:image" content="https://xzam730.github.io/PORTAL-IEA/quality_restoration_20260129111635956.jpg">
+    <meta name="google-site-verification" content="5RwhXmVjMMqPuptynKkai9cP_EIonBJdB_JsJIJoaKY">
+
+    <title>IEA Portal - International Education Astronomy</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="144x144" href="assets/favicon-iea.png">
+    <link rel="apple-touch-icon" href="assets/favicon-iea.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link rel="stylesheet" href="css/compatibility.css">
+    <link rel="stylesheet" href="css/premium-ui.css">
+    <link rel="stylesheet" href="css/navbar-unified.css">
+    <link rel="stylesheet" href="css/interactive-elements.css">
+    <link rel="stylesheet" href="css/footer-unified.css">
+</head>
+<body>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <div id="system-log" class="system-log">
+      <div class="system-log-header">
+          <span>SYSTEM_LOG_MONITOR</span>
+          <span class="close-btn" onclick="toggleLog()">[TUTUP]</span>
+      </div>
+      <div id="log-content"></div>
+  </div>
+
+  <div id="backToTop" onclick="scrollToTop()">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </div>
+
+  <div class="texture-layer"></div>
+
+  <div id="protocol-screen">
+      <div class="protocol-box">
+          <div class="protocol-header">
+              <span>GERBANG MASUK</span>
+              <span class="protocol-version">VERSI 3</span>
+          </div>
+
+          <div class="protocol-content">
+              <p class="protocol-greeting">Halo, Calon Peneliti!</p>
+              <p>Sistem ini telah diperbarui dengan fitur visual. Harap baca panduan singkat:</p>
+
+              <h4>01. NAVIGASI</h4>
+              <ul>
+                  <li>Gunakan menu kartu untuk mengakses halaman.</li>
+                  <li>Gunakan tombol gerigi (kanan atas) untuk pengaturan.</li>
+              </ul>
+
+              <h4>02. FITUR BARU</h4>
+              <ul>
+                  <li><b class="accent-sec">Informasi:</b> Ada banyak informasi dan fakta menarik.</li>
+                  <li><b class="accent-sec">Data NASA:</b> Gambar asli dari satelit muncul otomatis.</li>
+                  <li><b class="accent-sec">Log Sistem:</b> Melihat aktivitas teknis website.</li>
+              </ul>
+
+              <h4>03. ETIKA</h4>
+              <p>Tetap sopan, ilmiah, dan saling menghargai sesama anggota IEA.</p>
+          </div>
+
+          <div class="protocol-confirm">
+              <div class="custom-checkbox" id="proto-check" onclick="toggleCheck()">
+                  <i>✓</i>
+              </div>
+              <span class="confirm-text" onclick="toggleCheck()">SAYA PAHAM & SIAP MASUK</span>
+          </div>
+
+          <button id="btn-init" onclick="initializeSystem()">TUNGGU PERSETUJUAN</button>
+      </div>
+  </div>
+
+  <div id="loader-overlay">
+    <div class="loader-logo-wrap">
+            <svg class="logo-svg svg-fullscreen" viewBox="0 0 200 200">
+            <ellipse class="ring ring-1" cx="100" cy="100" rx="90" ry="30" />
+            <ellipse class="ring ring-2" cx="100" cy="100" rx="90" ry="30" />
+            <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-family="Orbitron" font-weight="900" font-size="50">IEA</text>
+        </svg>
+    </div>
+    <div class="loader-text" id="loaderMsg">MEMBUKA SISTEM...</div>
+  </div>
+
+  <div class="announcement-bar">
+    <div class="marquee-text">
+        Selamat datang di Portal IEA • Nikmati fitur fitur nya • Pendaftaran Komunitas 2 Dibuka • Cek Pusat Data untuk update satelit • Have a nice day!
+    </div>
+  </div>
+
+  <div class="corner-brand" id="brand-corner">
+    <svg class="corner-logo logo-svg" viewBox="0 0 200 200">
+        <ellipse class="ring ring-1" cx="100" cy="100" rx="90" ry="30" />
+        <ellipse class="ring ring-2" cx="100" cy="100" rx="90" ry="30" />
+        <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-family="Orbitron" font-weight="900" font-size="50">IEA</text>
+    </svg>
+    <span class="corner-text">SYSTEM IEA</span>
+  </div>
+
+  <button class="settings-btn" onclick="openSettings()">
+      <svg viewBox="0 0 24 24" class="settings-icon"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84a.484.484 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.488.488 0 0 0-.59.22L2.09 8.83a.488.488 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.488.488 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.27.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+  </button>
+
+  <div class="wrap" id="main-wrap">
+
+    <header>
+      <div class="status-pill"><div class="status-dot"></div>Semua Sistem Online</div>
+      <h1>PORTAL <span class="iea-glow">IEA</span></h1>
+
+      <p>Selamat Datang, <span id="user-display-name" class="user-name" onclick="changeName()">Peneliti</span></p>
+      <div class="top-controls">
+        <div id="digital-clock" class="digital-clock">00:00:00</div>
+        <button class="theme-action-btn" id="themeActionBtn" aria-label="Ganti mode gelap / terang" onclick="toggleTheme()">
+          <span class="material-icons" id="themeActionIcon">dark_mode</span>
+        </button>
+      </div>
+
+      <div id="nasa-widget" class="nasa-widget">
+          <img id="nasa-img" src="" class="nasa-img" alt="NASA Daily Image">
+          <div class="nasa-info">
+              <span class="nasa-label">NASA DAILY:</span> <span id="nasa-title">Loading...</span>
+          </div>
+      </div>
+
+      <div class="search-container">
+        <input type="text" id="portalSearch" placeholder="Cari menu akses..." onkeyup="filterCards()">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </div>
+    </header>
+
+    <div class="status-indicator">
+        <span>ENKRIPSI: AKTIF</span>
+        <span>SERVER: STABIL</span>
+        <span>PING: <span id="ping-status" class="ping-status">--</span></span>
+    </div>
+
+    <div class="grid">
+
+      <div class="card" onclick="goto('https://whatsapp.com/channel/0029Vb7X7CIHFxPAYUFhN01q')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+        <span class="card-tag">INFO</span>
+        <h2>Saluran WhatsApp</h2>
+        <p>Gabung ke saluran resmi untuk info terbaru kegiatan kami.</p>
+      </div>
+
+      <div class="card" onclick="goto('pages/information.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <span class="card-tag">WEB</span>
+        <h2>Informasi Portal</h2>
+        <p>Baca detail lengkap dan dokumentasi resmi mengenai sistem IEA.</p>
+      </div>
+      <div class="card" onclick="goto('https://xzam730.github.io/PENDAFTARAN-KOMUNITAS-1/')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span class="card-tag">GABUNG</span>
+        <h2>Komunitas 1</h2>
+        <p>Pendaftaran utama bagi anggota baru yang ingin bergabung.</p>
+      </div>
+
+      <div class="card" onclick="goto('https://xzam730.github.io/PENDAFTARAN-KOMUNITAS-1/komunitas2.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span class="card-tag">EKSPANSI</span>
+        <h2>Komunitas 2</h2>
+        <p>Pendaftaran kolaborasi lanjutan untuk proyek bersama.</p>
+      </div>
+
+      <div class="card" onclick="goto('pages/live.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/></svg>
+        <span class="card-tag">LIVE DATA</span>
+        <h2>Pusat Data (Monolith)</h2>
+        <p>Pantau lokasi satelit ISS dan data NASA secara real-time.</p>
+      </div>
+
+      <div class="card" onclick="goto('pages/mind.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM8.9 6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H8.9V6zM18 20H6V10h12v10z"/></svg>
+        <span class="card-tag">ILMIAH</span>
+        <h2>Jurnal IEA</h2>
+        <p>Kumpulan teori dan tulisan ilmiah dari para anggota.</p>
+      </div>
+
+      <div class="card" onclick="goto('pages/library.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>
+        <span class="card-tag">ARSIP</span>
+        <h2>Perpustakaan</h2>
+        <p>Gudang dokumen digital, e-book, dan musik astronomi.</p>
+      </div>
+
+      <div class="card" onclick="goto('https://xzam730.github.io/IEA-Web-premium/')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <span class="card-tag">VIP</span>
+        <h2>Website Utama</h2>
+        <p>Akses ke pengelolaan pusat dengan tampilan visual terbaik.</p>
+      </div>
+
+      <div class="card" onclick="goto('https://ai-iea-international-education-astronomy-tvmchu4pnij7avslkygup.streamlit.app/')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10zM12 5.5L9.5 9h5L12 12.5 14.5 9h-5z"/></svg>
+        <span class="card-tag">BOT</span>
+        <h2>Asisten AI</h2>
+        <p>Tanya jawab otomatis seputar astronomi dan sains.</p>
+      </div>
+
+      <div class="card" onclick="goto('pages/calculate.html')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-7-2h5v-2h-5v2zm0-4h5v-2h-5v2zm0-4h5V7h-5v2zM7 7v2h5V7H7zm0 4h5v-2H7v2zm0 4h5v-2H7v2z"/></svg>
+        <span class="card-tag">TOOLS</span>
+        <h2>Kalkulator Ilmiah</h2>
+        <p>Alat hitung fisika dan konversi data untuk riset.</p>
+      </div>
+
+      <div class="card" onclick="openModal('rulesModal')">
+        <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <span class="card-tag">KOMUNITAS</span>
+        <h2>Server Discord</h2>
+        <p>Tempat diskusi online dan mencari teman baru.</p>
+      </div>
+
+    </div>
+    <div class="sys-footer">
+        IEA SYSTEM // KONEKSI AMAN TERKENDALI
+    </div>
+  </div>
+
+  <div id="rulesModal" class="modal">
+    <div class="modal-box">
+      <h3 class="modal-title">ATURAN DASAR</h3>
+      <div class="modal-content">
+        <p><b class="accent">1. SOPAN SANTUN</b><br>Jaga sikap dan bahasa. Hormati sesama peneliti.</p>
+        <p class="rule-item"><b class="accent">2. FOKUS SAINS</b><br>Utamakan diskusi berbasis data ilmiah yang valid.</p>
+        <p class="rule-item"><b class="accent">3. ANTI HOAX</b><br>Dilarang menyebar informasi palsu atau spam.</p>
+      </div>
+      <button class="btn-action" onclick="goto('https://discord.gg/38chzHbCnN')">PAHAM & GABUNG DISCORD</button>
+      <div class="btn-close" onclick="closeModal('rulesModal')">BATAL</div>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal">
+      <div class="modal-box settings-modal">
+          <h3 class="settings-title">PENGATURAN SISTEM</h3>
+
+          <div class="setting-row">
+              <span>Mode Layar Penuh</span>
+              <button class="setting-btn" onclick="toggleFullScreen()">AKTIFKAN</button>
+          </div>
+          <div class="setting-row">
+              <span>Musik Ambient (Space)</span>
+              <button class="setting-btn" id="music-btn" onclick="toggleMusic()">PLAY</button>
+          </div>
+
+          <div class="setting-row battery-row">
+             <span>Daya Perangkat</span>
+             <span id="battery-status" class="battery-status">--%</span>
+          </div>
+
+          <hr class="settings-hr">
+
+          <div class="setting-row">
+              <span>Mode Terang (Light)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-theme" onchange="toggleTheme()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Efek Suara (SFX)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-sound" onchange="toggleSound()" checked>
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Hemat Daya (No Blur)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-gfx" onchange="toggleGfx()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Matikan Animasi</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-motion" onchange="toggleMotion()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="font-size-row">
+              <span>Ukuran Teks</span>
+              <input type="range" id="font-slider" min="14" max="22" value="16" oninput="changeFontSize(this.value)">
+          </div>
+
+          <hr class="settings-hr">
+
+          <button class="btn-action accent-sec-btn" onclick="toggleLog()">LIHAT LOG SISTEM</button>
+          <button class="btn-danger" onclick="resetSystemData()">HAPUS DATA & RESET</button>
+
+          <div class="btn-close modal-close" onclick="closeModal('settingsModal')">TUTUP PANEL</div>
+      </div>
+  </div>
+
+  <div class="fab-container" id="myFab">
+    <button class="fab-main" onclick="toggleFab()">
+      <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </button>
+
+    <div class="fab-menu">
+      <div class="fab-item" data-label="Reload Halaman" onclick="reloadPage()">
+        <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+      </div>
+      <div class="fab-item" data-label="Panel Admin" onclick="goto('pages/admin.html')">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      </div>
+      <div class="fab-item" data-label="Baca Aturan" onclick="openModal('rulesModal')">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </div>
+      <div class="fab-item" data-label="Hubungi Admin" onclick="goto('https://wa.me/yournumber')">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+      </div>
+      <div class="fab-item" data-label="Cari Cepat" onclick="document.getElementById('portalSearch').focus()">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Handler for graceful error handling -->
+  <script src="js/error-handler.js"></script>
+
+  <!-- Analytics tracking -->
+  <script src="js/analytics.js"></script>
+
+  <!-- Search utility -->
+  <script src="js/search-utils.js"></script>
+
+  <!-- Core application -->
+  <script src="js/script.js"></script>
+
+  <!-- Service Worker registration -->
+  <script>
+    // Register Service Worker for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then((registration) => {
+            console.log('[SW] Registered successfully:', registration);
+
+            // Check for updates periodically
+            setInterval(() => {
+              registration.update();
+            }, 60000); // Every minute
+          })
+          .catch((err) => {
+            console.warn('[SW] Registration failed:', err);
+          });
+      });
+    } else {
+      console.warn('[SW] Service Workers not supported in this browser');
+    }
+  </script>
+
+</body>
+</html>
