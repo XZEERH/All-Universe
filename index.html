@@ -180,12 +180,6 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
             </div>
         </div>
 
-  <div class="announcement-bar">
-    <div class="marquee-text">
-        Selamat datang di Portal IEA • Nikmati fitur fitur nya • Pendaftaran Komunitas 2 Dibuka • Cek Pusat Data untuk update satelit • Have a nice day!
-    </div>
-  </div>
-
         <div id="dashboard-page" style="display:none;">
             <h1 style="text-align:center; font-family:'Orbitron'; letter-spacing:8px; font-size: 2rem; margin-top: 10px;">PORTAL EAC</h1>
             <p id="clock">00:00:00 // EAC-TIME</p>
@@ -216,81 +210,13 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
                     <h3>Asisten AI</h3>
                     <p>Tanya jawab otomatis seputar astronomi dan sains dengan kecerdasan buatan.</p>
                 </div>
-  <div kelas="kartu"saat di klik="goto('https://kalkulator-ilmiah.vercel.app/')">
-  <svg> kelas="ikon kartu"kotak tampilan="0 0 24 24"><jalur D="M4 6H2v14cO 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 O-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-  <menjangkau kelas="label kartu">PERALATAN</menjangkau>
-  <h2>Kalkulator Ilmiah</h2>
-  <P>Alat hitung data dan konversi untuk penelitian ilmiah.</P>
-</div>
+                <div onclick="playClick(); openPortal('https://kalkulator-ilmiah.vercel.app/')" class="menu-item">
+                    <h3>Kalkulator Ilmiah</h3>
+                    <p>Alat hitung fisika dan konversi data untuk keperluan riset antariksa.</p>
+                </div>
             </div>
         </div>
     </div>
-
-  <div id="settingsModal" class="modal">
-      <div class="modal-box settings-modal">
-          <h3 class="settings-title">PENGATURAN SISTEM</h3>
-
-          <div class="setting-row">
-              <span>Mode Layar Penuh</span>
-              <button class="setting-btn" onclick="toggleFullScreen()">AKTIFKAN</button>
-          </div>
-          <div class="setting-row">
-              <span>Musik Ambient (Space)</span>
-              <button class="setting-btn" id="music-btn" onclick="toggleMusic()">PLAY</button>
-          </div>
-
-          <div class="setting-row battery-row">
-             <span>Daya Perangkat</span>
-             <span id="battery-status" class="battery-status">--%</span>
-          </div>
-
-          <hr class="settings-hr">
-
-          <div class="setting-row">
-              <span>Mode Terang (Light)</span>
-              <label class="switch">
-                  <input type="checkbox" id="toggle-theme" onchange="toggleTheme()">
-                  <span class="slider"></span>
-              </label>
-          </div>
-
-          <div class="setting-row">
-              <span>Efek Suara (SFX)</span>
-              <label class="switch">
-                  <input type="checkbox" id="toggle-sound" onchange="toggleSound()" checked>
-                  <span class="slider"></span>
-              </label>
-          </div>
-
-          <div class="setting-row">
-              <span>Hemat Daya (No Blur)</span>
-              <label class="switch">
-                  <input type="checkbox" id="toggle-gfx" onchange="toggleGfx()">
-                  <span class="slider"></span>
-              </label>
-          </div>
-
-          <div class="setting-row">
-              <span>Matikan Animasi</span>
-              <label class="switch">
-                  <input type="checkbox" id="toggle-motion" onchange="toggleMotion()">
-                  <span class="slider"></span>
-              </label>
-          </div>
-
-          <div class="font-size-row">
-              <span>Ukuran Teks</span>
-              <input type="range" id="font-slider" min="14" max="22" value="16" oninput="changeFontSize(this.value)">
-          </div>
-
-          <hr class="settings-hr">
-
-          <button class="btn-action accent-sec-btn" onclick="toggleLog()">LIHAT LOG SISTEM</button>
-          <button class="btn-danger" onclick="resetSystemData()">HAPUS DATA & RESET</button>
-
-          <div class="btn-close modal-close" onclick="closeModal('settingsModal')">TUTUP PANEL</div>
-      </div>
-  </div>
 
     <script>
         const NASA_KEY = 'JMcJ1UGIgdFUs4qDWRaPEONheF5zazhnIdMhs4eH';
