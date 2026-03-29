@@ -226,6 +226,72 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
         </div>
     </div>
 
+  <div id="settingsModal" class="modal">
+      <div class="modal-box settings-modal">
+          <h3 class="settings-title">PENGATURAN SISTEM</h3>
+
+          <div class="setting-row">
+              <span>Mode Layar Penuh</span>
+              <button class="setting-btn" onclick="toggleFullScreen()">AKTIFKAN</button>
+          </div>
+          <div class="setting-row">
+              <span>Musik Ambient (Space)</span>
+              <button class="setting-btn" id="music-btn" onclick="toggleMusic()">PLAY</button>
+          </div>
+
+          <div class="setting-row battery-row">
+             <span>Daya Perangkat</span>
+             <span id="battery-status" class="battery-status">--%</span>
+          </div>
+
+          <hr class="settings-hr">
+
+          <div class="setting-row">
+              <span>Mode Terang (Light)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-theme" onchange="toggleTheme()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Efek Suara (SFX)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-sound" onchange="toggleSound()" checked>
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Hemat Daya (No Blur)</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-gfx" onchange="toggleGfx()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="setting-row">
+              <span>Matikan Animasi</span>
+              <label class="switch">
+                  <input type="checkbox" id="toggle-motion" onchange="toggleMotion()">
+                  <span class="slider"></span>
+              </label>
+          </div>
+
+          <div class="font-size-row">
+              <span>Ukuran Teks</span>
+              <input type="range" id="font-slider" min="14" max="22" value="16" oninput="changeFontSize(this.value)">
+          </div>
+
+          <hr class="settings-hr">
+
+          <button class="btn-action accent-sec-btn" onclick="toggleLog()">LIHAT LOG SISTEM</button>
+          <button class="btn-danger" onclick="resetSystemData()">HAPUS DATA & RESET</button>
+
+          <div class="btn-close modal-close" onclick="closeModal('settingsModal')">TUTUP PANEL</div>
+      </div>
+  </div>
+
     <script>
         const NASA_KEY = 'JMcJ1UGIgdFUs4qDWRaPEONheF5zazhnIdMhs4eH';
         const ls = document.getElementById('loading-screen');
