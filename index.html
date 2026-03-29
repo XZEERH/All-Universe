@@ -72,6 +72,18 @@
         .dots::after { content: ''; animation: dots-loading 1.5s infinite; }
         @keyframes dots-loading { 0% { content: ''; } 33% { content: '.'; } 66% { content: '..'; } 100% { content: '...'; } }
 
+        /* --- IFRAME VIEWER SYSTEM --- */
+        #portal-viewer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9000;
+            display: none;
+        }
+        #portal-viewer iframe {
+            width: 100%; height: 100%; border: none;
+        }
+
         /* --- CONTAINER --- */
         .container { width: 100%; max-width: 480px; padding: 20px; }
 
@@ -93,7 +105,7 @@
 
         .gate-content h2 { font-family: 'Orbitron'; font-size: 0.9rem; color: var(--accent-purple); margin: 20px 0 10px 0; }
         .gate-content p { font-size: 0.95rem; line-height: 1.5; color: #e0e0e0; margin-bottom: 15px; }
-        
+
         .gate-list { list-style: none; margin-bottom: 20px; }
         .gate-list li { font-size: 0.9rem; margin-bottom: 12px; padding-left: 25px; position: relative; color: #ccc; }
         .gate-list li::before { content: "•"; position: absolute; left: 5px; color: var(--accent-purple); font-size: 1.2rem; }
@@ -126,6 +138,10 @@
         <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
     </audio>
 
+    <div id="portal-viewer">
+        <iframe id="iframe-content" src=""></iframe>
+    </div>
+
     <div id="loading-screen">
         <div class="logo-area">
             <div class="orbit o1"></div>
@@ -133,7 +149,7 @@
             <div class="orbit o3"></div>
             <div class="eac-badge">EAC</div>
         </div>
-        <div class="loading-text">MASUK KE SISTEM<span class="dots"></span></div>
+        <div class="loading-text" id="loading-info">MASUK KE SISTEM<span class="dots"></span></div>
     </div>
 
     <div class="container">
@@ -156,20 +172,13 @@
                     <ul class="gate-list">
                         <li><b>Data NASA:</b> Gambar asli dari satelit yang diperbarui setiap hari.</li>
                         <li><b>Asisten AI:</b> Gunakan portal AI untuk tanya jawab otomatis.</li>
-
-                        <li><b>Pendaftaran:</b>
-Ada pendaftaran khusus untuk menjadi anggota EAC.</li>
-                       <li><b>Website resmi:</b>
-Berisi informasi khusus dari EAC yang bisa dibaca.</li>
-
-                      <li><b>Kalkulator khusus:</b>
-Kalkulator untuk membantu menghitung ilmiah.</li>
-
+                        <li><b>Pendaftaran:</b> Ada pendaftaran khusus untuk menjadi anggota EAC.</li>
+                        <li><b>Website resmi:</b> Berisi informasi khusus dari EAC yang bisa dibaca.</li>
+                        <li><b>Kalkulator khusus:</b> Kalkulator untuk membantu menghitung ilmiah.</li>
                     </ul>
                     <h2>03. NOTE!</h2>
                     <ul class="gate-list">
-                        <li><b>Peringatan!:</b>
-Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan apapun tersebut!</li>
+                        <li><b>Peringatan!:</b> Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan apapun tersebut!</li>
                     </ul>
                 </div>
                 <div onclick="playClick(); toggleCheck();" style="display:flex; align-items:center; gap:12px; cursor:pointer; margin: 25px 0 15px 0; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px;">
@@ -186,11 +195,11 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
             <span class="nasa-label">DATA NASA HARIAN</span>
             <div class="nasa-card" id="nasa-card"></div>
             <div class="grid-menu" id="grid-container">
-                <div onclick="playClick(); openPortal('pages/registration.html')" class="menu-item">
+                <div onclick="playClick(); openPortal('https://xzeerh.github.io/REGISTRASI-EAC/')" class="menu-item">
                     <h3>Registrasi EAC 1</h3>
                     <p>Pendaftaran utama bagi calon anggota baru komunitas.</p>
                 </div>
-                <div onclick="playClick(); openPortal('pages/registration2.html')" class="menu-item">
+                <div onclick="playClick(); openPortal('https://xzeerh.github.io/REGISTRASI-EAC2/')" class="menu-item">
                     <h3>Registrasi EAC 2</h3>
                     <p>Pendaftaran resmi versi kedua bagi calon anggota baru komunitas.</p>
                 </div>
@@ -198,7 +207,7 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
                     <h3>Saluran WhatsApp</h3>
                     <p>Tempat informasi terkini yang bisa anda ikuti.</p>
                 </div>
-                <div onclick="playClick(); openPortal('pages/information.html')" class="menu-item">
+                <div onclick="playClick(); openPortal('https://website-resmi.vercel.app/')" class="menu-item">
                     <h3>Website Resmi 1</h3>
                     <p>Akses ke pengelolaan pusat ilmu dengan tampilan visual terbaik.</p>
                 </div>
@@ -247,25 +256,28 @@ Portal dalam tahap pengembangan, jadi bisa saja portal nya rusak dalam keadaan a
             }
         }
 
-        // LOGIKA BARU: Ganti halaman DI DALAM setTimeout biar gak ada layar hitam kosong
         function handleAgreement() {
             ls.style.display = 'flex';
             setTimeout(() => {
-                // Sembunyikan Gerbang & Munculkan Dashboard dulu sebelum loading ditutup
                 document.getElementById('gate-page').style.display = 'none';
                 document.getElementById('dashboard-page').style.display = 'block';
                 initScrollAnimation();
-                
-                // Baru tutup loading-nya biar transisi halus
                 ls.style.display = 'none';
             }, 4000);
         }
 
+        // LOGIKA BARU: Buka Portal di dalam Iframe (Tanpa Keluar Web)
         function openPortal(url) {
+            const info = document.getElementById('loading-info');
+            info.innerHTML = "MENGHUBUNGKAN KE DATABASE<span class='dots'></span>";
             ls.style.display = 'flex';
+            
             setTimeout(() => {
+                const viewer = document.getElementById('portal-viewer');
+                const iframe = document.getElementById('iframe-content');
+                iframe.src = url;
+                viewer.style.display = 'block';
                 ls.style.display = 'none';
-                window.open(url, '_blank');
             }, 4000);
         }
 
