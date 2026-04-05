@@ -31,7 +31,7 @@
             overflow-x: hidden;
         }
 
-        /* --- NEW LOADING SCREEN SYSTEM --- */
+        /* --- LOADING SCREEN SYSTEM (BARU & REUSABLE) --- */
         #loading-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -39,6 +39,7 @@
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             z-index: 9999;
+            transition: opacity 0.6s ease;
         }
 
         .loader-wrapper { width: 200px; text-align: center; }
@@ -55,7 +56,7 @@
 
         #load-bar {
             height: 100%; width: 0%; background: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan); transition: all 0.3s;
+            box-shadow: 0 0 10px var(--accent-cyan); transition: width 0.05s linear;
         }
 
         #load-status {
@@ -74,18 +75,19 @@
         .welcome-text { font-size: 24px; letter-spacing: 5px; margin-bottom: 10px; opacity: 0; }
         .angkasa-text { font-size: 32px; color: var(--accent-purple); letter-spacing: 8px; opacity: 0; text-shadow: 0 0 20px var(--accent-purple); }
 
-        /* --- MARQUEE SYSTEM (NEW) --- */
+        /* --- MARQUEE SYSTEM (SPEED: SEDANG) --- */
         .marquee-container {
             width: 100%; background: rgba(155, 81, 224, 0.05);
             border-top: 1px solid rgba(155, 81, 224, 0.1);
             border-bottom: 1px solid rgba(155, 81, 224, 0.1);
             padding: 10px 0; overflow: hidden; white-space: nowrap;
+            display: none; /* Muncul otomatis lewat JS */
         }
 
         .marquee-content {
             display: inline-block; font-family: 'Orbitron', sans-serif;
             font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px;
-            animation: marquee-run 25s linear infinite;
+            animation: marquee-run 35s linear infinite; /* Kecepatan Sedang */
         }
 
         @keyframes marquee-run {
@@ -167,7 +169,6 @@
 
         .card.reveal { opacity: 1; transform: translateY(0); }
         .card.exit { opacity: 0; transform: translateY(30px); }
-
         .card:active { transform: scale(0.96); }
 
         .tag-label {
@@ -188,7 +189,6 @@
             opacity: 0.8;
         }
 
-        /* --- FAB WRAPPER --- */
         .fab-wrapper {
             position: fixed; bottom: 40px; right: 25px;
             display: flex; flex-direction: column;
@@ -241,7 +241,7 @@
             margin-top: 50px; letter-spacing: 2px; 
         }
 
-        /* UTILITY ANIMATIONS */
+        /* UTILITY */
         .fade-out { animation: fadeOut 0.8s forwards; }
         .fade-in { animation: fadeIn 0.8s forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -266,7 +266,7 @@
     </div>
 
     <div id="portal-content" style="display:none; opacity: 0;">
-        <div class="marquee-container">
+        <div class="marquee-container" id="mainMarquee">
             <div class="marquee-content">
                 SELAMAT DATANG ANGKASA! • PENDAFTARAN KOMUNITAS 2 TELAH DIBUKA! • CEK PUSAT DATA UNTUK MENGETAHUI INFORMASI TERKINI • NIKMATIN SEMUA FITUR YANG ADA DISINI • EAC PUSAT INFORMASI.
             </div>
@@ -362,54 +362,64 @@
     </div>
 
     <script>
-        // --- LOGIC LOADING BARU ---
-        let count = 0;
         const loadBar = document.getElementById('load-bar');
         const loadPerc = document.getElementById('load-perc');
         const loadStatus = document.getElementById('load-status');
         const loadScreen = document.getElementById('loading-screen');
         const welcomeScreen = document.getElementById('welcome-sequence');
         const portalContent = document.getElementById('portal-content');
+        const marquee = document.getElementById('mainMarquee');
 
-        const loadingInterval = setInterval(() => {
-            count++;
-            loadBar.style.width = count + "%";
-            loadPerc.innerText = count + "%";
+        // --- SISTEM LOADING UNIVERSAL (0-100%) ---
+        function runLoading(statusText, callback) {
+            let count = 0;
+            loadScreen.style.display = 'flex';
+            loadScreen.style.opacity = '1';
+            loadBar.style.width = '0%';
+            loadBar.style.background = 'var(--accent-cyan)';
+            loadPerc.style.color = 'var(--accent-cyan)';
+            loadStatus.style.color = 'var(--accent-cyan)';
+            loadStatus.innerText = statusText;
 
-            // Ubah Warna di 80% ke Hijau
-            if(count >= 80) {
-                loadBar.style.background = "var(--green-glow)";
-                loadBar.style.boxShadow = "0 0 15px var(--green-glow)";
-                loadPerc.style.color = "var(--green-glow)";
-                loadStatus.style.color = "var(--green-glow)";
-            }
+            const interval = setInterval(() => {
+                count++;
+                loadBar.style.width = count + "%";
+                loadPerc.innerText = count + "%";
 
-            if(count >= 100) {
-                clearInterval(loadingInterval);
-                finishLoading();
-            }
-        }, 30);
+                if(count >= 80) {
+                    loadBar.style.background = "var(--green-glow)";
+                    loadBar.style.boxShadow = "0 0 15px var(--green-glow)";
+                    loadPerc.style.color = "var(--green-glow)";
+                    loadStatus.style.color = "var(--green-glow)";
+                }
 
-        function finishLoading() {
-            loadScreen.classList.add('fade-out');
-            setTimeout(() => {
-                loadScreen.style.display = 'none';
-                startWelcome();
-            }, 800);
+                if(count >= 100) {
+                    clearInterval(interval);
+                    setTimeout(callback, 200);
+                }
+            }, 25);
         }
+
+        // Jalankan loading saat pertama kali buka web
+        window.addEventListener('load', () => {
+            runLoading("SYSTEM INITIALIZING...", () => {
+                loadScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadScreen.style.display = 'none';
+                    startWelcome();
+                }, 800);
+            });
+        });
 
         function startWelcome() {
             welcomeScreen.style.display = 'flex';
             const w1 = document.getElementById('w-1');
             const w2 = document.getElementById('w-2');
 
-            // Fade In "WELCOME"
             w1.classList.add('fade-in');
             setTimeout(() => {
-                // Fade In "ANGKASA!"
                 w2.classList.add('fade-in');
                 setTimeout(() => {
-                    // Fade Out Welcome Sequence
                     welcomeScreen.classList.add('fade-out');
                     setTimeout(() => {
                         welcomeScreen.style.display = 'none';
@@ -421,13 +431,24 @@
 
         function showPortal() {
             portalContent.style.display = 'block';
+            marquee.style.display = 'block'; // Marquee otomatis muncul
             setTimeout(() => {
                 portalContent.style.opacity = '1';
                 revealCards();
             }, 100);
         }
 
-        // --- SISTEM LAMA (JANGAN DIUBAH) ---
+        // --- GOTO DENGAN LOADING BARU (REUSABLE) ---
+        function goto(url, target) {
+            runLoading("CONNECTING TO " + target.toUpperCase(), () => {
+                loadStatus.innerText = "ACCESS GRANTED";
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 800);
+            });
+        }
+
+        // --- SISTEM LAMA (TIDAK DIUBAH) ---
         function toggleFab() {
             document.getElementById('fabWrapper').classList.toggle('active');
         }
@@ -444,28 +465,6 @@
         setInterval(() => {
             document.getElementById('eac-time').innerText = new Date().toLocaleTimeString('en-GB') + " // EAC-TIME";
         }, 1000);
-
-        function goto(url, target) {
-            // Menggunakan tampilan loading lama untuk transisi antar halaman
-            const loader = document.getElementById('loading-screen');
-            const status = document.getElementById('load-status');
-            const perc = document.getElementById('load-perc');
-            
-            loader.style.display = 'flex'; 
-            loader.style.opacity = '1';
-            loadBar.style.width = "0%";
-            perc.innerText = "";
-            status.innerText = "CONNECTING TO " + target.toUpperCase();
-            status.style.color = "#555";
-
-            setTimeout(() => {
-                status.innerText = "ACCESS GRANTED TO " + target.toUpperCase();
-                status.style.color = "#00ffaa";
-                setTimeout(() => {
-                    window.location.href = url;
-                }, 1000);
-            }, 2000);
-        }
 
         fetch(`https://api.nasa.gov/planetary/apod?api_key=JMcJ1UGIgdFUs4qDWRaPEONheF5zazhnIdMhs4eH`)
             .then(res => res.json()).then(data => {
