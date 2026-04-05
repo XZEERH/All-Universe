@@ -56,7 +56,7 @@
         .welcome-text { font-family: 'Orbitron'; font-size: 24px; letter-spacing: 8px; opacity: 0; transform: translateY(20px); transition: all 1s ease; }
         .welcome-sub { font-family: 'Orbitron'; font-size: 14px; color: var(--accent-purple); letter-spacing: 5px; margin-top: 10px; opacity: 0; transition: all 1s ease; }
 
-        /* --- MARQUEE (SMOOTH & SLOW) --- */
+        /* --- MARQUEE (IMPROVED: NO JEDA) --- */
         .marquee-container {
             width: 100%; background: rgba(155, 81, 224, 0.05);
             border-top: 1px solid rgba(155, 81, 224, 0.1);
@@ -67,8 +67,12 @@
             display: inline-block; font-family: 'Orbitron', sans-serif;
             font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px;
             animation: marquee-run 40s linear infinite;
+            padding-left: 0; /* Mulai langsung dari posisi awal */
         }
-        @keyframes marquee-run { 0% { transform: translateX(100%); } 100% { transform: translateX(-150%); } }
+        @keyframes marquee-run { 
+            0% { transform: translateX(0%); } 
+            100% { transform: translateX(-100%); } 
+        }
 
         /* --- HEADER & CARDS --- */
         .header-section { padding: 30px 20px 20px; text-align: center; }
@@ -100,7 +104,7 @@
         .search-bar input { width: 100%; padding: 16px 20px; background: #15151a; border: 1px solid #222; border-radius: 15px; color: white; outline: none; }
         .mini-status { display: flex; justify-content: center; gap: 20px; font-family: 'Orbitron'; font-size: 10px; color: var(--text-muted); margin-bottom: 30px; }
 
-        /* --- FAB SYSTEM (ASLI) --- */
+        /* --- FAB SYSTEM --- */
         .fab-wrapper { position: fixed; bottom: 40px; right: 25px; display: flex; flex-direction: column; align-items: flex-end; z-index: 1000; }
         .fab-main { width: 56px; height: 56px; background: var(--accent-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(155, 81, 224, 0.4); cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .fab-main svg { width: 24px; height: 24px; fill: white; }
@@ -133,7 +137,7 @@
     <div id="portal-content" style="display:none; opacity: 0;">
         <div class="marquee-container">
             <div class="marquee-content">
-                SELAMAT DATANG ANGKASA! • PENDAFTARAN KOMUNITAS EAC TELAH DIBUKA! • CEK PUSAT DATA UNTUK INFORMASI TERKINI • EXPLORE THE UNIVERSE WITH US • EAC PUSAT INFORMASI.
+                SELAMAT DATANG ANGKASA! • PENDAFTARAN KOMUNITAS EAC TELAH DIBUKA! • CEK PUSAT DATA UNTUK INFORMASI TERKINI • EXPLORE THE UNIVERSE WITH US • EAC PUSAT INFORMASI. &nbsp;&nbsp;&nbsp; SELAMAT DATANG ANGKASA! • PENDAFTARAN KOMUNITAS EAC TELAH DIBUKA! • CEK PUSAT DATA UNTUK INFORMASI TERKINI • EXPLORE THE UNIVERSE WITH US • EAC PUSAT INFORMASI.
             </div>
         </div>
 
@@ -175,7 +179,7 @@
             </div>
 
             <div class="card" onclick="goto('https://whatsapp.com/channel/0029VbCN4sQLo4hhDCkOHX1m', 'Saluran WhatsApp')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-7.6-4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <div class="tag-label">INFO</div>
                 <h3>Saluran WhatsApp</h3>
                 <p>Gabung ke saluran resmi untuk mendapatkan info terbaru kegiatan kami.</p>
@@ -232,12 +236,14 @@
         const welcome = document.getElementById('welcome-overlay');
         const portal = document.getElementById('portal-content');
 
-        // Logic Loading Universial (6 Detik untuk Pembukaan)
         function startLoading(text, duration, callback) {
+            // FIX: Pastikan display dan opacity di-reset agar muncul kembali saat pindah portal
             loadScreen.style.display = 'flex';
             loadScreen.style.opacity = '1';
+            loadStatus.style.color = "#555"; // Reset warna status
             loadStatus.innerText = text;
             loadBar.style.width = '0%';
+            
             let start = null;
             function animate(timestamp) {
                 if (!start) start = timestamp;
@@ -254,7 +260,6 @@
             requestAnimationFrame(animate);
         }
 
-        // Jalur Masuk (Sesuai Permintaan Owner)
         window.addEventListener('load', () => {
             startLoading("SYSTEM INITIALIZING", 6000, () => {
                 loadScreen.style.opacity = '0';
@@ -272,7 +277,10 @@
                                 setTimeout(() => {
                                     welcome.style.display = 'none';
                                     portal.style.display = 'block';
-                                    setTimeout(() => { portal.style.opacity = '1'; revealCards(); }, 50);
+                                    setTimeout(() => { 
+                                        portal.style.opacity = '1'; 
+                                        revealCards(); 
+                                    }, 50);
                                 }, 800);
                             }, 1500);
                         }, 800);
@@ -281,8 +289,8 @@
             });
         });
 
-        // Jalur Keluar (Bekerja otomatis dengan Loading)
         function goto(url, target) {
+            // FIX: Reset tampilan loader sebelum proses jalan
             startLoading("CONNECTING TO " + target.toUpperCase(), 3000, () => {
                 window.location.href = url;
             });
@@ -297,7 +305,6 @@
             });
         }
 
-        // Animasi Scroll (Fade In ke Atas & Fade Out ke Bawah)
         function revealCards() {
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
@@ -314,13 +321,11 @@
         window.addEventListener('scroll', revealCards);
         setInterval(() => { document.getElementById('eac-time').innerText = new Date().toLocaleTimeString('en-GB') + " // EAC-TIME"; }, 1000);
 
-        // NASA API
         fetch(`https://api.nasa.gov/planetary/apod?api_key=JMcJ1UGIgdFUs4qDWRaPEONheF5zazhnIdMhs4eH`)
             .then(res => res.json()).then(data => {
                 document.getElementById('nasa-data').innerHTML = `<img src="${data.url}"><div class="nasa-info" style="padding:15px"><h4>NASA DAILY:</h4><p style="font-size:12px; color:var(--text-muted)">${data.title}</p></div>`;
             });
 
-        // Ping Logic
         setInterval(() => {
             const p = Math.floor(Math.random() * 100) + 10;
             const el = document.getElementById('ping-val');
