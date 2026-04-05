@@ -27,11 +27,11 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            padding-bottom: 80px; /* Ruang ekstra untuk FAB */
+            padding-bottom: 100px; 
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (SISTEM LAMA) --- */
+        /* --- NEW LOADING SCREEN SYSTEM --- */
         #loading-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -39,21 +39,59 @@
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             z-index: 9999;
-            transition: opacity 0.6s ease;
         }
-        .premium-loader {
-            width: 120px; height: 3px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px; overflow: hidden;
-            position: relative;
+
+        .loader-wrapper { width: 200px; text-align: center; }
+        
+        #load-perc { 
+            font-family: 'Orbitron', sans-serif; font-size: 14px; 
+            margin-bottom: 10px; color: var(--accent-cyan); transition: color 0.3s;
         }
-        .premium-loader::after {
-            content: ''; position: absolute;
-            top: 0; left: 0; height: 100%; width: 40%;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
-            animation: preloader 1.2s infinite ease-in-out;
+
+        .premium-loader-bg {
+            width: 100%; height: 4px; background: rgba(255,255,255,0.05);
+            border-radius: 10px; overflow: hidden; position: relative;
         }
-        @keyframes preloader { 0% { left: -40%; } 100% { left: 100%; } }
+
+        #load-bar {
+            height: 100%; width: 0%; background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan); transition: all 0.3s;
+        }
+
+        #load-status {
+            font-family: 'Orbitron', sans-serif; font-size: 9px; margin-top: 15px;
+            letter-spacing: 2px; color: var(--accent-cyan); transition: color 0.3s;
+        }
+
+        /* --- WELCOME SEQUENCE --- */
+        #welcome-sequence {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); display: none; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9998;
+            font-family: 'Orbitron', sans-serif; text-align: center;
+        }
+
+        .welcome-text { font-size: 24px; letter-spacing: 5px; margin-bottom: 10px; opacity: 0; }
+        .angkasa-text { font-size: 32px; color: var(--accent-purple); letter-spacing: 8px; opacity: 0; text-shadow: 0 0 20px var(--accent-purple); }
+
+        /* --- MARQUEE SYSTEM (NEW) --- */
+        .marquee-container {
+            width: 100%; background: rgba(155, 81, 224, 0.05);
+            border-top: 1px solid rgba(155, 81, 224, 0.1);
+            border-bottom: 1px solid rgba(155, 81, 224, 0.1);
+            padding: 10px 0; overflow: hidden; white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block; font-family: 'Orbitron', sans-serif;
+            font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px;
+            animation: marquee-run 25s linear infinite;
+        }
+
+        @keyframes marquee-run {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
 
         /* --- HEADER AREA --- */
         .header-section { padding: 40px 20px 20px; text-align: center; }
@@ -145,29 +183,21 @@
         .card-action-icon {
             position: absolute; right: 25px; top: 25px;
             width: 26px; height: 26px;
-            fill: none;
-            stroke: var(--icon-color);
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            fill: none; stroke: var(--icon-color);
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
             opacity: 0.8;
         }
 
-        /* --- FLOATING ACTION BUTTON (SISTEM BARU) --- */
+        /* --- FAB WRAPPER --- */
         .fab-wrapper {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            z-index: 1000;
+            position: fixed; bottom: 40px; right: 25px;
+            display: flex; flex-direction: column;
+            align-items: flex-end; z-index: 1000;
         }
 
         .fab-main {
             width: 56px; height: 56px;
-            background: var(--accent-purple);
-            border-radius: 50%;
+            background: var(--accent-purple); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 15px rgba(155, 81, 224, 0.4);
             cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -178,8 +208,7 @@
 
         .fab-menu {
             display: flex; flex-direction: column;
-            gap: 12px; margin-bottom: 15px;
-            pointer-events: none;
+            gap: 12px; margin-bottom: 15px; pointer-events: none;
         }
 
         .fab-item {
@@ -191,17 +220,11 @@
         .fab-wrapper.active .fab-menu { pointer-events: auto; }
         .fab-wrapper.active .fab-item { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* Delay animasi staggered */
-        .fab-item:nth-child(1) { transition-delay: 0.05s; }
-        .fab-item:nth-child(2) { transition-delay: 0.1s; }
-        .fab-item:nth-child(3) { transition-delay: 0.15s; }
-
         .fab-label {
             background: #1c1c24; color: white;
             padding: 6px 12px; border-radius: 8px;
             font-size: 10px; font-family: 'Orbitron';
             border: 1px solid #333; white-space: nowrap;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .fab-icon {
@@ -209,27 +232,46 @@
             background: #25252f; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             border: 1px solid #444; color: var(--accent-cyan);
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
         }
 
         .footer { 
-            text-align: center; 
-            color: #636e72; 
-            font-family: 'Orbitron'; 
-            font-size: 9px; 
-            margin-top: 50px; 
-            letter-spacing: 2px; 
+            text-align: center; color: #636e72; 
+            font-family: 'Orbitron'; font-size: 9px; 
+            margin-top: 50px; letter-spacing: 2px; 
         }
+
+        /* UTILITY ANIMATIONS */
+        .fade-out { animation: fadeOut 0.8s forwards; }
+        .fade-in { animation: fadeIn 0.8s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div id="loading-screen">
-        <div class="premium-loader"></div>
-        <div class="load-text" id="load-status" style="font-family:'Orbitron'; font-size:10px; color:#555; margin-top:15px; letter-spacing: 2px;">SYSTEM INITIALIZING</div>
+        <div class="loader-wrapper">
+            <div id="load-perc">0%</div>
+            <div class="premium-loader-bg">
+                <div id="load-bar"></div>
+            </div>
+            <div id="load-status">SYSTEM INITIALIZING...</div>
+        </div>
     </div>
 
-    <div id="portal-content" style="display:none;">
+    <div id="welcome-sequence">
+        <div id="w-1" class="welcome-text">WELCOME</div>
+        <div id="w-2" class="angkasa-text">ANGKASA!</div>
+    </div>
+
+    <div id="portal-content" style="display:none; opacity: 0;">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                SELAMAT DATANG ANGKASA! • PENDAFTARAN KOMUNITAS 2 TELAH DIBUKA! • CEK PUSAT DATA UNTUK MENGETAHUI INFORMASI TERKINI • NIKMATIN SEMUA FITUR YANG ADA DISINI • EAC PUSAT INFORMASI.
+            </div>
+        </div>
+
         <header class="header-section">
             <div class="status-capsule"><div id="status-dot"></div>SEMUA SISTEM ONLINE</div>
             <h1 class="title-portal">PORTAL EAC</h1>
@@ -253,14 +295,14 @@
         </div>
 
         <div class="card-container" id="cardContainer">
-            <div class="card" onclick="goto('components/registration.html', 'Komunitas 1')">
+            <div class="card" onclick="goto('components/registration.html', 'Registrasi 1')">
                 <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 <div class="tag-label">GABUNG</div>
                 <h3>REGISTRASI EAC 1</h3>
                 <p>Pendaftaran utama bagi anggota baru yang ingin bergabung.</p>
             </div>
 
-            <div class="card" onclick="goto('components/registration2.html', 'Komunitas 2')">
+            <div class="card" onclick="goto('components/registration2.html', 'Registrasi 2')">
                 <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <div class="tag-label">GABUNG PROYEK KEDUA</div>
                 <h3>REGISTRASI EAC 2</h3>
@@ -274,7 +316,7 @@
                 <p>Gabung ke saluran resmi untuk mendapatkan info terbaru kegiatan kami.</p>
             </div>
 
-            <div class="card" onclick="goto('pages/information.html', 'Website Resmi')">
+            <div class="card" onclick="goto('pages/information.html', 'Website Utama')">
                 <svg class="card-action-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                 <div class="tag-label">WEB</div>
                 <h3>Website Utama</h3>
@@ -320,7 +362,72 @@
     </div>
 
     <script>
-        // --- FUNGSI TOGGLE FAB ---
+        // --- LOGIC LOADING BARU ---
+        let count = 0;
+        const loadBar = document.getElementById('load-bar');
+        const loadPerc = document.getElementById('load-perc');
+        const loadStatus = document.getElementById('load-status');
+        const loadScreen = document.getElementById('loading-screen');
+        const welcomeScreen = document.getElementById('welcome-sequence');
+        const portalContent = document.getElementById('portal-content');
+
+        const loadingInterval = setInterval(() => {
+            count++;
+            loadBar.style.width = count + "%";
+            loadPerc.innerText = count + "%";
+
+            // Ubah Warna di 80% ke Hijau
+            if(count >= 80) {
+                loadBar.style.background = "var(--green-glow)";
+                loadBar.style.boxShadow = "0 0 15px var(--green-glow)";
+                loadPerc.style.color = "var(--green-glow)";
+                loadStatus.style.color = "var(--green-glow)";
+            }
+
+            if(count >= 100) {
+                clearInterval(loadingInterval);
+                finishLoading();
+            }
+        }, 30);
+
+        function finishLoading() {
+            loadScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadScreen.style.display = 'none';
+                startWelcome();
+            }, 800);
+        }
+
+        function startWelcome() {
+            welcomeScreen.style.display = 'flex';
+            const w1 = document.getElementById('w-1');
+            const w2 = document.getElementById('w-2');
+
+            // Fade In "WELCOME"
+            w1.classList.add('fade-in');
+            setTimeout(() => {
+                // Fade In "ANGKASA!"
+                w2.classList.add('fade-in');
+                setTimeout(() => {
+                    // Fade Out Welcome Sequence
+                    welcomeScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        welcomeScreen.style.display = 'none';
+                        showPortal();
+                    }, 800);
+                }, 1500);
+            }, 800);
+        }
+
+        function showPortal() {
+            portalContent.style.display = 'block';
+            setTimeout(() => {
+                portalContent.style.opacity = '1';
+                revealCards();
+            }, 100);
+        }
+
+        // --- SISTEM LAMA (JANGAN DIUBAH) ---
         function toggleFab() {
             document.getElementById('fabWrapper').classList.toggle('active');
         }
@@ -338,48 +445,26 @@
             document.getElementById('eac-time').innerText = new Date().toLocaleTimeString('en-GB') + " // EAC-TIME";
         }, 1000);
 
-        window.onpageshow = function(event) {
-            if (event.persisted) {
-                window.location.reload();
-            }
-        };
-
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loading-screen');
-            const status = document.getElementById('load-status');
-
-            setTimeout(() => {
-                status.innerText = "ACCESS GRANTED";
-                status.style.color = "#00ffaa";
-
-                setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        document.getElementById('portal-content').style.display = 'block';
-                        revealCards();
-                    }, 600);
-                }, 1000);
-            }, 2000);
-        });
-
         function goto(url, target) {
+            // Menggunakan tampilan loading lama untuk transisi antar halaman
             const loader = document.getElementById('loading-screen');
             const status = document.getElementById('load-status');
-
+            const perc = document.getElementById('load-perc');
+            
             loader.style.display = 'flex'; 
             loader.style.opacity = '1';
+            loadBar.style.width = "0%";
+            perc.innerText = "";
             status.innerText = "CONNECTING TO " + target.toUpperCase();
             status.style.color = "#555";
 
             setTimeout(() => {
                 status.innerText = "ACCESS GRANTED TO " + target.toUpperCase();
                 status.style.color = "#00ffaa";
-
                 setTimeout(() => {
                     window.location.href = url;
-                }, 1200);
-            }, 2500);
+                }, 1000);
+            }, 2000);
         }
 
         fetch(`https://api.nasa.gov/planetary/apod?api_key=JMcJ1UGIgdFUs4qDWRaPEONheF5zazhnIdMhs4eH`)
@@ -390,8 +475,10 @@
         setInterval(() => {
             const p = Math.floor(Math.random() * 100) + 10;
             const el = document.getElementById('ping-val');
-            el.innerText = p;
-            el.style.color = p < 50 ? "#00ffaa" : "#f59e0b";
+            if(el) {
+                el.innerText = p;
+                el.style.color = p < 50 ? "#00ffaa" : "#f59e0b";
+            }
         }, 3000);
 
         function revealCards() {
