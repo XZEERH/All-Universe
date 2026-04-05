@@ -31,15 +31,15 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN SYSTEM (FIXED) --- */
+        /* --- LOADING SCREEN SYSTEM (PERBAIKAN: Z-INDEX & POINTER) --- */
         #loading-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-dark);
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            z-index: 10001; /* Paling atas */
-            pointer-events: auto; /* Awalnya menangkap klik agar sistem stabil */
+            z-index: 10001; 
+            pointer-events: auto; /* Mengunci klik saat loading aktif */
             transition: opacity 0.6s ease;
         }
 
@@ -76,7 +76,7 @@
         .welcome-text { font-size: 24px; letter-spacing: 5px; margin-bottom: 10px; opacity: 0; }
         .angkasa-text { font-size: 32px; color: var(--accent-purple); letter-spacing: 8px; opacity: 0; text-shadow: 0 0 20px var(--accent-purple); }
 
-        /* --- MARQUEE SYSTEM (FIXED SPEED) --- */
+        /* --- MARQUEE SYSTEM (PERBAIKAN: ANIMASI MULUS) --- */
         .marquee-container {
             width: 100%; background: rgba(155, 81, 224, 0.05);
             border-top: 1px solid rgba(155, 81, 224, 0.1);
@@ -88,12 +88,13 @@
         .marquee-content {
             display: inline-block; font-family: 'Orbitron', sans-serif;
             font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px;
-            animation: marquee-run 40s linear infinite; /* Speed Sedang/Smooth */
+            animation: marquee-run 30s linear infinite; 
+            padding-left: 100%; /* Memastikan mulai dari pojok kanan layar */
         }
 
         @keyframes marquee-run {
-            from { transform: translateX(100vw); }
-            to { transform: translateX(-100%); }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-200%); } /* Mengakomodasi padding-left */
         }
 
         /* --- HEADER AREA --- */
@@ -376,14 +377,14 @@
             let count = 0;
             loadScreen.style.display = 'flex';
             loadScreen.style.opacity = '1';
-            loadScreen.style.pointerEvents = 'auto'; // Mengunci layar pas loading
+            loadScreen.style.pointerEvents = 'auto'; // Kunci layar
             loadBar.style.width = '0%';
             loadBar.style.background = 'var(--accent-cyan)';
             loadPerc.style.color = 'var(--accent-cyan)';
             loadStatus.innerText = statusText;
 
             const interval = setInterval(() => {
-                count += 2; // Biar lebih responsif
+                count += 2; 
                 if(count > 100) count = 100;
                 
                 loadBar.style.width = count + "%";
@@ -401,13 +402,12 @@
             }, 20);
         }
 
-        // Init saat pertama kali
         window.addEventListener('load', () => {
             runLoading("SYSTEM INITIALIZING...", () => {
                 loadScreen.classList.add('fade-out');
                 setTimeout(() => {
                     loadScreen.style.display = 'none';
-                    loadScreen.style.pointerEvents = 'none'; // BUKA KUNCI KLIK TOTAL
+                    loadScreen.style.pointerEvents = 'none'; // BEBASKAN KLIK
                     startWelcome();
                 }, 600);
             });
@@ -432,25 +432,35 @@
 
         function showPortal() {
             portalContent.style.display = 'block';
-            // PERBAIKAN MARQUEE: Muncul barengan portal tapi speed smooth
             marquee.style.display = 'block'; 
             setTimeout(() => {
                 portalContent.style.opacity = '1';
-                revealCards(); // Pastikan kartu muncul dan bisa diklik
-            }, 50);
+                // REVEAL CARDS SETELAH FADE IN
+                revealCards(); 
+            }, 100);
         }
 
-        // --- GOTO FIXED (NO GHOSTING) ---
+        // --- GOTO FIXED (PERBAIKAN: TAHAN LOADING & BERSIHKAN POINTER) ---
         function goto(url, target) {
+            // Sebelum jalan, paksa pointer-events aktif biar loading screen nge-lock
+            loadScreen.style.pointerEvents = 'auto'; 
+            
             runLoading("CONNECTING TO " + target.toUpperCase(), () => {
                 loadStatus.innerText = "ACCESS GRANTED";
                 loadStatus.style.color = "var(--green-glow)";
-                // Tahan loading screen tetap muncul (display flex) sampai pindah halaman
-                window.location.href = url; 
+                
+                // JANGAN HAPUS LOADING SCREEN, biar browser yang ganti halamannya
+                window.location.href = url;
+
+                // Backup jika user klik tombol 'Back' di HP, pastikan layar tidak terkunci
+                setTimeout(() => {
+                    loadScreen.style.display = 'none';
+                    loadScreen.style.pointerEvents = 'none';
+                }, 3000);
             });
         }
 
-        // --- SISTEM LAMA (TIDAK DISENTUH) ---
+        // --- SISTEM LAMA (TETAP BERFUNGSI) ---
         function toggleFab() {
             document.getElementById('fabWrapper').classList.toggle('active');
         }
@@ -486,9 +496,13 @@
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < window.innerHeight - 50) {
+                // Perbaiki logika deteksi scroll HP
+                if (cardTop < window.innerHeight * 0.9) { 
                     card.classList.add('reveal');
                     card.classList.remove('exit');
+                } else {
+                    card.classList.remove('reveal');
+                    card.classList.add('exit');
                 }
             });
         }
