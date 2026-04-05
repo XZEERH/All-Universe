@@ -31,7 +31,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN SYSTEM (PERBAIKAN: Z-INDEX & POINTER) --- */
+        /* --- LOADING SCREEN SYSTEM (FIXED: Z-INDEX & PERSISTENCE) --- */
         #loading-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -39,7 +39,7 @@
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             z-index: 10001; 
-            pointer-events: auto; /* Mengunci klik saat loading aktif */
+            pointer-events: auto; 
             transition: opacity 0.6s ease;
         }
 
@@ -76,7 +76,7 @@
         .welcome-text { font-size: 24px; letter-spacing: 5px; margin-bottom: 10px; opacity: 0; }
         .angkasa-text { font-size: 32px; color: var(--accent-purple); letter-spacing: 8px; opacity: 0; text-shadow: 0 0 20px var(--accent-purple); }
 
-        /* --- MARQUEE SYSTEM (PERBAIKAN: ANIMASI MULUS) --- */
+        /* --- MARQUEE SYSTEM (PERBAIKAN: ANTI-LOMPAT) --- */
         .marquee-container {
             width: 100%; background: rgba(155, 81, 224, 0.05);
             border-top: 1px solid rgba(155, 81, 224, 0.1);
@@ -89,12 +89,12 @@
             display: inline-block; font-family: 'Orbitron', sans-serif;
             font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px;
             animation: marquee-run 30s linear infinite; 
-            padding-left: 100%; /* Memastikan mulai dari pojok kanan layar */
+            padding-left: 100%; /* Start dari luar layar kanan */
         }
 
         @keyframes marquee-run {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-200%); } /* Mengakomodasi padding-left */
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-200%, 0, 0); } 
         }
 
         /* --- HEADER AREA --- */
@@ -158,6 +158,7 @@
             color: var(--text-muted); margin-bottom: 30px;
         }
 
+        /* --- CARD SYSTEM (FIXED: FADE SCROLL) --- */
         .card-container { padding: 0 20px; display: flex; flex-direction: column; gap: 20px; }
 
         .card {
@@ -165,12 +166,13 @@
             padding: 25px; position: relative;
             border: 1px solid rgba(255,255,255,0.03);
             cursor: pointer;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0; transform: translateY(40px);
+            pointer-events: none; /* Awalnya tidak bisa diklik sampai reveal */
         }
 
-        .card.reveal { opacity: 1; transform: translateY(0); }
-        .card.exit { opacity: 0; transform: translateY(30px); }
+        .card.reveal { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .card.exit { opacity: 0; transform: translateY(40px); pointer-events: none; }
         .card:active { transform: scale(0.96); }
 
         .tag-label {
@@ -372,12 +374,12 @@
         const portalContent = document.getElementById('portal-content');
         const marquee = document.getElementById('mainMarquee');
 
-        // --- FIXED LOADING SYSTEM ---
+        // --- FIXED LOADING SYSTEM (SMOOTH & PERSISTENT) ---
         function runLoading(statusText, callback) {
             let count = 0;
             loadScreen.style.display = 'flex';
             loadScreen.style.opacity = '1';
-            loadScreen.style.pointerEvents = 'auto'; // Kunci layar
+            loadScreen.style.pointerEvents = 'auto'; 
             loadBar.style.width = '0%';
             loadBar.style.background = 'var(--accent-cyan)';
             loadPerc.style.color = 'var(--accent-cyan)';
@@ -402,12 +404,13 @@
             }, 20);
         }
 
+        // Init pertama kali
         window.addEventListener('load', () => {
             runLoading("SYSTEM INITIALIZING...", () => {
                 loadScreen.classList.add('fade-out');
                 setTimeout(() => {
                     loadScreen.style.display = 'none';
-                    loadScreen.style.pointerEvents = 'none'; // BEBASKAN KLIK
+                    loadScreen.style.pointerEvents = 'none'; 
                     startWelcome();
                 }, 600);
             });
@@ -435,28 +438,24 @@
             marquee.style.display = 'block'; 
             setTimeout(() => {
                 portalContent.style.opacity = '1';
-                // REVEAL CARDS SETELAH FADE IN
                 revealCards(); 
-            }, 100);
+            }, 50);
         }
 
-        // --- GOTO FIXED (PERBAIKAN: TAHAN LOADING & BERSIHKAN POINTER) ---
+        // --- GOTO FIXED (Mencegah Ghosting & Menahan Layar) ---
         function goto(url, target) {
-            // Sebelum jalan, paksa pointer-events aktif biar loading screen nge-lock
-            loadScreen.style.pointerEvents = 'auto'; 
-            
-            runLoading("CONNECTING TO " + target.toUpperCase(), () => {
+            loadScreen.style.display = 'flex';
+            loadScreen.style.opacity = '1';
+            loadScreen.style.pointerEvents = 'auto';
+
+            runLoading("ESTABLISHING LINK TO " + target.toUpperCase(), () => {
                 loadStatus.innerText = "ACCESS GRANTED";
                 loadStatus.style.color = "var(--green-glow)";
                 
-                // JANGAN HAPUS LOADING SCREEN, biar browser yang ganti halamannya
-                window.location.href = url;
-
-                // Backup jika user klik tombol 'Back' di HP, pastikan layar tidak terkunci
+                // Tahan sedikit biar visual loading tertangkap browser sebelum pindah
                 setTimeout(() => {
-                    loadScreen.style.display = 'none';
-                    loadScreen.style.pointerEvents = 'none';
-                }, 3000);
+                    window.location.href = url;
+                }, 100);
             });
         }
 
@@ -492,12 +491,15 @@
             }
         }, 3000);
 
+        // --- REVEAL CARDS (FIXED: FADE SCROLL RESTORED) ---
         function revealCards() {
             const cards = document.querySelectorAll('.card');
+            const triggerBottom = window.innerHeight * 0.95;
+
             cards.forEach(card => {
                 const cardTop = card.getBoundingClientRect().top;
-                // Perbaiki logika deteksi scroll HP
-                if (cardTop < window.innerHeight * 0.9) { 
+                
+                if (cardTop < triggerBottom) {
                     card.classList.add('reveal');
                     card.classList.remove('exit');
                 } else {
@@ -506,7 +508,11 @@
                 }
             });
         }
-        window.addEventListener('scroll', revealCards);
+        
+        // Pakai requestAnimationFrame biar scroll mulus di HP
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(revealCards);
+        });
     </script>
 </body>
 </html>
