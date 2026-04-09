@@ -101,6 +101,69 @@
                 <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
             </div>
         </div>
+<div id="ext_welcome_screen" style="display:none;">
+    <canvas id="ext_star_canvas"></canvas>
+    <div class="ext_welcome_word ext_w1" id="ext_ww1">WELCOME</div>
+    <div class="ext_welcome_line" id="ext_wline"></div>
+    <div class="ext_welcome_word ext_w2" id="ext_ww2">ANGKASA</div>
+    <div class="ext_welcome_sub" id="ext_wsub">EAC · PUSAT INFORMASI ASTRONOMI</div>
+</div>
+
+<div id="ext_notif_container"></div>
+
+<div id="ext_settings_overlay" onclick="ext_closeSettings()"></div>
+<div id="ext_settings_panel">
+    <div class="ext_panel_handle"></div>
+    <div class="ext_panel_title">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        PENGATURAN SISTEM
+    </div>
+    <div class="ext_settings_grid">
+        <div class="ext_setting_item">
+            <div class="ext_toggle_row">
+                <div class="ext_setting_label">LAYAR PENUH</div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_s_fullscreen" onchange="extToggleFullscreen(this)">
+                    <span class="ext_toggle_slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="ext_setting_item">
+            <div class="ext_toggle_row">
+                <div class="ext_setting_label">SFX</div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_s_sfx" checked onchange="extToggleSFX(this)">
+                    <span class="ext_toggle_slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="ext_setting_item">
+            <div class="ext_setting_label">STATUS DAYA</div>
+            <div class="ext_setting_value" style="color:#00ffaa;">⚡ 49%</div>
+        </div>
+        <div class="ext_setting_item ext_full">
+            <div class="ext_setting_label">UKURAN TEKS — <span id="ext_textsize_val">14</span>px</div>
+            <input type="range" class="ext_range_slider" id="ext_s_textsize" min="12" max="20" value="14" oninput="extChangeTextSize(this.value)">
+        </div>
+    </div>
+    <div class="ext_close_btn" onclick="ext_closeSettings()">TUTUP PANEL</div>
+</div>
+
+<div id="ext_rules_overlay" onclick="ext_closeRules()"></div>
+<div id="ext_rules_panel">
+    <div class="ext_panel_handle"></div>
+    <div class="ext_panel_title">ATURAN EAC</div>
+    <div class="ext_rules_section">
+        <div class="ext_rules_category">◆ KOMUNITAS</div>
+        <p>1. Jaga Etika & Sopan Santun.</p>
+        <p>2. No Spam / Berbagi ilmu.</p>
+    </div>
+    <div class="ext_rules_btns">
+        <button class="ext_btn_close" onclick="ext_closeRules()">TUTUP</button>
+        <button class="ext_btn_agree" onclick="ext_agreeRules()">SAYA PAHAM</button>
+    </div>
+</div>
+
 
         <div class="footer">SISTEM TERKENDALI AMAN | EAC PUSAT INFORMASI</div>
     </div>
