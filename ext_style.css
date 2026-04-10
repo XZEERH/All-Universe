@@ -553,3 +553,28 @@ body.ext_no_anim .ext_welcome_word,
 body.ext_no_anim .ext_welcome_name,
 body.ext_no_anim .ext_welcome_stars    { transition: none !important; }
 body.ext_no_anim .card                 { transition: none !important; }
+
+/* Tambahkan di bagian bawah ext_style.css */
+
+/* Loader fadeout via class (bukan JS style langsung) */
+#loading-screen.ext_loader_fadeout {
+    opacity: 0 !important;
+    transition: opacity 0.55s ease !important;
+    pointer-events: none !important;
+}
+
+/* Welcome fadeout */
+#ext_welcome_screen.ext_fadeout {
+    opacity: 0 !important;
+    transition: opacity 0.55s ease !important;
+}
+
+/* Z-index panel & overlay (di atas segalanya saat aktif) */
+.ext_overlay              { z-index: 10001; }
+.ext_panel                { z-index: 10002; }
+#ext_settings_panel       { z-index: 10002; }
+#ext_rules_panel          { z-index: 10002; }
+
+/* Panel tidak aktif tidak boleh intercept touch */
+.ext_panel:not(.ext_visible)   { pointer-events: none; }
+.ext_overlay:not(.ext_visible) { pointer-events: none; }
