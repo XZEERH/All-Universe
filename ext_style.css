@@ -1,153 +1,143 @@
 /* =========================
-   LOADING REVAMP SYSTEM
+   EXT LOADING REVAMP
 ========================= */
-window.addEventListener('load', () => {
+.ext_loader_wrap {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    text-align: center;
+}
 
-    const loader = document.getElementById('loading-screen');
+.ext_loader_percent {
+    font-family: 'Orbitron';
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #38bdf8;
+    letter-spacing: 2px;
+}
 
-    // Inject UI
-    loader.innerHTML += `
-        <div class="ext_loader_wrap">
-            <div class="ext_loader_percent" id="ext_percent">0%</div>
-            <div class="ext_loader_bar">
-                <div class="ext_loader_fill" id="ext_fill"></div>
-            </div>
-        </div>
-        <div class="ext_welcome" id="ext_welcome"></div>
-    `;
+.ext_loader_bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-    let percent = 0;
-    const fill = document.getElementById('ext_fill');
-    const text = document.getElementById('ext_percent');
+.ext_loader_fill {
+    height: 100%;
+    width: 0%;
+    background: #38bdf8;
+    transition: width 0.1s linear;
+}
 
-    const interval = setInterval(() => {
-        percent++;
-        fill.style.width = percent + "%";
-        text.innerText = percent + "%";
+.ext_loader_done {
+    background: #00ffaa !important;
+}
 
-        if (percent >= 100) {
-            clearInterval(interval);
-            fill.classList.add('ext_loader_done');
+/* =========================
+   WELCOME TEXT
+========================= */
+.ext_welcome {
+    position: absolute;
+    top: 40%;
+    text-align: center;
+    width: 100%;
+    font-family: 'Orbitron';
+    font-size: 26px;
+    letter-spacing: 6px;
+    opacity: 0;
+    transition: all 0.8s ease;
+}
 
-            // Welcome Sequence
-            const welcome = document.getElementById('ext_welcome');
-
-            setTimeout(() => {
-                welcome.innerText = "WELCOME";
-                welcome.classList.add('show');
-            }, 500);
-
-            setTimeout(() => {
-                welcome.innerText = "ANGKASA";
-            }, 1500);
-
-            setTimeout(() => {
-                loader.style.opacity = "0";
-                setTimeout(() => {
-                    loader.style.display = "none";
-                    document.getElementById('portal-content').style.display = 'block';
-                    revealCards();
-                    showNotif("Sistem Aktif");
-                    setTimeout(()=>showNotif("Halaman Stabil"),1500);
-                }, 600);
-            }, 3000);
-        }
-    }, 40);
-});
+.ext_welcome.show {
+    opacity: 1;
+    transform: scale(1.1);
+}
 
 /* =========================
    NOTIFICATION
 ========================= */
-function showNotif(msg) {
-    const el = document.createElement('div');
-    el.className = "ext_notif";
-    el.innerText = msg;
-    document.body.appendChild(el);
+.ext_notif {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-family: 'Orbitron';
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.4s;
+}
 
-    setTimeout(()=>el.classList.add('show'),100);
-
-    setTimeout(()=>{
-        el.classList.remove('show');
-        setTimeout(()=>el.remove(),500);
-    },2000);
+.ext_notif.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* =========================
    SETTINGS PANEL
 ========================= */
-function ext_togglePanel(id){
-    document.getElementById(id).classList.toggle('show');
+.ext_settings_btn, .ext_rules_btn {
+    margin-left: 10px;
+    cursor: pointer;
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
+.ext_panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: rgba(20,20,30,0.7);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    transition: 0.4s;
+    z-index: 9999;
+    padding: 20px;
+    overflow-y: auto;
+}
 
-    // Inject buttons
-    document.querySelector('.status-capsule').innerHTML += `
-        <svg class="ext_settings_btn" onclick="ext_togglePanel('ext_settings')" width="16" viewBox="0 0 24 24"><path fill="white" d="M12 8a4 4 0 100 8 4 4 0 000-8zm9 4a7.9 7.9 0 01-.34 2l2.04 1.6-2 3.4-2.4-.8a8 8 0 01-1.7 1l-.4 2.5H9.8l-.4-2.5a8 8 0 01-1.7-1l-2.4.8-2-3.4 2.04-1.6A8 8 0 013 12c0-.7.1-1.4.34-2L1.3 8.4l2-3.4 2.4.8c.5-.4 1.1-.7 1.7-1l.4-2.5h4.4l.4 2.5c.6.3 1.2.6 1.7 1l2.4-.8 2 3.4-2.04 1.6c.24.6.34 1.3.34 2z"/></svg>
-    `;
+.ext_panel.show {
+    right: 0;
+}
 
-    document.querySelector('.mini-status').innerHTML += `
-        <svg class="ext_rules_btn" onclick="ext_togglePanel('ext_rules')" width="16" viewBox="0 0 24 24"><path fill="white" d="M6 2h9l5 5v15H6z"/></svg>
-    `;
+.ext_panel h3 {
+    font-family: 'Orbitron';
+    margin-bottom: 20px;
+}
 
-    // Inject panels
-    document.body.innerHTML += `
-        <div id="ext_settings" class="ext_panel">
-            <h3>SETTINGS</h3>
-            <div class="ext_option"><input type="checkbox"> Fullscreen</div>
-            <div class="ext_option"><input type="checkbox"> Musik Ambient</div>
-            <div class="ext_option"><input type="checkbox"> Status Daya</div>
-            <div class="ext_option"><input type="checkbox"> Mode Terang</div>
-            <div class="ext_option"><input type="checkbox" id="ext_sfx"> SFX</div>
-            <div class="ext_option"><input type="checkbox"> Hemat Daya</div>
-            <div class="ext_option"><input type="checkbox"> Matikan Animasi</div>
-            <div class="ext_option">Ukuran Teks <input type="range" min="12" max="20"></div>
-            <button onclick="ext_togglePanel('ext_settings')">TUTUP PANEL</button>
-        </div>
-
-        <div id="ext_rules" class="ext_panel">
-            <h3>ATURAN EAC</h3>
-            <p>Komunitas:<br>1. Jaga Etika<br>2. No Spam<br>3. Saling Berbagi Ilmu</p>
-            <p>Web:<br>1. Gunakan Bijak<br>2. Lapor Bug ke Admin<br>3. Dilarang Re-upload Asset</p>
-            <button onclick="ext_togglePanel('ext_rules')">SAYA PAHAM</button>
-        </div>
-    `;
-
-    // SFX
-    const sfx = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
-    document.addEventListener('click', ()=>{
-        if(document.getElementById('ext_sfx')?.checked){
-            sfx.currentTime = 0;
-            sfx.play();
-        }
-    });
-
-    /* =========================
-       MARQUEE
-    ========================= */
-    const marquee = document.createElement("div");
-    marquee.className = "ext_marquee";
-    marquee.innerHTML = `<span>Update: Fenomena Pink Moon • Misi Artemis • Aktivitas Matahari meningkat • Observasi langit malam terbaik minggu ini</span>`;
-    
-    document.querySelector('.header-section').appendChild(marquee);
-});
+.ext_option {
+    margin-bottom: 15px;
+    font-size: 13px;
+}
 
 /* =========================
-   GLOBAL TRANSITION OVERRIDE
+   MARQUEE
 ========================= */
-const oldGoto = window.goto;
-window.goto = function(url, target){
+.ext_marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 11px;
+    font-family: 'Orbitron';
+    color: #38bdf8;
+    margin: 10px 0;
+}
 
-    const loader = document.getElementById('loading-screen');
-    loader.style.display = "flex";
-    loader.style.opacity = "1";
+.ext_marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ext_marquee_anim 25s linear infinite;
+}
 
-    let percent = 0;
-    const interval = setInterval(()=>{
-        percent+=2;
-        if(percent>=100){
-            clearInterval(interval);
-            setTimeout(()=> window.location.href = url, 500);
-        }
-    },40);
-};
+@keyframes ext_marquee_anim {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
