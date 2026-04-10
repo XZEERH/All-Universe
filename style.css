@@ -1,0 +1,423 @@
+/* ==================== FITUR BARU: LOADER & WELCOME SCREEN ==================== */
+#new-loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, #0a0f1e, #03050b);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    transition: opacity 1.2s ease-out;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+}
+
+#loader-percentage {
+    font-family: 'Orbitron', monospace;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #00f3ff;
+    text-shadow: 0 0 30px #00f3ff, 0 0 60px #0066ff;
+    margin-bottom: 20px;
+    letter-spacing: 6px;
+}
+
+.loader-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #1a2333;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px #00000080, 0 0 15px #0000004d;
+    overflow: hidden;
+    margin-bottom: 50px;
+    border: 1px solid #2a3a55;
+}
+
+#loader-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00c8ff, #0077ff);
+    box-shadow: 0 0 20px #00a6ff;
+    border-radius: 20px;
+    transition: width 0.05s linear;
+}
+
+#loader-bar.complete {
+    background: linear-gradient(90deg, #00ffaa, #00cc88);
+    box-shadow: 0 0 25px #00ffaa;
+}
+
+.welcome-message {
+    opacity: 0;
+    transition: opacity 1.2s ease-in;
+    text-align: center;
+}
+
+.welcome-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5.5rem;
+    font-weight: 800;
+    letter-spacing: 18px;
+    color: transparent;
+    background: linear-gradient(135deg, #a0e9ff, #c1f2ff, #6eb5ff, #a0e9ff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 40px #00a6ff;
+    margin-bottom: 10px;
+    animation: galaxyShimmer 3s ease infinite;
+}
+
+@keyframes galaxyShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.angkasa-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 300;
+    letter-spacing: 35px;
+    color: #c1d9ff;
+    text-shadow: 0 0 30px #3f7eff, 0 0 60px #1a4faa;
+}
+
+/* Notifikasi Pojok Kiri Bawah */
+.portal-notification {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: rgba(10, 20, 35, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #00e0ff80;
+    border-radius: 40px;
+    padding: 14px 28px;
+    color: #b0f0ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    gap: 30px;
+    box-shadow: 0 0 40px #00000066, 0 0 15px #00aaff40;
+    z-index: 9998;
+    animation: slideInNotif 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 1px;
+}
+
+.portal-notification span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notif-dot {
+    color: #00ff88;
+    font-size: 1.4rem;
+    line-height: 1;
+    text-shadow: 0 0 12px #00ffaa;
+    animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes slideInNotif {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ==================== FITUR BARU: HEADER ICONS (GEAR & ATURAN) ==================== */
+.eac-header-icons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-left: auto;
+}
+
+.eac-icon-btn {
+    background: rgba(28, 28, 36, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid #3a4a6a;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #c0e4ff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.eac-icon-btn:hover {
+    background: #2a3a55;
+    border-color: #00aaff;
+    box-shadow: 0 0 20px #00aaff66;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.eac-icon-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.2s;
+}
+
+.eac-icon-btn:active svg {
+    transform: scale(0.9);
+}
+
+/* Panel Settings & Aturan (Glassmorphism) */
+.eac-settings-panel,
+.eac-rules-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    max-width: 90vw;
+    background: rgba(15, 25, 40, 0.75);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid #2f6080;
+    border-radius: 36px;
+    padding: 28px 24px;
+    color: #e3f2fd;
+    font-family: 'Inter', 'Orbitron', sans-serif;
+    box-shadow: 0 30px 60px #00000080, 0 0 0 1px #1e90ff40 inset;
+    z-index: 10001;
+    display: none;
+}
+
+.eac-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #2e5a7a;
+    padding-bottom: 16px;
+}
+
+.eac-panel-header svg {
+    width: 28px;
+    height: 28px;
+    fill: #aad0ff;
+}
+
+.eac-settings-panel h3,
+.eac-rules-panel h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    color: #aad0ff;
+    letter-spacing: 3px;
+    font-size: 1.3rem;
+}
+
+.eac-setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding: 8px 4px;
+    border-bottom: 1px solid #1e3a55;
+}
+
+.eac-setting-item label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.eac-setting-item svg {
+    width: 22px;
+    height: 22px;
+    fill: #7ab7ef;
+}
+
+.eac-setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #00aaff;
+    cursor: pointer;
+}
+
+.eac-setting-item input[type="range"] {
+    width: 140px;
+    background: #102433;
+    height: 5px;
+    border-radius: 10px;
+    accent-color: #00aaff;
+}
+
+.eac-rules-content {
+    margin: 20px 0;
+}
+
+.eac-rules-section {
+    margin-bottom: 20px;
+}
+
+.eac-rules-section strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f59e0b;
+    font-family: 'Orbitron';
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.eac-rules-section svg {
+    width: 20px;
+    height: 20px;
+    fill: #f59e0b;
+}
+
+.eac-rules-section ul {
+    padding-left: 25px;
+    margin: 8px 0;
+    list-style: none;
+}
+
+.eac-rules-section li {
+    margin: 10px 0;
+    color: #c5e2ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.eac-rules-section li svg {
+    width: 16px;
+    height: 16px;
+    fill: #38bdf8;
+}
+
+.eac-btn-understand {
+    background: linear-gradient(135deg, #0f3450, #1a4a6e);
+    border: 1px solid #00c8ff;
+    color: white;
+    font-weight: bold;
+    padding: 14px;
+    width: 100%;
+    border-radius: 40px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    transition: all 0.25s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.eac-btn-understand svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.eac-btn-understand:hover {
+    background: #1b5580;
+    box-shadow: 0 0 20px #0088ff;
+    transform: scale(1.02);
+}
+
+.eac-overlay-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000b0;
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: none;
+}
+
+/* Battery indicator style */
+.eac-battery-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #00ffaa;
+}
+
+.eac-battery-indicator svg {
+    width: 22px;
+    height: 22px;
+    fill: #00ffaa;
+}
+
+/* ==================== FITUR BARU: SMOOTH MARQUEE ==================== */
+.eac-smooth-marquee-container {
+    width: 100%;
+    background: rgba(7, 16, 24, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid #1e4970;
+    border-bottom: 1px solid #1e4970;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px #00000060;
+    margin: 10px 0 20px;
+}
+
+.eac-smooth-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: smoothMarquee 70s linear infinite;
+    font-family: 'Orbitron', sans-serif;
+    color: #b4e6ff;
+    letter-spacing: 2.5px;
+    font-size: 1rem;
+    font-weight: 400;
+    text-shadow: 0 0 8px #0088ff;
+}
+
+.eac-smooth-marquee span {
+    margin-right: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.eac-smooth-marquee svg {
+    width: 18px;
+    height: 18px;
+    fill: #f59e0b;
+    margin-right: 5px;
+}
+
+.eac-marquee-separator {
+    margin: 0 20px;
+    color: #f59e0b;
+    font-size: 1.2rem;
+}
+
+@keyframes smoothMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
