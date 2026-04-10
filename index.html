@@ -11,13 +11,34 @@
 <body>
 
     <div id="loading-screen">
-        <div class="premium-loader"></div>
+        <div class="ext_loader_wrap">
+            <div class="ext_loader_percent" id="ext_percent_text">0%</div>
+            <div class="ext_progress_track">
+                <div class="ext_progress_fill" id="ext_progress_fill"></div>
+            </div>
+        </div>
         <div class="load-text" id="load-status" style="font-family:'Orbitron'; font-size:10px; color:#555; margin-top:15px; letter-spacing: 2px;">SYSTEM INITIALIZING</div>
+    </div>
+
+    <!-- EXT: Welcome Interstitial -->
+    <div class="ext_welcome_screen" id="ext_welcome_screen">
+        <div class="ext_welcome_word">WELCOME</div>
+        <div class="ext_welcome_name">ANGKASA</div>
+        <div class="ext_welcome_stars">✦ &nbsp; EAC ASTRONOMI &nbsp; ✦</div>
     </div>
 
     <div id="portal-content" style="display:none;">
         <header class="header-section">
             <div class="status-capsule"><div id="status-dot"></div>SEMUA SISTEM ONLINE</div>
+
+            <!-- EXT: Settings Gear Button -->
+            <button class="ext_gear_btn" onclick="ext_openSettings()" title="Pengaturan">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </button>
+
             <h1 class="title-portal">PORTAL EAC</h1>
             <p class="welcome-greet" style="color:var(--text-muted)">Selamat Datang, <span style="color:var(--accent-purple)">Angkasa</span></p>
             <div class="time-display" id="eac-time">00:00:00 // EAC-TIME</div>
@@ -36,6 +57,21 @@
         <div class="mini-status">
             <span>SERVER: STABIL</span>
             <span>PING: <span id="ping-val">--</span> MS</span>
+            <!-- EXT: Rules Button -->
+            <button class="ext_rules_btn" onclick="ext_openRules()">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                ATURAN EAC
+            </button>
+        </div>
+
+        <!-- EXT: Marquee -->
+        <div class="ext_marquee_wrap">
+            <div class="ext_marquee_track" id="ext_marquee_track"></div>
         </div>
 
         <div class="card-container" id="cardContainer">
@@ -101,72 +137,122 @@
                 <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
             </div>
         </div>
-<div id="ext_welcome_screen" style="display:none;">
-    <canvas id="ext_star_canvas"></canvas>
-    <div class="ext_welcome_word ext_w1" id="ext_ww1">WELCOME</div>
-    <div class="ext_welcome_line" id="ext_wline"></div>
-    <div class="ext_welcome_word ext_w2" id="ext_ww2">ANGKASA</div>
-    <div class="ext_welcome_sub" id="ext_wsub">EAC · PUSAT INFORMASI ASTRONOMI</div>
-</div>
-
-<div id="ext_notif_container"></div>
-
-<div id="ext_settings_overlay" onclick="ext_closeSettings()"></div>
-<div id="ext_settings_panel">
-    <div class="ext_panel_handle"></div>
-    <div class="ext_panel_title">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        PENGATURAN SISTEM
-    </div>
-    <div class="ext_settings_grid">
-        <div class="ext_setting_item">
-            <div class="ext_toggle_row">
-                <div class="ext_setting_label">LAYAR PENUH</div>
-                <label class="ext_toggle">
-                    <input type="checkbox" id="ext_s_fullscreen" onchange="extToggleFullscreen(this)">
-                    <span class="ext_toggle_slider"></span>
-                </label>
-            </div>
-        </div>
-        <div class="ext_setting_item">
-            <div class="ext_toggle_row">
-                <div class="ext_setting_label">SFX</div>
-                <label class="ext_toggle">
-                    <input type="checkbox" id="ext_s_sfx" checked onchange="extToggleSFX(this)">
-                    <span class="ext_toggle_slider"></span>
-                </label>
-            </div>
-        </div>
-        <div class="ext_setting_item">
-            <div class="ext_setting_label">STATUS DAYA</div>
-            <div class="ext_setting_value" style="color:#00ffaa;">⚡ 49%</div>
-        </div>
-        <div class="ext_setting_item ext_full">
-            <div class="ext_setting_label">UKURAN TEKS — <span id="ext_textsize_val">14</span>px</div>
-            <input type="range" class="ext_range_slider" id="ext_s_textsize" min="12" max="20" value="14" oninput="extChangeTextSize(this.value)">
-        </div>
-    </div>
-    <div class="ext_close_btn" onclick="ext_closeSettings()">TUTUP PANEL</div>
-</div>
-
-<div id="ext_rules_overlay" onclick="ext_closeRules()"></div>
-<div id="ext_rules_panel">
-    <div class="ext_panel_handle"></div>
-    <div class="ext_panel_title">ATURAN EAC</div>
-    <div class="ext_rules_section">
-        <div class="ext_rules_category">◆ KOMUNITAS</div>
-        <p>1. Jaga Etika & Sopan Santun.</p>
-        <p>2. No Spam / Berbagi ilmu.</p>
-    </div>
-    <div class="ext_rules_btns">
-        <button class="ext_btn_close" onclick="ext_closeRules()">TUTUP</button>
-        <button class="ext_btn_agree" onclick="ext_agreeRules()">SAYA PAHAM</button>
-    </div>
-</div>
-
 
         <div class="footer">SISTEM TERKENDALI AMAN | EAC PUSAT INFORMASI</div>
-    </div>
+
+        <!-- EXT: Notification Stack -->
+        <div class="ext_notif_stack" id="ext_notif_stack"></div>
+
+        <!-- EXT: Settings Overlay + Panel -->
+        <div class="ext_overlay" id="ext_settings_overlay"></div>
+        <div class="ext_panel" id="ext_settings_panel">
+            <div class="ext_panel_title">PENGATURAN SISTEM</div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Mode Layar Penuh</div>
+                    <div class="ext_setting_sub">FULLSCREEN</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_fullscreen"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Musik Ambient</div>
+                    <div class="ext_setting_sub">BACKGROUND AUDIO</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_ambient"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Status Daya</div>
+                    <div class="ext_setting_sub">BATERAI: <span id="ext_battery_val">...</span></div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" disabled><span class="ext_toggle_slider" style="opacity:0.3"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Mode Terang</div>
+                    <div class="ext_setting_sub">LIGHT MODE</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_light"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">SFX</div>
+                    <div class="ext_setting_sub">SOUND EFFECT</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_sfx"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Hemat Daya</div>
+                    <div class="ext_setting_sub">POWER SAVER</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_power"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Matikan Animasi</div>
+                    <div class="ext_setting_sub">NO ANIMATION</div>
+                </div>
+                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_anim"><span class="ext_toggle_slider"></span></label>
+            </div>
+
+            <div class="ext_setting_row">
+                <div>
+                    <div class="ext_setting_label">Ukuran Teks</div>
+                    <div class="ext_setting_sub">TEXT SIZE: <span id="ext_slider_label">16px</span></div>
+                </div>
+                <div class="ext_slider_wrap">
+                    <input type="range" id="ext_slider_text" min="12" max="22" value="16">
+                </div>
+            </div>
+
+            <button class="ext_panel_close_btn" onclick="ext_closeSettings()">TUTUP PANEL</button>
+        </div>
+
+        <!-- EXT: Rules Overlay + Panel -->
+        <div class="ext_overlay" id="ext_rules_overlay"></div>
+        <div class="ext_panel" id="ext_rules_panel">
+            <div class="ext_panel_title">ATURAN EAC</div>
+
+            <div class="ext_rules_section">
+                <div class="ext_rules_section_title">◈ KOMUNITAS</div>
+                <ul class="ext_rules_list">
+                    <li>Jaga Etika dan sopan santun antar sesama anggota</li>
+                    <li>No Spam — dilarang mengirim pesan berulang tanpa tujuan</li>
+                    <li>Saling Berbagi Ilmu untuk kemajuan bersama</li>
+                </ul>
+            </div>
+
+            <div class="ext_rules_section">
+                <div class="ext_rules_section_title">◈ PENGGUNAAN WEB</div>
+                <ul class="ext_rules_list">
+                    <li>Gunakan portal ini dengan bijak dan bertanggung jawab</li>
+                    <li>Lapor Bug ke Admin jika menemukan masalah teknis</li>
+                    <li>Dilarang Re-upload Asset tanpa izin dari pengelola EAC</li>
+                </ul>
+            </div>
+
+            <button class="ext_rules_paham_btn" onclick="ext_closeRules()">✓ &nbsp; SAYA PAHAM</button>
+            <button class="ext_panel_close_btn" style="margin-top:10px;" onclick="ext_closeRules()">TUTUP PANEL</button>
+        </div>
+
+        <!-- EXT: Audio Elements -->
+        <audio id="ext_ambient_audio" loop>
+            <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="ext_sfx_audio">
+            <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+        </audio>
+
+    </div><!-- end #portal-content -->
 
     <script src="script.js"></script>
     <script src="ext_logic.js"></script>
