@@ -1,592 +1,153 @@
-/* ============================================================
-   EAC EXTENSION STYLES — ext_style.css (FINAL)
-   ============================================================ */
+/* =========================
+   LOADING REVAMP SYSTEM
+========================= */
+window.addEventListener('load', () => {
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap');
+    const loader = document.getElementById('loading-screen');
 
-/* ── LOADING SCREEN: LOCK TOTAL ───────────────────────────── */
-#loading-screen {
-    position: fixed        !important;
-    top: 0                 !important;
-    left: 0                !important;
-    width: 100vw           !important;
-    height: 100vh          !important;
-    background: #050505    !important;
-    display: flex          !important;
-    flex-direction: column !important;
-    justify-content: center!important;
-    align-items: center    !important;
-    z-index: 999999        !important;
-    gap: 0                 !important;
-    opacity: 1;
-    transition: opacity 1.5s ease;
-    pointer-events: auto;
+    // Inject UI
+    loader.innerHTML += `
+        <div class="ext_loader_wrap">
+            <div class="ext_loader_percent" id="ext_percent">0%</div>
+            <div class="ext_loader_bar">
+                <div class="ext_loader_fill" id="ext_fill"></div>
+            </div>
+        </div>
+        <div class="ext_welcome" id="ext_welcome"></div>
+    `;
+
+    let percent = 0;
+    const fill = document.getElementById('ext_fill');
+    const text = document.getElementById('ext_percent');
+
+    const interval = setInterval(() => {
+        percent++;
+        fill.style.width = percent + "%";
+        text.innerText = percent + "%";
+
+        if (percent >= 100) {
+            clearInterval(interval);
+            fill.classList.add('ext_loader_done');
+
+            // Welcome Sequence
+            const welcome = document.getElementById('ext_welcome');
+
+            setTimeout(() => {
+                welcome.innerText = "WELCOME";
+                welcome.classList.add('show');
+            }, 500);
+
+            setTimeout(() => {
+                welcome.innerText = "ANGKASA";
+            }, 1500);
+
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    document.getElementById('portal-content').style.display = 'block';
+                    revealCards();
+                    showNotif("Sistem Aktif");
+                    setTimeout(()=>showNotif("Halaman Stabil"),1500);
+                }, 600);
+            }, 3000);
+        }
+    }, 40);
+});
+
+/* =========================
+   NOTIFICATION
+========================= */
+function showNotif(msg) {
+    const el = document.createElement('div');
+    el.className = "ext_notif";
+    el.innerText = msg;
+    document.body.appendChild(el);
+
+    setTimeout(()=>el.classList.add('show'),100);
+
+    setTimeout(()=>{
+        el.classList.remove('show');
+        setTimeout(()=>el.remove(),500);
+    },2000);
 }
 
-#loading-screen.ext_fade_out {
-    opacity: 0             !important;
-    pointer-events: none   !important;
+/* =========================
+   SETTINGS PANEL
+========================= */
+function ext_togglePanel(id){
+    document.getElementById(id).classList.toggle('show');
 }
 
-/* ── LOADER WRAP ──────────────────────────────────────────── */
-.ext_loader_wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-}
-
-/* ── PERCENT ──────────────────────────────────────────────── */
-#ext_percent_text {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    letter-spacing: 5px;
-    color: #38bdf8;
-    text-shadow: 0 0 12px #38bdf8, 0 0 28px rgba(56,189,248,0.35);
-    transition: color 0.8s ease, text-shadow 0.8s ease;
-}
-
-#ext_percent_text.ext_done {
-    color: #00ffaa;
-    text-shadow: 0 0 14px #00ffaa, 0 0 32px rgba(0,255,170,0.4);
-}
-
-/* ── PROGRESS TRACK ───────────────────────────────────────── */
-.ext_progress_track {
-    width: 210px;
-    height: 3px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-#ext_progress_fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #1a6fff, #38bdf8, #7dd3fc);
-    box-shadow: 0 0 10px #38bdf8;
-    transition: width 0.05s linear, background 0.8s ease, box-shadow 0.8s ease;
-}
-
-#ext_progress_fill.ext_done {
-    background: linear-gradient(90deg, #00c47a, #00ffaa, #6effc0);
-    box-shadow: 0 0 16px #00ffaa;
-}
-
-/* ── SYSTEM INITIALIZING TEXT ─────────────────────────────── */
-#ext_init_text {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: #00f3ff;
-    margin-top: 20px;
-    text-shadow: 0 0 10px #00f3ff, 0 0 22px rgba(0,243,255,0.3);
-    animation: ext_pulse 2.2s ease-in-out infinite;
-    transition: color 0.6s ease, text-shadow 0.6s ease;
-}
-
-#ext_init_text.ext_granted {
-    color: #00ffaa;
-    text-shadow: 0 0 12px #00ffaa, 0 0 26px rgba(0,255,170,0.35);
-    animation: none;
-}
-
-@keyframes ext_pulse {
-    0%, 100% { opacity: 1;   text-shadow: 0 0 10px #00f3ff, 0 0 22px rgba(0,243,255,0.3); }
-    50%       { opacity: 0.3; text-shadow: none; }
-}
-
-/* ── WELCOME SCREEN ───────────────────────────────────────── */
-#ext_welcome_screen {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    z-index: 999998;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.9s ease;
-}
-
-#ext_welcome_screen.ext_visible  { opacity: 1; pointer-events: auto; }
-#ext_welcome_screen.ext_fade_out { opacity: 0; pointer-events: none; }
-
-.ext_welcome_word {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: 10px;
-    background: linear-gradient(90deg, #38bdf8, #9b51e0, #00ffaa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.85s ease, transform 0.85s ease;
-}
-
-.ext_welcome_name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 20px;
-    letter-spacing: 7px;
-    color: #00ffaa;
-    text-shadow: 0 0 18px rgba(0,255,170,0.5);
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.85s ease 0.3s, transform 0.85s ease 0.3s;
-}
-
-.ext_welcome_stars {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #38bdf8;
-    text-shadow: 0 0 8px rgba(56,189,248,0.4);
-    opacity: 0;
-    transition: opacity 0.85s ease 0.6s;
-}
-
-.ext_welcome_typing {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: #444;
-    min-height: 18px;
-    margin-top: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease 0.9s;
-}
-
-.ext_welcome_typing.ext_cursor::after {
-    content: '|';
-    color: #38bdf8;
-    animation: ext_blink 0.75s step-end infinite;
-}
-
-@keyframes ext_blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
-}
-
-/* Aktifkan semua elemen welcome */
-#ext_welcome_screen.ext_show .ext_welcome_word,
-#ext_welcome_screen.ext_show .ext_welcome_name,
-#ext_welcome_screen.ext_show .ext_welcome_stars,
-#ext_welcome_screen.ext_show .ext_welcome_typing {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ── NOTIFICATION STACK ───────────────────────────────────── */
-#ext_notif_stack {
-    position: fixed;
-    bottom: 28px;
-    left: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 90000;
-    pointer-events: none;
-}
-
-.ext_notif {
-    background: rgba(5,5,12,0.96);
-    border: 1px solid rgba(0,255,170,0.2);
-    border-left: 3px solid #00ffaa;
-    border-radius: 10px;
-    padding: 10px 16px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    color: #00ffaa;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
-    text-shadow: 0 0 8px rgba(0,255,170,0.35);
-    opacity: 0;
-    transform: translateX(-22px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.ext_notif.ext_show {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* ── GEAR BUTTON ──────────────────────────────────────────── */
-.ext_gear_btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: rgba(155,81,224,0.1);
-    border: 1px solid rgba(155,81,224,0.35);
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 10px;
-    vertical-align: middle;
-    transition: background 0.25s, box-shadow 0.25s;
-    flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.ext_gear_btn:active {
-    background: rgba(155,81,224,0.28);
-    box-shadow: 0 0 12px rgba(155,81,224,0.4);
-    outline: none;
-}
-
-.ext_gear_btn svg {
-    width: 15px; height: 15px;
-    stroke: #9b51e0; fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    pointer-events: none;
-}
-
-/* ── OVERLAY ──────────────────────────────────────────────── */
-.ext_overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    z-index: 10001;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.ext_overlay.ext_visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* ── PANEL ────────────────────────────────────────────────── */
-.ext_panel {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: rgba(6,6,12,0.98);
-    border-top: 1px solid rgba(155,81,224,0.2);
-    border-radius: 24px 24px 0 0;
-    padding: 10px 20px 44px;
-    z-index: 10002;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    max-height: 88vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    pointer-events: none;
-}
-
-.ext_panel.ext_visible {
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.ext_panel::before {
-    content: '';
-    display: block;
-    width: 40px; height: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 4px;
-    margin: 12px auto 18px;
-}
-
-.ext_panel_title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 11px;
-    color: #9b51e0;
-    letter-spacing: 3px;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.ext_panel_title::before {
-    content: '';
-    display: block;
-    width: 4px; height: 14px;
-    background: #9b51e0;
-    border-radius: 2px;
-    flex-shrink: 0;
-    box-shadow: 0 0 8px rgba(155,81,224,0.5);
-}
-
-/* ── SETTING ROW ──────────────────────────────────────────── */
-.ext_setting_row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    gap: 12px;
-}
-
-.ext_setting_label {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: #e2e8f0;
-    line-height: 1.3;
-}
-
-.ext_setting_sub {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 8px;
-    color: #444;
-    margin-top: 3px;
-    letter-spacing: 1px;
-}
-
-/* Toggle */
-.ext_toggle {
-    position: relative;
-    width: 44px; height: 26px;
-    flex-shrink: 0;
-    cursor: pointer;
-}
-
-.ext_toggle input {
-    opacity: 0; width: 0; height: 0;
-    position: absolute;
-}
-
-.ext_toggle_slider {
-    position: absolute;
-    inset: 0;
-    background: #14141e;
-    border: 1px solid #2a2a3a;
-    border-radius: 26px;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-.ext_toggle_slider::before {
-    content: '';
-    position: absolute;
-    width: 18px; height: 18px;
-    left: 3px; top: 3px;
-    background: #444;
-    border-radius: 50%;
-    transition: transform 0.3s, background 0.3s;
-}
-
-.ext_toggle input:checked + .ext_toggle_slider {
-    background: rgba(0,255,170,0.1);
-    border-color: rgba(0,255,170,0.3);
-    box-shadow: 0 0 8px rgba(0,255,170,0.2);
-}
-
-.ext_toggle input:checked + .ext_toggle_slider::before {
-    transform: translateX(18px);
-    background: #00ffaa;
-}
-
-/* Slider */
-.ext_slider_wrap { width: 110px; flex-shrink: 0; }
-.ext_slider_wrap input[type="range"] {
-    width: 100%;
-    accent-color: #9b51e0;
-    cursor: pointer;
-}
-
-/* Panel close button */
-.ext_panel_close_btn {
-    display: block;
-    width: 100%;
-    margin-top: 22px;
-    padding: 14px;
-    background: rgba(155,81,224,0.07);
-    border: 1px solid rgba(155,81,224,0.25);
-    border-radius: 14px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    color: #9b51e0;
-    letter-spacing: 2px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.2s, box-shadow 0.2s;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.ext_panel_close_btn:active {
-    background: rgba(155,81,224,0.22);
-    box-shadow: 0 0 10px rgba(155,81,224,0.2);
-}
-
-/* ── RULES BUTTON ─────────────────────────────────────────── */
-.ext_rules_btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(56,189,248,0.06);
-    border: 1px solid rgba(56,189,248,0.2);
-    border-radius: 8px;
-    padding: 5px 12px;
-    cursor: pointer;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    color: #38bdf8;
-    letter-spacing: 1px;
-    transition: background 0.2s;
-    -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
-}
-
-.ext_rules_btn:active { background: rgba(56,189,248,0.18); }
-
-.ext_rules_btn svg {
-    width: 12px; height: 12px;
-    stroke: #38bdf8; fill: none;
-    stroke-width: 1.8;
-    stroke-linecap: round; stroke-linejoin: round;
-    flex-shrink: 0; pointer-events: none;
-}
-
-/* ── RULES PANEL ──────────────────────────────────────────── */
-#ext_rules_panel .ext_panel_title { color: #38bdf8; }
-#ext_rules_panel .ext_panel_title::before {
-    background: #38bdf8;
-    box-shadow: 0 0 8px rgba(56,189,248,0.4);
-}
-
-.ext_rules_section { margin-bottom: 20px; }
-
-.ext_rules_section_title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    color: #38bdf8;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    text-shadow: 0 0 6px rgba(56,189,248,0.3);
-}
-
-.ext_rules_list {
-    list-style: none;
-    padding: 0; margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.ext_rules_list li {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: #a0a0a5;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    line-height: 1.5;
-}
-
-.ext_rules_list li::before {
-    content: '▸';
-    color: #38bdf8;
-    flex-shrink: 0;
-    margin-top: 1px;
-}
-
-.ext_rules_paham_btn {
-    display: block;
-    width: 100%;
-    margin-top: 22px;
-    padding: 14px;
-    background: rgba(56,189,248,0.07);
-    border: 1px solid rgba(56,189,248,0.25);
-    border-radius: 14px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 10px;
-    color: #38bdf8;
-    letter-spacing: 2px;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.2s;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.ext_rules_paham_btn:active { background: rgba(56,189,248,0.22); }
-
-/* ── MARQUEE ──────────────────────────────────────────────── */
-#ext_marquee_wrap {
-    width: 100%;
-    overflow: hidden;
-    background: rgba(56,189,248,0.03);
-    border-top: 1px solid rgba(56,189,248,0.07);
-    border-bottom: 1px solid rgba(56,189,248,0.07);
-    padding: 9px 0;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-#ext_marquee_wrap::before,
-#ext_marquee_wrap::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 36px;
-    z-index: 1;
-    pointer-events: none;
-}
-
-#ext_marquee_wrap::before {
-    left: 0;
-    background: linear-gradient(to right, #0b0b0f, transparent);
-}
-
-#ext_marquee_wrap::after {
-    right: 0;
-    background: linear-gradient(to left, #0b0b0f, transparent);
-}
-
-.ext_marquee_track {
-    display: flex;
-    width: max-content;
-    animation: ext_scroll 50s linear infinite;
-}
-
-.ext_marquee_track:hover { animation-play-state: paused; }
-
-@keyframes ext_scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-.ext_marquee_item {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 9px;
-    color: #38bdf8;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
-    padding: 0 28px;
-    opacity: 0.75;
-}
-
-.ext_marquee_dot {
-    color: rgba(56,189,248,0.3);
-    margin-right: 10px;
-}
-
-/* ── LIGHT MODE (element-spesifik saja) ───────────────────── */
-body.ext_light #portal-content     { background: #f0f4ff; }
-body.ext_light .nasa-card          { background: #e4eaf8; }
-body.ext_light .search-bar input   { background: #e4eaf8; color: #111; border-color: #c8d4ee; }
-body.ext_light .ext_panel          { background: rgba(235,240,255,0.98); }
-body.ext_light .ext_setting_label  { color: #111; }
-body.ext_light .ext_rules_list li  { color: #444; }
-
-/* ── POWER SAVER ──────────────────────────────────────────── */
-body.ext_power_saver .ext_marquee_track { animation-duration: 120s !important; }
-
-/* ── NO ANIMATION ─────────────────────────────────────────── */
-body.ext_no_anim .ext_marquee_track     { animation: none !important; }
-body.ext_no_anim .card                  { transition: none !important; }
+document.addEventListener("DOMContentLoaded", ()=>{
+
+    // Inject buttons
+    document.querySelector('.status-capsule').innerHTML += `
+        <svg class="ext_settings_btn" onclick="ext_togglePanel('ext_settings')" width="16" viewBox="0 0 24 24"><path fill="white" d="M12 8a4 4 0 100 8 4 4 0 000-8zm9 4a7.9 7.9 0 01-.34 2l2.04 1.6-2 3.4-2.4-.8a8 8 0 01-1.7 1l-.4 2.5H9.8l-.4-2.5a8 8 0 01-1.7-1l-2.4.8-2-3.4 2.04-1.6A8 8 0 013 12c0-.7.1-1.4.34-2L1.3 8.4l2-3.4 2.4.8c.5-.4 1.1-.7 1.7-1l.4-2.5h4.4l.4 2.5c.6.3 1.2.6 1.7 1l2.4-.8 2 3.4-2.04 1.6c.24.6.34 1.3.34 2z"/></svg>
+    `;
+
+    document.querySelector('.mini-status').innerHTML += `
+        <svg class="ext_rules_btn" onclick="ext_togglePanel('ext_rules')" width="16" viewBox="0 0 24 24"><path fill="white" d="M6 2h9l5 5v15H6z"/></svg>
+    `;
+
+    // Inject panels
+    document.body.innerHTML += `
+        <div id="ext_settings" class="ext_panel">
+            <h3>SETTINGS</h3>
+            <div class="ext_option"><input type="checkbox"> Fullscreen</div>
+            <div class="ext_option"><input type="checkbox"> Musik Ambient</div>
+            <div class="ext_option"><input type="checkbox"> Status Daya</div>
+            <div class="ext_option"><input type="checkbox"> Mode Terang</div>
+            <div class="ext_option"><input type="checkbox" id="ext_sfx"> SFX</div>
+            <div class="ext_option"><input type="checkbox"> Hemat Daya</div>
+            <div class="ext_option"><input type="checkbox"> Matikan Animasi</div>
+            <div class="ext_option">Ukuran Teks <input type="range" min="12" max="20"></div>
+            <button onclick="ext_togglePanel('ext_settings')">TUTUP PANEL</button>
+        </div>
+
+        <div id="ext_rules" class="ext_panel">
+            <h3>ATURAN EAC</h3>
+            <p>Komunitas:<br>1. Jaga Etika<br>2. No Spam<br>3. Saling Berbagi Ilmu</p>
+            <p>Web:<br>1. Gunakan Bijak<br>2. Lapor Bug ke Admin<br>3. Dilarang Re-upload Asset</p>
+            <button onclick="ext_togglePanel('ext_rules')">SAYA PAHAM</button>
+        </div>
+    `;
+
+    // SFX
+    const sfx = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+    document.addEventListener('click', ()=>{
+        if(document.getElementById('ext_sfx')?.checked){
+            sfx.currentTime = 0;
+            sfx.play();
+        }
+    });
+
+    /* =========================
+       MARQUEE
+    ========================= */
+    const marquee = document.createElement("div");
+    marquee.className = "ext_marquee";
+    marquee.innerHTML = `<span>Update: Fenomena Pink Moon • Misi Artemis • Aktivitas Matahari meningkat • Observasi langit malam terbaik minggu ini</span>`;
+    
+    document.querySelector('.header-section').appendChild(marquee);
+});
+
+/* =========================
+   GLOBAL TRANSITION OVERRIDE
+========================= */
+const oldGoto = window.goto;
+window.goto = function(url, target){
+
+    const loader = document.getElementById('loading-screen');
+    loader.style.display = "flex";
+    loader.style.opacity = "1";
+
+    let percent = 0;
+    const interval = setInterval(()=>{
+        percent+=2;
+        if(percent>=100){
+            clearInterval(interval);
+            setTimeout(()=> window.location.href = url, 500);
+        }
+    },40);
+};
