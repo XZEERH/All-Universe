@@ -10,6 +10,7 @@
 </head>
 <body>
 
+    <!-- LOADING SCREEN (structure lama dipertahankan, isi direvamp ext) -->
     <div id="loading-screen">
         <div class="ext_loader_wrap">
             <div class="ext_loader_percent" id="ext_percent_text">0%</div>
@@ -17,36 +18,59 @@
                 <div class="ext_progress_fill" id="ext_progress_fill"></div>
             </div>
         </div>
-        <div class="load-text" id="load-status" style="font-family:'Orbitron'; font-size:10px; color:#555; margin-top:15px; letter-spacing: 2px;">SYSTEM INITIALIZING</div>
+        <!-- load-status dipertahankan untuk kompatibilitas script.js -->
+        <div class="load-text" id="load-status"
+             style="font-family:'Orbitron';font-size:10px;color:#555;margin-top:15px;letter-spacing:2px;display:none;">
+            SYSTEM INITIALIZING
+        </div>
     </div>
 
     <!-- EXT: Welcome Interstitial -->
-    <div class="ext_welcome_screen" id="ext_welcome_screen">
+    <div id="ext_welcome_screen">
         <div class="ext_welcome_word">WELCOME</div>
         <div class="ext_welcome_name">ANGKASA</div>
         <div class="ext_welcome_stars">✦ &nbsp; EAC ASTRONOMI &nbsp; ✦</div>
     </div>
 
     <div id="portal-content" style="display:none;">
-        <header class="header-section">
-            <div class="status-capsule"><div id="status-dot"></div>SEMUA SISTEM ONLINE</div>
 
-            <!-- EXT: Settings Gear Button -->
-            <button class="ext_gear_btn" onclick="ext_openSettings()" title="Pengaturan">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-            </button>
+        <header class="header-section">
+            <!-- Capsule + Gear dalam satu baris -->
+            <div style="display:inline-flex;align-items:center;justify-content:center;margin-bottom:25px;gap:8px;">
+                <div class="status-capsule" style="margin-bottom:0;">
+                    <div id="status-dot"></div>SEMUA SISTEM ONLINE
+                </div>
+                <button class="ext_gear_btn" onclick="ext_openSettings()" title="Pengaturan">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                                 a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0
+                                 v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06
+                                 a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15
+                                 a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                                 A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06
+                                 a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68
+                                 a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                                 a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06
+                                 a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9
+                                 a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                                 a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
 
             <h1 class="title-portal">PORTAL EAC</h1>
-            <p class="welcome-greet" style="color:var(--text-muted)">Selamat Datang, <span style="color:var(--accent-purple)">Angkasa</span></p>
+            <p class="welcome-greet" style="color:var(--text-muted)">
+                Selamat Datang, <span style="color:var(--accent-purple)">Angkasa</span>
+            </p>
             <div class="time-display" id="eac-time">00:00:00 // EAC-TIME</div>
         </header>
 
         <div class="nasa-card">
             <div id="nasa-data">
-                <div style="height: 150px; display: flex; align-items: center; justify-content: center; color: #333;">Fetching Satellite Data...</div>
+                <div style="height:150px;display:flex;align-items:center;justify-content:center;color:#333;">
+                    Fetching Satellite Data...
+                </div>
             </div>
         </div>
 
@@ -57,9 +81,8 @@
         <div class="mini-status">
             <span>SERVER: STABIL</span>
             <span>PING: <span id="ping-val">--</span> MS</span>
-            <!-- EXT: Rules Button -->
             <button class="ext_rules_btn" onclick="ext_openRules()">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
                     <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -70,67 +93,119 @@
         </div>
 
         <!-- EXT: Marquee -->
-        <div class="ext_marquee_wrap">
+        <div id="ext_marquee_wrap">
             <div class="ext_marquee_track" id="ext_marquee_track"></div>
         </div>
 
         <div class="card-container" id="cardContainer">
-            <div class="card" onclick="goto('components/registration.html', 'Registrasi 1')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+
+            <div class="card" onclick="goto('components/registration.html','Registrasi 1')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
                 <div class="tag-label">GABUNG</div>
                 <h3>REGISTRASI EAC 1</h3>
                 <p>Pendaftaran utama bagi anggota baru yang ingin bergabung.</p>
             </div>
 
-            <div class="card" onclick="goto('components/registration2.html', 'Registrasi 2')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div class="card" onclick="goto('components/registration2.html','Registrasi 2')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
                 <div class="tag-label">GABUNG PROYEK KEDUA</div>
                 <h3>REGISTRASI EAC 2</h3>
                 <p>Pendaftaran kolaborasi lanjutan kedua untuk proyek bersama.</p>
             </div>
 
-            <div class="card" onclick="goto('https://whatsapp.com/channel/0029VbCN4sQLo4hhDCkOHX1m', 'Saluran WhatsApp')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <div class="card" onclick="goto('https://whatsapp.com/channel/0029VbCN4sQLo4hhDCkOHX1m','Saluran WhatsApp')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7
+                             a8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8
+                             a8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5
+                             a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
                 <div class="tag-label">INFO</div>
                 <h3>Saluran WhatsApp</h3>
                 <p>Gabung ke saluran resmi untuk mendapatkan info terbaru kegiatan kami.</p>
             </div>
 
-            <div class="card" onclick="goto('pages/information.html', 'Website Utama')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <div class="card" onclick="goto('pages/information.html','Website Utama')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10
+                             a15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
                 <div class="tag-label">WEB</div>
                 <h3>Website Utama</h3>
                 <p>Akses ke pengelolaan pusat informasi astro dengan tampilan visual terbaik.</p>
             </div>
 
-            <div class="card" onclick="goto('https://eac-ai.vercel.app', 'Asisten AI')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <div class="card" onclick="goto('https://eac-ai.vercel.app','Asisten AI')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
                 <div class="tag-label">BOT</div>
                 <h3>Asisten AI</h3>
                 <p>Tanya jawab otomatis seputar astronomi dan sains serta lainnya.</p>
             </div>
 
-            <div class="card" onclick="goto('src/calculator.html', 'Kalkulator Ilmiah')">
-                <svg class="card-action-icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="8" y2="10"></line><line x1="12" y1="10" x2="12" y2="10"></line><line x1="16" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="8" y2="18"></line><line x1="12" y1="18" x2="12" y2="18"></line><line x1="16" y1="18" x2="16" y2="18"></line></svg>
+            <div class="card" onclick="goto('src/calculator.html','Kalkulator Ilmiah')">
+                <svg class="card-action-icon" viewBox="0 0 24 24">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                    <line x1="8" y1="10" x2="8" y2="10"></line><line x1="12" y1="10" x2="12" y2="10"></line>
+                    <line x1="16" y1="10" x2="16" y2="10"></line>
+                    <line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line>
+                    <line x1="16" y1="14" x2="16" y2="14"></line>
+                    <line x1="8" y1="18" x2="8" y2="18"></line><line x1="12" y1="18" x2="12" y2="18"></line>
+                    <line x1="16" y1="18" x2="16" y2="18"></line>
+                </svg>
                 <div class="tag-label">TOOLS</div>
                 <h3>Kalkulator Ilmiah</h3>
                 <p>Alat hitung fisika dan riset antariksa.</p>
             </div>
-        </div>
+
+        </div><!-- end .card-container -->
 
         <div class="fab-wrapper" id="fabWrapper">
             <div class="fab-menu">
                 <div class="fab-item" onclick="location.reload()">
                     <span class="fab-label">Reload Halaman</span>
-                    <div class="fab-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></div>
+                    <div class="fab-icon">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8
+                                     s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08
+                                     A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6
+                                     c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="fab-item" onclick="goto('pages/admin.html', 'Panel Admin')">
+                <div class="fab-item" onclick="goto('pages/admin.html','Panel Admin')">
                     <span class="fab-label">Panel Admin</span>
-                    <div class="fab-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                    <div class="fab-icon">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z
+                                     m0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="fab-item" onclick="window.open('https://wa.me/6283865255697?text=Halo%20Admin,%20saya%20ingin%20melaporkan%20bug%20di%20portal%20EAC.')">
                     <span class="fab-label">Hubungi Admin</span>
-                    <div class="fab-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg></div>
+                    <div class="fab-icon">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2
+                                     V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
             <div class="fab-main" onclick="toggleFab()">
@@ -140,75 +215,82 @@
 
         <div class="footer">SISTEM TERKENDALI AMAN | EAC PUSAT INFORMASI</div>
 
-        <!-- EXT: Notification Stack -->
-        <div class="ext_notif_stack" id="ext_notif_stack"></div>
+        <!-- ══ EXT ELEMENTS ══════════════════════════════════════════ -->
 
-        <!-- EXT: Settings Overlay + Panel -->
+        <!-- Notification Stack -->
+        <div id="ext_notif_stack"></div>
+
+        <!-- Settings Overlay + Panel -->
         <div class="ext_overlay" id="ext_settings_overlay"></div>
         <div class="ext_panel" id="ext_settings_panel">
             <div class="ext_panel_title">PENGATURAN SISTEM</div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Mode Layar Penuh</div>
-                    <div class="ext_setting_sub">FULLSCREEN</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_fullscreen"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">Mode Layar Penuh</div>
+                <div class="ext_setting_sub">FULLSCREEN</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_fullscreen">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Musik Ambient</div>
-                    <div class="ext_setting_sub">BACKGROUND AUDIO</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_ambient"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">Musik Ambient</div>
+                <div class="ext_setting_sub">BACKGROUND AUDIO</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_ambient">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Status Daya</div>
-                    <div class="ext_setting_sub">BATERAI: <span id="ext_battery_val">...</span></div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" disabled><span class="ext_toggle_slider" style="opacity:0.3"></span></label>
+                <div><div class="ext_setting_label">Status Daya</div>
+                <div class="ext_setting_sub">BATERAI: <span id="ext_battery_val">...</span></div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" disabled>
+                    <span class="ext_toggle_slider" style="opacity:0.3;cursor:default;"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Mode Terang</div>
-                    <div class="ext_setting_sub">LIGHT MODE</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_light"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">Mode Terang</div>
+                <div class="ext_setting_sub">LIGHT MODE</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_light">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">SFX</div>
-                    <div class="ext_setting_sub">SOUND EFFECT</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_sfx"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">SFX</div>
+                <div class="ext_setting_sub">SOUND EFFECT</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_sfx">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Hemat Daya</div>
-                    <div class="ext_setting_sub">POWER SAVER</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_power"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">Hemat Daya</div>
+                <div class="ext_setting_sub">POWER SAVER</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_power">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Matikan Animasi</div>
-                    <div class="ext_setting_sub">NO ANIMATION</div>
-                </div>
-                <label class="ext_toggle"><input type="checkbox" id="ext_toggle_anim"><span class="ext_toggle_slider"></span></label>
+                <div><div class="ext_setting_label">Matikan Animasi</div>
+                <div class="ext_setting_sub">NO ANIMATION</div></div>
+                <label class="ext_toggle">
+                    <input type="checkbox" id="ext_toggle_anim">
+                    <span class="ext_toggle_slider"></span>
+                </label>
             </div>
 
             <div class="ext_setting_row">
-                <div>
-                    <div class="ext_setting_label">Ukuran Teks</div>
-                    <div class="ext_setting_sub">TEXT SIZE: <span id="ext_slider_label">16px</span></div>
-                </div>
+                <div><div class="ext_setting_label">Ukuran Teks</div>
+                <div class="ext_setting_sub">SIZE: <span id="ext_slider_label">16px</span></div></div>
                 <div class="ext_slider_wrap">
                     <input type="range" id="ext_slider_text" min="12" max="22" value="16">
                 </div>
@@ -217,7 +299,7 @@
             <button class="ext_panel_close_btn" onclick="ext_closeSettings()">TUTUP PANEL</button>
         </div>
 
-        <!-- EXT: Rules Overlay + Panel -->
+        <!-- Rules Overlay + Panel -->
         <div class="ext_overlay" id="ext_rules_overlay"></div>
         <div class="ext_panel" id="ext_rules_panel">
             <div class="ext_panel_title">ATURAN EAC</div>
@@ -244,11 +326,11 @@
             <button class="ext_panel_close_btn" style="margin-top:10px;" onclick="ext_closeRules()">TUTUP PANEL</button>
         </div>
 
-        <!-- EXT: Audio Elements -->
-        <audio id="ext_ambient_audio" loop>
+        <!-- Audio Elements -->
+        <audio id="ext_ambient_audio" loop preload="none">
             <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
         </audio>
-        <audio id="ext_sfx_audio">
+        <audio id="ext_sfx_audio" preload="none">
             <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
         </audio>
 
