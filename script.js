@@ -1,5 +1,5 @@
 /* ============================================
-   PORTAL EAC — script.js FINAL
+   PORTAL EAC — script.js FINAL (LOADING FIX)
    ============================================ */
 
 // ── Audio elements ───────────────────────────
@@ -78,7 +78,6 @@ window.addEventListener('scroll', revealCards);
 function showNotifications() {
     const notif1 = document.getElementById('sys-notif');
     const notif2 = document.getElementById('sys-notif-2');
-
     if (notif1) {
         setTimeout(() => {
             notif1.classList.add('show');
@@ -93,18 +92,35 @@ function showNotifications() {
     }
 }
 
-// ── LOADING SCREEN — Smart Progress ──────────
+// ── LOADING SCREEN — Clean Transition ────────
 window.addEventListener('load', () => {
-    const loader  = document.getElementById('loading-screen');
-    const bar     = document.getElementById('loader-bar');
-    const pct     = document.getElementById('load-percent');
-    const status  = document.getElementById('load-status');
-    const granted = document.getElementById('load-granted');
-    const welcome = document.getElementById('welcome-sequence');
+    const loader   = document.getElementById('loading-screen');
+    const bar      = document.getElementById('loader-bar');
+    const loaderBg = document.querySelector('.premium-loader');
+    const pct      = document.getElementById('load-percent');
+    const status   = document.getElementById('load-status');
+    const granted  = document.getElementById('load-granted');
+    const welcome  = document.getElementById('welcome-sequence');
+
+    // Reset state awal bersih
+    bar.style.width      = '0%';
+    bar.style.opacity    = '1';
+    bar.style.display    = '';
+    pct.style.opacity    = '1';
+    pct.style.display    = '';
+    status.style.opacity = '1';
+    status.style.display = '';
+    granted.classList.remove('show', 'flicker');
+    granted.style.cssText = '';
+    welcome.classList.remove('show');
+    welcome.style.cssText = '';
 
     let prog = 0;
+    let done = false;
 
     const interval = setInterval(() => {
+        if (done) return;
+
         prog += Math.random() * 4 + 2;
         if (prog >= 100) prog = 100;
 
@@ -116,77 +132,100 @@ window.addEventListener('load', () => {
             pct.classList.add('done');
         }
 
-        if (prog >= 100) {
+        if (prog >= 100 && !done) {
+            done = true;
             clearInterval(interval);
 
-            // FASE 1: Sembunyikan bar, persen, status
-            bar.style.opacity    = '0';
-            pct.style.opacity    = '0';
-            status.style.opacity = '0';
+            // ── HOLD 700ms: bar penuh hijau + glow sebelum cleanup ──
+            bar.classList.add('hold');
 
             setTimeout(() => {
-                // Benar-benar hilang dari layout
-                bar.style.visibility    = 'hidden';
-                pct.style.visibility    = 'hidden';
-                status.style.visibility = 'hidden';
 
-                // FASE 2: ACCESS GRANTED di tengah layar
-                granted.classList.add('show');
+                // ── CLEANUP TOTAL: fade out semua elemen loader ──
+                pct.style.transition    = 'opacity 0.35s ease';
+                status.style.transition = 'opacity 0.35s ease';
+                if (loaderBg) loaderBg.style.transition = 'opacity 0.35s ease';
 
+                pct.style.opacity    = '0';
+                status.style.opacity = '0';
+                if (loaderBg) loaderBg.style.opacity = '0';
+
+                // Setelah fade → display:none, tidak ada sisa piksel
                 setTimeout(() => {
-                    // FASE 3: Ganti ke WELCOME ANGKASA
-                    granted.style.opacity    = '0';
-                    granted.style.transition = 'opacity 0.5s ease';
+                    pct.style.display    = 'none';
+                    status.style.display = 'none';
+                    bar.style.display    = 'none';
+                    if (loaderBg) loaderBg.style.display = 'none';
 
+                    // ── FASE 2: ACCESS GRANTED di layar hitam bersih ──
+                    granted.classList.add('show');
+
+                    // ── HOLD 1.4 detik lalu flicker keluar ──
                     setTimeout(() => {
-                        granted.style.visibility = 'hidden';
-                        welcome.classList.add('show');
+                        granted.classList.add('flicker');
+                        granted.classList.remove('show');
 
-                        // FASE 2: Tahan 2 detik, lalu masuk portal
+                        // ── FASE 3: WELCOME ANGKASA setelah flicker ──
                         setTimeout(() => {
-                            loader.style.opacity = '0';
+                            granted.style.display = 'none';
+                            welcome.classList.add('show');
+
+                            // ── TAHAN WELCOME 4 detik lalu masuk portal ──
                             setTimeout(() => {
-                                loader.style.display = 'none';
-                                document.getElementById('portal-content').style.display = 'block';
-                                revealCards();
-                                showNotifications();
-                            }, 700);
-                        }, 2000); // ← 2 detik menikmati welcome
+                                loader.style.transition = 'opacity 0.7s ease';
+                                loader.style.opacity    = '0';
+                                setTimeout(() => {
+                                    loader.style.display = 'none';
+                                    document.getElementById('portal-content').style.display = 'block';
+                                    revealCards();
+                                    showNotifications();
+                                }, 700);
+                            }, 4000);
 
-                    }, 300);
-                }, 1200); // ACCESS GRANTED tampil 1.2 detik
+                        }, 750); // durasi flicker
 
-            }, 450); // tunggu fade selesai
+                    }, 1400); // ACCESS GRANTED hold
+
+                }, 380); // tunggu fade cleanup selesai
+
+            }, 700); // hold bar penuh hijau
         }
     }, 55);
 });
 
-// ── Goto — navigasi tanpa welcome screen ─────
+// ── Goto — navigasi bersih tanpa welcome ─────
 function goto(url, target) {
-    const loader  = document.getElementById('loading-screen');
-    const status  = document.getElementById('load-status');
-    const bar     = document.getElementById('loader-bar');
-    const pct     = document.getElementById('load-percent');
-    const granted = document.getElementById('load-granted');
-    const welcome = document.getElementById('welcome-sequence');
+    const loader   = document.getElementById('loading-screen');
+    const status   = document.getElementById('load-status');
+    const bar      = document.getElementById('loader-bar');
+    const loaderBg = document.querySelector('.premium-loader');
+    const pct      = document.getElementById('load-percent');
+    const granted  = document.getElementById('load-granted');
+    const welcome  = document.getElementById('welcome-sequence');
 
-    // Pastikan welcome & granted tidak muncul
-    if (granted) { granted.classList.remove('show'); granted.style.opacity = '0'; granted.style.visibility = 'hidden'; }
+    // Sembunyikan welcome & granted
+    if (granted) { granted.classList.remove('show', 'flicker'); granted.style.display = 'none'; }
     if (welcome) { welcome.classList.remove('show'); welcome.style.opacity = '0'; }
 
-    // Reset elemen loader
-    bar.style.opacity = '1'; bar.style.visibility = 'visible';
-    pct.style.opacity = '1'; pct.style.visibility = 'visible';
-    status.style.opacity = '1'; status.style.visibility = 'visible';
+    // Restore elemen loader yang mungkin di-hide
+    bar.style.display    = '';
+    bar.style.opacity    = '1';
+    if (loaderBg) { loaderBg.style.display = ''; loaderBg.style.opacity = '1'; }
+    pct.style.display    = '';
+    pct.style.opacity    = '1';
+    status.style.display = '';
+    status.style.opacity = '1';
+
     bar.style.width = '0%';
-    bar.classList.remove('done');
+    bar.classList.remove('done', 'hold');
     pct.classList.remove('done');
     pct.innerText = '0%';
 
-    loader.style.display = 'flex';
-    loader.style.opacity = '1';
-    status.innerText     = 'CONNECTING TO ' + target.toUpperCase();
-    status.style.color   = '#555';
+    loader.style.display    = 'flex';
+    loader.style.opacity    = '1';
+    loader.style.transition = 'none';
+    status.innerText        = 'CONNECTING TO ' + target.toUpperCase();
+    status.style.color      = '#555';
 
     let prog = 0;
     const iv = setInterval(() => {
@@ -214,7 +253,6 @@ function openModal(id) {
     const modal = document.getElementById(id);
     if (!modal) return;
     modal.classList.add('open');
-
     const sfxToggle = document.getElementById('toggle-sfx');
     if (sfxToggle && sfxToggle.checked && sfxAudio) {
         sfxAudio.currentTime = 0;
@@ -240,7 +278,6 @@ function toggleMusic(el) {
         const p = ambientAudio.play();
         if (p !== undefined) {
             p.catch(() => {
-                // Fallback: mainkan saat ada interaksi pertama
                 const resume = () => {
                     ambientAudio.play().catch(() => {});
                     document.removeEventListener('touchstart', resume);
@@ -281,29 +318,22 @@ function adjustFontSize(val) {
     const scale  = val / 100;
     const portal = document.getElementById('portal-content');
     if (portal) {
-        // Judul utama
         const title = portal.querySelector('.title-portal');
         if (title) title.style.fontSize = (32 * scale) + 'px';
 
-        // H3 cards
         portal.querySelectorAll('.card h3').forEach(h => {
             h.style.fontSize = (18 * scale) + 'px';
         });
-
-        // P cards
         portal.querySelectorAll('.card p').forEach(p => {
             p.style.fontSize = (13 * scale) + 'px';
         });
 
-        // Jam
         const time = portal.querySelector('.time-display');
         if (time) time.style.fontSize = (12 * scale) + 'px';
 
-        // Welcome greet
         const greet = portal.querySelector('.welcome-greet');
         if (greet) greet.style.fontSize = (14 * scale) + 'px';
     }
-
     const label = document.getElementById('font-size-label');
     if (label) label.innerText = Math.round(val) + '%';
 }
