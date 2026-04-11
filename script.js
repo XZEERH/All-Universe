@@ -142,7 +142,7 @@ window.addEventListener('load', () => {
                         granted.style.visibility = 'hidden';
                         welcome.classList.add('show');
 
-                        // FASE 4: Tahan 4 detik, lalu masuk portal
+                        // FASE 3: Tahan 3 detik, lalu masuk portal
                         setTimeout(() => {
                             loader.style.opacity = '0';
                             setTimeout(() => {
@@ -151,7 +151,7 @@ window.addEventListener('load', () => {
                                 revealCards();
                                 showNotifications();
                             }, 700);
-                        }, 4000); // ← 4 detik menikmati welcome
+                        }, 3000); // ← 3 detik menikmati welcome
 
                     }, 300);
                 }, 1200); // ACCESS GRANTED tampil 1.2 detik
