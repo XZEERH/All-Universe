@@ -110,7 +110,7 @@ window.addEventListener('load', () => {
     pct.style.display    = '';
     status.style.opacity = '1';
     status.style.display = '';
-    granted.classList.remove('show', 'flicker');
+    granted.classList.remove('show');
     granted.style.cssText = '';
     welcome.classList.remove('show');
     welcome.style.cssText = '';
@@ -160,12 +160,13 @@ window.addEventListener('load', () => {
                     // ── FASE 2: ACCESS GRANTED di layar hitam bersih ──
                     granted.classList.add('show');
 
-                    // ── HOLD 1.4 detik lalu flicker keluar ──
+                    // ── HOLD 1.5 detik lalu fade out bersih ──
                     setTimeout(() => {
-                        granted.classList.add('flicker');
-                        granted.classList.remove('show');
+                        // Fade out smooth — tidak ada flicker/kedip error
+                        granted.style.transition = 'opacity 0.8s ease';
+                        granted.style.opacity    = '0';
 
-                        // ── FASE 3: WELCOME ANGKASA setelah flicker ──
+                        // ── FASE 3: WELCOME ANGKASA setelah fade selesai ──
                         setTimeout(() => {
                             granted.style.display = 'none';
                             welcome.classList.add('show');
@@ -182,9 +183,9 @@ window.addEventListener('load', () => {
                                 }, 700);
                             }, 4000);
 
-                        }, 750); // durasi flicker
+                        }, 850); // tunggu fade granted selesai
 
-                    }, 1400); // ACCESS GRANTED hold
+                    }, 1500); // ACCESS GRANTED hold
 
                 }, 380); // tunggu fade cleanup selesai
 
@@ -204,7 +205,7 @@ function goto(url, target) {
     const welcome  = document.getElementById('welcome-sequence');
 
     // Sembunyikan welcome & granted
-    if (granted) { granted.classList.remove('show', 'flicker'); granted.style.display = 'none'; }
+    if (granted) { granted.classList.remove('show'); granted.style.display = 'none'; granted.style.opacity = '0'; }
     if (welcome) { welcome.classList.remove('show'); welcome.style.opacity = '0'; }
 
     // Restore elemen loader yang mungkin di-hide
