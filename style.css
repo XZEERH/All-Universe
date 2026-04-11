@@ -33,6 +33,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    overflow: hidden;
     transition: opacity 0.7s ease;
 }
 
@@ -43,24 +44,37 @@ body {
     color: var(--accent-cyan);
     letter-spacing: 4px;
     margin-bottom: 10px;
-    transition: color 0.5s ease, opacity 0.4s ease;
+    transition: color 0.5s ease, opacity 0.35s ease;
+    /* z-index rendah — tidak tumpang tindih ACCESS GRANTED */
+    position: relative;
+    z-index: 1;
 }
 .load-percent.done { color: var(--green-glow); }
 
-/* BAR */
+/* BAR wrapper */
 .premium-loader {
     width: 180px; height: 4px;
     background: rgba(255,255,255,0.07);
     border-radius: 10px; overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: opacity 0.35s ease;
 }
+
+/* BAR fill */
 .loader-bar {
     height: 100%; width: 0%;
     border-radius: 10px;
     background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
-    transition: width 0.12s ease, background 0.5s ease;
+    transition: width 0.12s ease, background 0.5s ease, box-shadow 0.3s ease;
 }
 .loader-bar.done {
     background: linear-gradient(90deg, #00ffaa, #38bdf8);
+}
+/* Hold state: bar penuh hijau + glow sebelum cleanup */
+.loader-bar.hold {
+    background: linear-gradient(90deg, #00ffaa, #38bdf8);
+    box-shadow: 0 0 14px rgba(0,255,170,0.7), 0 0 30px rgba(0,255,170,0.25);
 }
 
 /* STATUS TEKS */
@@ -68,36 +82,61 @@ body {
     font-family: 'Orbitron', sans-serif;
     font-size: 10px; color: #555;
     margin-top: 12px; letter-spacing: 2px;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
+    position: relative;
+    z-index: 1;
 }
 
-/* ACCESS GRANTED — absolut di tengah layar */
+/* ACCESS GRANTED — absolut tengah layar, z-index tinggi */
 .load-granted {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%) translateY(16px);
     font-family: 'Orbitron', sans-serif;
-    font-size: 14px; color: var(--green-glow);
-    letter-spacing: 5px; text-align: center;
+    font-size: 14px;
+    color: var(--green-glow);
+    letter-spacing: 5px;
+    text-align: center;
     opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    /* z-index lebih tinggi dari elemen loader lain */
+    z-index: 10;
     pointer-events: none;
-    z-index: 2;
+    background: transparent;
+    /* Text shadow biar tajam di latar gelap */
+    text-shadow: 0 0 20px rgba(0,255,170,0.9), 0 0 40px rgba(0,255,170,0.4);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .load-granted.show {
     opacity: 1;
     transform: translate(-50%, -50%) translateY(0);
 }
 
-/* WELCOME SEQUENCE */
+/* Flicker animation — berkedip sebelum berganti ke WELCOME */
+@keyframes flicker-out {
+    0%   { opacity: 1; }
+    12%  { opacity: 0.15; }
+    25%  { opacity: 0.9; }
+    42%  { opacity: 0.05; }
+    58%  { opacity: 0.75; }
+    72%  { opacity: 0.1; }
+    85%  { opacity: 0.5; }
+    100% { opacity: 0; }
+}
+.load-granted.flicker {
+    animation: flicker-out 0.75s ease forwards;
+}
+
+/* WELCOME SEQUENCE — z-index tinggi, latar bersih */
 .welcome-sequence {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    opacity: 0; pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.6s ease;
-    z-index: 2;
+    z-index: 10;
+    background: transparent;
 }
 .welcome-sequence.show { opacity: 1; }
 
@@ -363,8 +402,7 @@ body {
 .setting-desc { font-size: 10px; color: var(--text-muted); font-family: 'Orbitron'; letter-spacing: 0.5px; }
 .setting-value { font-family: 'Orbitron', sans-serif; font-size: 13px; color: var(--green-glow); }
 .setting-svg {
-    flex-shrink: 0;
-    margin-right: 7px;
+    flex-shrink: 0; margin-right: 7px;
     color: var(--accent-cyan);
     display: inline-flex; align-items: center;
 }
