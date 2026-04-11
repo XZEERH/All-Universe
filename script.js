@@ -1,10 +1,50 @@
 /* ============================================
-   PORTAL EAC — script.js FINAL (LOADING FIX)
+   PORTAL EAC — script.js FINAL
    ============================================ */
 
 // ── Audio elements ───────────────────────────
 const sfxAudio     = document.getElementById('audio-sfx');
 const ambientAudio = document.getElementById('audio-ambient');
+
+// ── Fungsi putar SFX klik (cek toggle aktif) ─
+function playSfx() {
+    const sfxToggle = document.getElementById('toggle-sfx');
+    if (sfxToggle && sfxToggle.checked && sfxAudio) {
+        sfxAudio.currentTime = 0;
+        sfxAudio.play().catch(() => {});
+    }
+}
+
+// ── Global SFX: bunyi di semua elemen clickable
+// Dipasang setelah DOM siap agar menangkap semua elemen
+document.addEventListener('DOMContentLoaded', () => {
+    attachSfxListeners();
+});
+
+// Fungsi attach — dipanggil ulang setelah portal tampil
+function attachSfxListeners() {
+    // Selector semua elemen yang bisa diklik di portal
+    const clickableSelectors = [
+        '.card',          // card menu utama
+        '.fab-item',      // item menu FAB
+        '.fab-main',      // tombol + FAB
+        '.fab-icon',      // ikon di FAB
+        '.fab-label',     // label di FAB
+        '.modal-close',   // tombol tutup modal
+        '.btn-paham',     // tombol SAYA PAHAM
+        '.toggle-switch', // semua toggle
+        '.modal-close',   // close button
+    ];
+
+    clickableSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            // Hindari double-attach
+            if (el.dataset.sfxAttached) return;
+            el.dataset.sfxAttached = 'true';
+            el.addEventListener('click', playSfx, { passive: true });
+        });
+    });
+}
 
 // ── FAB Toggle ───────────────────────────────
 function toggleFab() {
@@ -136,7 +176,7 @@ window.addEventListener('load', () => {
             done = true;
             clearInterval(interval);
 
-            // ── HOLD 700ms: bar penuh hijau + glow sebelum cleanup ──
+            // ── HOLD 700ms: bar penuh hijau + glow ──
             bar.classList.add('hold');
 
             setTimeout(() => {
@@ -150,28 +190,26 @@ window.addEventListener('load', () => {
                 status.style.opacity = '0';
                 if (loaderBg) loaderBg.style.opacity = '0';
 
-                // Setelah fade → display:none, tidak ada sisa piksel
                 setTimeout(() => {
                     pct.style.display    = 'none';
                     status.style.display = 'none';
                     bar.style.display    = 'none';
                     if (loaderBg) loaderBg.style.display = 'none';
 
-                    // ── FASE 2: ACCESS GRANTED di layar hitam bersih ──
+                    // ── FASE 2: ACCESS GRANTED ──
                     granted.classList.add('show');
 
-                    // ── HOLD 1.5 detik lalu fade out bersih ──
                     setTimeout(() => {
-                        // Fade out smooth — tidak ada flicker/kedip error
+                        // Fade out smooth
                         granted.style.transition = 'opacity 0.8s ease';
                         granted.style.opacity    = '0';
 
-                        // ── FASE 3: WELCOME ANGKASA setelah fade selesai ──
+                        // ── FASE 3: WELCOME ANGKASA ──
                         setTimeout(() => {
                             granted.style.display = 'none';
                             welcome.classList.add('show');
 
-                            // ── TAHAN WELCOME 4 detik lalu masuk portal ──
+                            // ── TAHAN 4 detik lalu masuk portal ──
                             setTimeout(() => {
                                 loader.style.transition = 'opacity 0.7s ease';
                                 loader.style.opacity    = '0';
@@ -180,22 +218,26 @@ window.addEventListener('load', () => {
                                     document.getElementById('portal-content').style.display = 'block';
                                     revealCards();
                                     showNotifications();
+                                    // Pasang SFX ke semua elemen portal setelah tampil
+                                    attachSfxListeners();
                                 }, 700);
                             }, 4000);
 
-                        }, 850); // tunggu fade granted selesai
+                        }, 850);
 
-                    }, 1500); // ACCESS GRANTED hold
+                    }, 1500);
 
-                }, 380); // tunggu fade cleanup selesai
+                }, 380);
 
-            }, 700); // hold bar penuh hijau
+            }, 700);
         }
     }, 55);
 });
 
 // ── Goto — navigasi bersih tanpa welcome ─────
 function goto(url, target) {
+    playSfx();
+
     const loader   = document.getElementById('loading-screen');
     const status   = document.getElementById('load-status');
     const bar      = document.getElementById('loader-bar');
@@ -204,11 +246,9 @@ function goto(url, target) {
     const granted  = document.getElementById('load-granted');
     const welcome  = document.getElementById('welcome-sequence');
 
-    // Sembunyikan welcome & granted
     if (granted) { granted.classList.remove('show'); granted.style.display = 'none'; granted.style.opacity = '0'; }
     if (welcome) { welcome.classList.remove('show'); welcome.style.opacity = '0'; }
 
-    // Restore elemen loader yang mungkin di-hide
     bar.style.display    = '';
     bar.style.opacity    = '1';
     if (loaderBg) { loaderBg.style.display = ''; loaderBg.style.opacity = '1'; }
@@ -250,18 +290,15 @@ function goto(url, target) {
 
 // ── MODAL ────────────────────────────────────
 function openModal(id) {
+    playSfx();
     document.getElementById('fabWrapper').classList.remove('active');
     const modal = document.getElementById(id);
     if (!modal) return;
     modal.classList.add('open');
-    const sfxToggle = document.getElementById('toggle-sfx');
-    if (sfxToggle && sfxToggle.checked && sfxAudio) {
-        sfxAudio.currentTime = 0;
-        sfxAudio.play().catch(() => {});
-    }
 }
 
 function closeModal(id) {
+    playSfx();
     const modal = document.getElementById(id);
     if (modal) modal.classList.remove('open');
 }
