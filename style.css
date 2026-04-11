@@ -98,32 +98,16 @@ body {
     letter-spacing: 5px;
     text-align: center;
     opacity: 0;
-    /* z-index lebih tinggi dari elemen loader lain */
     z-index: 10;
     pointer-events: none;
     background: transparent;
-    /* Text shadow biar tajam di latar gelap */
     text-shadow: 0 0 20px rgba(0,255,170,0.9), 0 0 40px rgba(0,255,170,0.4);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Transisi fade in/out yang halus dan bersih */
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .load-granted.show {
     opacity: 1;
     transform: translate(-50%, -50%) translateY(0);
-}
-
-/* Flicker animation — berkedip sebelum berganti ke WELCOME */
-@keyframes flicker-out {
-    0%   { opacity: 1; }
-    12%  { opacity: 0.15; }
-    25%  { opacity: 0.9; }
-    42%  { opacity: 0.05; }
-    58%  { opacity: 0.75; }
-    72%  { opacity: 0.1; }
-    85%  { opacity: 0.5; }
-    100% { opacity: 0; }
-}
-.load-granted.flicker {
-    animation: flicker-out 0.75s ease forwards;
 }
 
 /* WELCOME SEQUENCE — z-index tinggi, latar bersih */
