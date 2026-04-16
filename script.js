@@ -209,7 +209,7 @@ window.addEventListener('load', () => {
                             granted.style.display = 'none';
                             welcome.classList.add('show');
 
-                            // ── TAHAN 4 detik lalu masuk portal ──
+                            // ── TAHAN 2 detik lalu masuk portal ──
                             setTimeout(() => {
                                 loader.style.transition = 'opacity 0.7s ease';
                                 loader.style.opacity    = '0';
@@ -221,7 +221,7 @@ window.addEventListener('load', () => {
                                     // Pasang SFX ke semua elemen portal setelah tampil
                                     attachSfxListeners();
                                 }, 700);
-                            }, 4000);
+                            }, 2000);
 
                         }, 850);
 
