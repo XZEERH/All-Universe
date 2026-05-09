@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulasi Alam Semesta Penuh</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -17,12 +17,12 @@
       <div class="absolute w-4 h-4 bg-white rounded-full shadow-[0_0_20px_#fff]"></div>
     </div>
     <h1 id="loadingPercent" class="text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">0%</h1>
-    <p id="loadingText" class="text-xs text-slate-400 font-mono animate-pulse">Menginisialisasi Alam Semesta...</p>
+    <p id="loadingText" class="text-xs text-slate-400 font-mono animate-pulse">Menghubungkan ke Server Kosmik...</p>
   </div>
 
   <!-- Kanvas Utama -->
   <div class="absolute inset-0 z-0">
-    <canvas id="simCanvas" class="w-full h-full cursor-pointer" style="background: radial-gradient(circle at center, #0f172a 0%, #020617 80%)"></canvas>
+    <canvas id="simCanvas" class="w-full h-full cursor-pointer block" style="background: radial-gradient(circle at center, #0f172a 0%, #020617 80%)"></canvas>
   </div>
 
   <!-- Lapisan Antarmuka (UI) -->
@@ -86,8 +86,10 @@
     <div id="hintText" class="absolute top-[60%] left-1/2 -translate-x-1/2 text-[11px] text-slate-300 text-center pointer-events-none hidden">
       Sentuh / Klik objek untuk info panel
     </div>
+
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- WAJIB MENGGUNAKAN TYPE MODULE DAN NAMA FILE YANG TEPAT -->
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
