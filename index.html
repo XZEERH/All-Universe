@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulasi Alam Semesta Penuh</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -86,10 +86,49 @@
     <div id="hintText" class="absolute top-[60%] left-1/2 -translate-x-1/2 text-[11px] text-slate-300 text-center pointer-events-none hidden">
       Sentuh / Klik objek untuk info panel
     </div>
-
   </div>
 
-  <!-- WAJIB MENGGUNAKAN TYPE MODULE DAN NAMA FILE YANG TEPAT -->
-  <script type="module" src="./app.js"></script>
+  <!-- SCRIPT LOADING GABUNGAN HTML (PASTI BERJALAN 4 DETIK) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const uiLayer = document.getElementById('uiLayer');
+        const loadingText = document.getElementById('loadingText');
+        const loadingPercent = document.getElementById('loadingPercent');
+
+        const texts =["Menginisialisasi Kosmos...", "Menghitung Gravitasi Planet...", "Memuat Lubang Hitam...", "Membuka Ruang & Waktu..."];
+        const startTime = Date.now();
+        const duration = 4000;
+
+        function updateLoader() {
+            const elapsed = Date.now() - startTime;
+            let percent = (elapsed / duration) * 100;
+            
+            if (percent > 100) percent = 100;
+            if (loadingPercent) loadingPercent.innerText = Math.floor(percent) + "%";
+            
+            const textIdx = Math.floor(elapsed / 1000) % texts.length;
+            if (loadingText) loadingText.innerText = texts[textIdx];
+
+            if (percent < 100) {
+                requestAnimationFrame(updateLoader);
+            } else {
+                if (loadingScreen) loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    if (loadingScreen) loadingScreen.style.display = 'none';
+                    if (uiLayer) uiLayer.classList.remove('hidden');
+                    
+                    // Berikan sinyal kepada app.js bahwa loading telah selesai
+                    window.dispatchEvent(new Event('loaderSelesai'));
+                }, 500);
+            }
+        }
+        requestAnimationFrame(updateLoader);
+    });
+  </script>
+
+  <!-- PANGGIL SCRIPT UTAMA (TANPA TYPE MODULE = ANTI ERROR VERCEL) -->
+  <script src="app.js"></script>
+
 </body>
 </html>
