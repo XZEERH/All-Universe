@@ -1,24 +1,6 @@
 import { ALL_DATA, SOLAR_DATA, DEEP_SPACE_DATA, MAIN_VIEWS, EXTRA_VIEWS } from './data.js';
 import * as Draw from './drawings.js';
 
-// --- LAYAR LOADING ---
-const loadingScreen = document.getElementById('loadingScreen');
-const uiLayer = document.getElementById('uiLayer');
-const texts =["Menginisialisasi Alam Semesta...", "Membentuk Galaksi...", "Menghitung Orbit Planet...", "Membuka Ruang & Waktu..."];
-let textIdx = 0;
-setInterval(() => {
-  const lt = document.getElementById('loadingText');
-  if(lt) lt.innerText = texts[textIdx = (textIdx + 1) % texts.length];
-}, 800);
-
-setTimeout(() => {
-  loadingScreen.style.opacity = '0';
-  setTimeout(() => {
-    loadingScreen.style.display = 'none';
-    uiLayer.classList.remove('hidden');
-  }, 500);
-}, 3000); // Selesai dalam 3 detik
-
 // --- STATE APLIKASI ---
 let view = "solar";
 let selected = null;
@@ -38,7 +20,7 @@ function resize() { canvas.width = window.innerWidth; canvas.height = window.inn
 window.addEventListener('resize', resize);
 resize();
 
-// --- ANTARMUKA & TOMBOL ---
+// --- ANTARMUKA & TOMBOL ZOOM ---
 document.getElementById('zoomInBtn').onclick = () => zoom = Math.min(2.5, zoom + 0.2);
 document.getElementById('zoomOutBtn').onclick = () => zoom = Math.max(0.3, zoom - 0.2);
 document.getElementById('zoomResetBtn').onclick = () => zoom = 1;
@@ -117,7 +99,7 @@ function updateInfoPanel() {
   document.getElementById('infoColor').style.boxShadow = `0 0 20px ${data.color}50`;
   
   currentTab = "data";
-  document.querySelectorAll('.tab-btn')[0].click(); // Reset tab ke "Data"
+  document.querySelectorAll('.tab-btn')[0].click();
 }
 
 function renderPanelContent() {
@@ -203,7 +185,7 @@ canvas.onclick = (e) => {
   }
 };
 
-// --- LOOPING ANIMASI ---
+// --- LOOPING KANVAS ---
 function loop() {
   const w = canvas.width, h = canvas.height;
   const cx = w / 2, cy = h / 2;
