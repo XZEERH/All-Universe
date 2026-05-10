@@ -1,69 +1,133 @@
-# 🌌 EAC PORTAL — Command Center
+<div align="center">
 
-![Version](https://img.shields.io/badge/Version-3.0.0-cyan)
-![Status](https://img.shields.io/badge/System-Online-green)
-![Security](https://img.shields.io/badge/Encryption-Active-purple)
+![Solar System Animation](solar-system.svg)
 
-**EAC Portal** adalah gerbang digital utama bagi **Earth Astronomy Community**. Dirancang dengan estetika *futuristic command center*, portal ini menghubungkan calon angkasa dengan berbagai modul riset, pendaftaran, dan asisten cerdas astronomi secara terpusat.
+# 🌌 Simulasi Alam Semesta
+### *Solar Sistem for Razeerh*
 
----
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Canvas](https://img.shields.io/badge/Canvas_API-38BDF8?style=for-the-badge&logo=html5&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-## 🛰️ Fitur Utama
+> **Simulasi interaktif alam semesta** — jelajahi tata surya, galaksi, hingga fenomena kosmik paling ekstrem di ujung jari kamu.
 
-* **Pulsar Radar Interface:** Navigasi visual yang intuitif dengan animasi radar pulsar pada gerbang utama.
-* **NASA APOD Integration:** Sinkronisasi otomatis dengan API NASA untuk menyajikan *Astronomy Picture of the Day*.
-* **Multi-Module Navigation:** Akses cepat ke 7 sektor utama:
-    * Registrasi Sektor 1 & 2.
-    * Ruang Ilmu Kappa (Ensiklopedia).
-    * Website Resmi EAC.
-    * AI Astronomy Assistant.
-    * Kalkulator Ilmiah Presisi.
-    * Saluran Transmisi WhatsApp.
-* **Low-Latency Loading:** Sistem transisi halus sebesar **1.5 detik** dengan animasi atomik ikonik.
+</div>
 
 ---
 
-## 🛠️ Stack Teknologi
+## 🚀 Fitur Utama
 
-Sistem ini dibangun menggunakan arsitektur *lightweight* untuk performa maksimal:
-* **Frontend:** HTML5, CSS3 (Modern Flexbox & Animations).
-* **Logic:** Vanilla JavaScript (ES6+).
-* **API:** NASA Planetary API.
-* **Theme:** Deep Space Dark Mode dengan aksen Cyan & Purple.
-
----
-
-## 🚀 Instalasi & Deployment
-
-1.  **Clone Repository**
-    ```bash
-    git clone [https://github.com/username/eac-portal.git](https://github.com/username/eac-portal.git)
-    ```
-2.  **Konfigurasi API Key**
-    Buka file `index.html` dan pastikan API Key NASA Anda terpasang pada fungsi `fetchNasaData`:
-    ```javascript
-    const apiKey = 'YOUR_NASA_API_KEY';
-    ```
-3.  **Run Locally**
-    Cukup buka file `index.html` di browser pilihan Anda atau gunakan ekstensi *Live Server*.
+- **🪐 Tata Surya Interaktif** — planet mengorbit matahari secara real-time, satelit (Bulan, Europa, Titan) mengorbit planet induknya masing-masing
+- **🔭 21+ Objek Kosmik** — dari planet hingga fenomena paling ekstrem di alam semesta
+- **✨ Starfield Dinamis** — latar bintang berkedip di semua tampilan
+- **🔍 Zoom & Pan** — perbesar/perkecil tampilan di semua mode
+- **🔎 Pencarian Cepat** — cari objek langsung dengan nama Indonesia atau Inggris
+- **📋 Info Panel Detail** — tiga tab: Data, Struktur Lapisan, dan Deskripsi
+- **⚡ Loading Screen Animasi** — animasi cincin kosmik saat memuat
+- **📱 Responsif Mobile** — dioptimalkan untuk layar HP dan desktop
 
 ---
 
-## 📡 Struktur Navigasi
+## 🌠 Daftar Objek
 
-| Sektor | Deskripsi | Tipe Akses |
-| :--- | :--- | :--- |
-| **Registrasi** | Jalur pendaftaran angkatan baru | Iframe Internal |
-| **AI Assistant** | Konsultasi astronomi cerdas | Iframe Internal |
-| **Kalkulator** | Perhitungan data riset presisi | Iframe Internal |
-| **WhatsApp** | Jalur komunikasi koordinasi | Tab Baru |
+### ☀️ Tata Surya
+| Objek | Kategori | Keterangan |
+|-------|----------|------------|
+| ☀️ Matahari | Bintang Tipe G | Pusat tata surya, suhu 5.778 K |
+| ☿ Merkurius | Planet Terestrial | Planet terkecil & terdekat |
+| ♀ Venus | Planet Terestrial | Planet terpanas, 462°C |
+| 🌍 Bumi | Planet Terestrial | Rumah kita, ada kehidupan |
+| 🌕 Bulan | Satelit Bumi | Mengorbit Bumi |
+| ♂ Mars | Planet Terestrial | Planet merah, Olympus Mons |
+| ♃ Jupiter | Raksasa Gas | Planet terbesar, Great Red Spot |
+| 🟡 Europa | Satelit Jupiter | Lautan cair di bawah es |
+| ♄ Saturnus | Raksasa Gas | Sistem cincin es indah |
+| 🟠 Titan | Satelit Saturnus | Danau metana cair |
+| ♅ Uranus | Raksasa Es | Berotasi miring 98° |
+| ♆ Neptunus | Raksasa Es | Badai super kencang |
+| 🩶 Pluto | Planet Kerdil | Hati es di Sabuk Kuiper |
+
+### 🌌 Deep Space
+| Objek | Kategori |
+|-------|----------|
+| 🌀 Bima Sakti | Galaksi Spiral |
+| 🔵 Andromeda | Galaksi Spiral |
+| 🌸 Nebula | Awan Antarbintang (Pabrik Bintang) |
+| 💜 Quasar | Inti Galaksi Aktif |
+| ⚡ Pulsar | Bintang Neutron Berputar + Gravitational Waves |
+| 🌑 Black Hole | Lubang Hitam Supermasif |
+| 🧨 Supernova | Ledakan Bintang Mati |
+| 🌀 Wormhole | Anomali Ruang-Waktu |
+| 💫 Magnetar | Medan Magnet Terkuat |
+| ⭐ Bintang Ganda | Sistem Biner Sirius |
+| 🔴 UY Scuti | Maha Raksasa Merah (1.700× Matahari) |
+| 🌊 Exoplanet | Planet Kembaran Bumi |
+| 🟣 Dark Matter | Materi Gelap + Filamen Kosmik |
+| 💥 Galaksi Tabrakan | NGC 4038/4039 |
+| ⚪ White Hole | Kebalikan Black Hole (Hipotetis) |
+| 🌟 Protobintang | Bintang Bayi dengan Jet Bipolar |
+| 🟢 Dyson Sphere | Megastruktur Buatan Peradaban Maju |
+| ☄️ Komet | Komet Halley dengan Dua Ekor |
+| 🪨 Sabuk Asteroid | Jutaan Asteroid + Ceres |
+| 🕸️ Cosmic Web | Jaring Laba-laba Kosmik Raksasa |
+| 🔴 Raksasa Merah | Tahap Akhir Bintang, Aldebaran |
+| 🔵 Bintang Neutron | Benda Terpadat Setelah Black Hole |
+| 💛 Gamma-Ray Burst | Ledakan Paling Energik di Alam Semesta |
 
 ---
 
-## 👨‍🚀 Credits
+## 🛠️ Teknologi
 
-Dibuat dengan penuh dedikasi untuk komunitas astronomi. 
-**"Selamat datang calon angkasa!"**
+```
+HTML5 Canvas API    → Rendering animasi semua objek kosmik
+Vanilla JavaScript  → Logika simulasi, orbit, zoom, search
+Tailwind CSS (CDN)  → Styling UI komponen
+CSS @keyframes      → Animasi loading screen
+requestAnimationFrame → Game loop 60fps
+```
 
 ---
-© 2026 EAC SYSTEM // ENKRIPSI: AKTIF
+
+## 📖 Cara Pakai
+
+1. **Buka file** `simulasi-alam-semesta.html` di browser
+2. **Tunggu loading** (4 detik) — loading screen akan berjalan 0% → 100%
+3. **Pilih tampilan:**
+   - Bar bawah: **Tata Surya / Bima Sakti / Andromeda**
+   - Tombol **☰** untuk semua objek lain (21+ objek, bisa scroll)
+4. **Klik/sentuh** objek untuk membuka Info Panel
+5. **Zoom** menggunakan tombol `+` / `-` / `↺` di kanan bawah
+6. **Cari** objek via kotak pencarian di kiri atas (support nama Indonesia & Inggris)
+
+---
+
+## 📁 Struktur File
+
+```
+📦 simulasi-alam-semesta/
+ ┣ 📄 simulasi-alam-semesta.html   ← File utama (all-in-one)
+ ┣ 🖼️  solar-system.svg            ← Animasi SVG untuk README
+ ┗ 📝 README.md                    ← Dokumentasi ini
+```
+
+---
+
+## 🎨 Screenshot
+
+| Tata Surya | Deep Space |
+|:---:|:---:|
+| Planet mengorbit Matahari | 21+ objek kosmik interaktif |
+| Satelit mengorbit planet induk | Info panel dengan 3 tab detail |
+
+---
+
+<div align="center">
+
+**Dibuat dengan ❤️ oleh Razeerh**
+
+*"Alam semesta itu luas — jelajahi selagi bisa."*
+
+⭐ **Star repo ini jika kamu suka!** ⭐
+
+</div>
