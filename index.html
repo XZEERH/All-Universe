@@ -57,13 +57,13 @@
     </div>
 
     <!-- Menu Bawah -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto w-max max-w-[95vw] z-20">
+    <div class="absolute bottom-6 left-[44%] -translate-x-1/2 flex flex-col items-center pointer-events-auto w-max max-w-[80vw] z-20">
       <div class="flex items-center gap-1 p-1.5 bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-full shadow-2xl mb-2">
         <div class="relative">
           <button id="menuBtn" class="p-2 mx-1 rounded-full hover:bg-slate-800 text-cyan-400 transition">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
-          <div id="subMenu" class="absolute bottom-[calc(100%+12px)] left-0 bg-slate-900/95 border border-slate-700/60 rounded-2xl p-2 w-max shadow-[0_0_30px_rgba(0,0,0,0.8)] fade-enter hidden">
+          <div id="subMenu" class="absolute bottom-[calc(100%+12px)] left-1/2 -translate-x-1/2 bg-slate-900/95 border border-slate-700/60 rounded-2xl p-3 shadow-[0_0_30px_rgba(0,0,0,0.8)] fade-enter hidden" style="width:min(92vw,340px)">
             <div id="subMenuContainer" class="grid grid-cols-3 gap-2"></div>
           </div>
         </div>
@@ -165,7 +165,9 @@
                 { id: "supernova", label: "Supernova" }, { id: "pulsar", label: "Pulsar" },
                 { id: "blackhole", label: "Black Hole" }, { id: "wormhole", label: "Wormhole" },
                 { id: "magnetar", label: "Magnetar" }, { id: "binary", label: "Bintang Ganda" },    
-                { id: "uyscuti", label: "UY Scuti" }, { id: "exoplanet", label: "Exoplanet" }      
+                { id: "uyscuti", label: "UY Scuti" }, { id: "exoplanet", label: "Exoplanet" },
+                { id: "darkmatter", label: "Dark Matter" }, { id: "collision", label: "Galaksi Tabrakan" },
+                { id: "whitehole", label: "White Hole" }, { id: "protostar", label: "Protobintang" }, { id: "dyson", label: "Dyson Sphere" }
             ];
 
             const SOLAR_DATA = {
@@ -196,7 +198,12 @@
                 "Magnetar": { viewId: "magnetar", color: "#e879f9", info: { Kategori: "Bintang Neutron", Magnet: "1.000 Triliun Gauss" }, desc: "Benda dengan medan magnet terkuat di alam semesta, mampu menghancurkan atom.", layers:["Medan Magnet Ekstrem", "Kerak Neutron", "Plasma Cair"] },
                 "Bintang Ganda": { viewId: "binary", color: "#818cf8", info: { Kategori: "Sistem Biner (Sirius)", Jarak: "8.6 Tahun Cahaya" }, desc: "Dua bintang yang saling mengorbit; bintang terang kebiruan raksasa dan katai putih padat.", layers:["Bintang Utama", "Katai Putih", "Pusat Massa Gravitasi"] },
                 "UY Scuti": { viewId: "uyscuti", color: "#fca5a5", info: { Kategori: "Maha Raksasa Merah", Radius: "1.700x Matahari" }, desc: "Salah satu bintang terbesar yang pernah ditemukan. Ukurannya menelan orbit Jupiter.", layers:["Fotosfer Bergolak", "Lidah Api Raksasa", "Inti Fusi Karbon"] },
-                "Exoplanet": { viewId: "exoplanet", color: "#14b8a6", info: { Kategori: "Planet Ekstrasurya", "Bintang Induk": "Kepler-186", Status: "Habitable Zone" }, desc: "Planet kembaran bumi di tata surya lain yang diyakini memiliki danau dan lautan beriklim stabil.", layers:["Atmosfer Asing", "Lautan Cair", "Benua Bebatuan", "Inti Magma"] }
+                "Exoplanet": { viewId: "exoplanet", color: "#14b8a6", info: { Kategori: "Planet Ekstrasurya", "Bintang Induk": "Kepler-186", Status: "Habitable Zone" }, desc: "Planet kembaran bumi di tata surya lain yang diyakini memiliki danau dan lautan beriklim stabil.", layers:["Atmosfer Asing", "Lautan Cair", "Benua Bebatuan", "Inti Magma"] },
+                "Dark Matter": { viewId: "darkmatter", color: "#6366f1", info: { Kategori: "Materi Gelap", Komposisi: "~27% Alam Semesta", Sifat: "Tak Terdeteksi Cahaya" }, desc: "Materi misterius tak kasat mata yang mengikat galaksi-galaksi bersama lewat gravitasi. Tidak memancarkan, menyerap, atau memantulkan cahaya.", layers:["Filamen Kosmik", "Halo Gelap", "Web Antar Galaksi"] },
+                "Galaksi Tabrakan": { viewId: "collision", color: "#f97316", info: { Kategori: "Interaksi Galaksi", Contoh: "NGC 4038/4039", Skala: "Ratusan Ribu tc" }, desc: "Dua galaksi raksasa yang bertabrakan dan saling melebur selama ratusan juta tahun, menciptakan ledakan pembentukan bintang masif.", layers:["Inti Galaksi A", "Inti Galaksi B", "Ekor Pasang Surut", "Zona Pembentukan Bintang"] },
+                "White Hole": { viewId: "whitehole", color: "#e0f2fe", info: { Kategori: "Anomali Kosmik (Hipotetis)", Teori: "Kebalikan Black Hole", Sifat: "Memancarkan Semua Materi" }, desc: "Kebalikan dari lubang hitam — materi dan cahaya terus dipancarkan keluar tanpa bisa masuk. Masih bersifat hipotetis dalam fisika modern.", layers:["Horizon Kejadian Terbalik", "Semburan Materi", "Pancaran Radiasi Ekstrem"] },
+                "Protobintang": { viewId: "protostar", color: "#fde68a", info: { Kategori: "Bintang Bayi", Usia: "< 100.000 Tahun", Suhu: "< 3.000 K" }, desc: "Cikal bakal bintang yang terbentuk dari awan molekuler yang runtuh. Belum mencapai fusi nuklir sempurna, masih dibalut cakram gas dan debu.", layers:["Awan Molekuler Induk", "Cakram Akresi", "Inti Proto", "Jet Bipolar"] },
+                "Dyson Sphere": { viewId: "dyson", color: "#a3e635", info: { Kategori: "Megastruktur (Hipotetis)", Konsep: "Freeman Dyson 1960", Fungsi: "Menangkap Energi Bintang 100%" }, desc: "Megastruktur hipotetis buatan peradaban maju yang mengelilingi bintang sepenuhnya untuk menangkap seluruh energi radiasinya.", layers:["Panel Energi Surya", "Rangka Megastruktur", "Bintang Inti", "Jalur Transmisi Energi"] }
             };
 
             const ALL_DATA = { ...SOLAR_DATA, ...DEEP_SPACE_DATA };
@@ -229,10 +236,11 @@
             window.addEventListener('resize', resize);
             resize();
 
-            // Zoom Controls
-            document.getElementById('zoomInBtn').onclick = () => zoom = Math.min(2.5, zoom + 0.2);
-            document.getElementById('zoomOutBtn').onclick = () => zoom = Math.max(0.3, zoom - 0.2);
-            document.getElementById('zoomResetBtn').onclick = () => zoom = 1;
+            // Zoom Controls — berlaku untuk semua view
+            let deepZoom = 1;
+            document.getElementById('zoomInBtn').onclick = () => { zoom = Math.min(2.5, zoom + 0.2); deepZoom = Math.min(2.5, deepZoom + 0.2); };
+            document.getElementById('zoomOutBtn').onclick = () => { zoom = Math.max(0.3, zoom - 0.2); deepZoom = Math.max(0.3, deepZoom - 0.2); };
+            document.getElementById('zoomResetBtn').onclick = () => { zoom = 1; deepZoom = 1; };
 
             // Menus
             const subMenu = document.getElementById('subMenu');
@@ -414,16 +422,37 @@
             }
 
             function drawPulsar(ctx, cx, cy, frame, w, h) {
-                const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 35);
+                const s = deepZoom;
+                // Gravitational waves — cincin gelombang gravitasi menyebar
+                for (let i = 0; i < 8; i++) {
+                    const waveR = ((frame * 1.5 + i * 55) % (Math.min(w,h) * 0.6)) * s;
+                    const waveOpacity = Math.max(0, 1 - waveR / (Math.min(w,h) * 0.6 * s));
+                    ctx.beginPath(); ctx.arc(cx, cy, waveR, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(56,189,248,${waveOpacity * 0.35})`;
+                    ctx.lineWidth = 2; ctx.stroke();
+                }
+                // Magnetosphere distortion — elips bergoyang
+                ctx.save(); ctx.translate(cx, cy);
+                for (let i = 0; i < 5; i++) {
+                    const tilt = (i / 5) * Math.PI + frame * 0.01;
+                    const rx = (60 + i * 20) * s, ry = (15 + i * 5) * s;
+                    ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, tilt, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(99,215,255,${0.12 + Math.sin(frame * 0.04 + i) * 0.06})`;
+                    ctx.lineWidth = 1.5; ctx.stroke();
+                }
+                ctx.restore();
+                // Pulsar core glow
+                const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 35 * s);
                 grd.addColorStop(0, "#ffffff"); grd.addColorStop(0.2, "#38bdf8"); grd.addColorStop(0.6, "#0284c740"); grd.addColorStop(1, "transparent");
-                ctx.beginPath(); ctx.arc(cx, cy, 40, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
+                ctx.beginPath(); ctx.arc(cx, cy, 40 * s, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
+                // Rotating beams
                 const angle1 = frame * 0.08, angle2 = angle1 + Math.PI;
-                [[angle1, angle2],[angle2, angle1 + Math.PI]].forEach(([a]) => {
+                [angle1, angle2].forEach((a) => {
                     const pulse = Math.abs(Math.sin(frame * 0.1)) * 0.8 + 0.2;
                     ctx.save(); ctx.translate(cx, cy); ctx.rotate(a);
-                    const beamGrd = ctx.createLinearGradient(0, 0, Math.min(w, h) * 0.8, 0);
+                    const beamGrd = ctx.createLinearGradient(0, 0, Math.min(w, h) * 0.8 * s, 0);
                     beamGrd.addColorStop(0, `rgba(56,189,248,${pulse})`); beamGrd.addColorStop(0.4, `rgba(14,165,233,${pulse * 0.4})`); beamGrd.addColorStop(1, "transparent");
-                    ctx.beginPath(); ctx.moveTo(0, -6); ctx.lineTo(Math.min(w, h) * 0.8, -1); ctx.lineTo(Math.min(w, h) * 0.8, 1); ctx.lineTo(0, 6);
+                    ctx.beginPath(); ctx.moveTo(0, -6); ctx.lineTo(Math.min(w, h) * 0.8 * s, -1); ctx.lineTo(Math.min(w, h) * 0.8 * s, 1); ctx.lineTo(0, 6);
                     ctx.fillStyle = beamGrd; ctx.fill(); ctx.restore();
                 });
             }
@@ -446,15 +475,55 @@
             }
 
             function drawNebula(ctx, cx, cy, frame, w, h) {
-                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.001);
-                const colors =["rgba(236, 72, 153, 0.15)", "rgba(56, 189, 248, 0.15)", "rgba(168, 85, 247, 0.15)"];
-                for (let i = 0; i < 8; i++) {
-                    const a = (i / 8) * Math.PI * 2, dist = 60 + Math.sin(frame * 0.02 + i) * 20;
-                    const x = Math.cos(a) * dist, y = Math.sin(a) * dist, r = 100 + Math.sin(frame * 0.01 + i) * 30;
+                const s = deepZoom;
+                // Layer 1: bintang latar
+                for (let i = 0; i < 80; i++) {
+                    const sx = (cx + Math.cos(i * 2.4) * (w * 0.48)) * 1;
+                    const sy = (cy + Math.sin(i * 1.7) * (h * 0.48)) * 1;
+                    const br = (Math.sin(frame * 0.03 + i) + 1) * 0.5;
+                    ctx.beginPath(); ctx.arc(sx, sy, Math.random() * 1.2 + 0.2, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(255,255,255,${br * 0.7})`; ctx.fill();
+                }
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.0008);
+                // Layer 2: awan gas berwarna-warni dengan glow kuat
+                const nebColors = [
+                    [236, 72, 153],  // pink
+                    [56, 189, 248],  // cyan
+                    [168, 85, 247],  // purple
+                    [251, 191, 36],  // amber
+                    [52, 211, 153],  // teal
+                ];
+                for (let i = 0; i < 14; i++) {
+                    const a = (i / 14) * Math.PI * 2;
+                    const breathe = Math.sin(frame * 0.015 + i * 0.7) * 25;
+                    const dist = (80 + i * 18 + breathe) * s;
+                    const x = Math.cos(a + frame * 0.002) * dist;
+                    const y = Math.sin(a + frame * 0.002) * dist * 0.7;
+                    const r = (90 + Math.sin(frame * 0.02 + i) * 30) * s;
+                    const col = nebColors[i % nebColors.length];
+                    const opacity = 0.25 + Math.sin(frame * 0.02 + i) * 0.1;
                     const cloudGrd = ctx.createRadialGradient(x, y, 0, x, y, r);
-                    cloudGrd.addColorStop(0, colors[i % colors.length]); cloudGrd.addColorStop(1, "transparent");
+                    cloudGrd.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},${opacity + 0.15})`);
+                    cloudGrd.addColorStop(0.5, `rgba(${col[0]},${col[1]},${col[2]},${opacity})`);
+                    cloudGrd.addColorStop(1, `rgba(${col[0]},${col[1]},${col[2]},0)`);
                     ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = cloudGrd; ctx.fill();
                 }
+                // Layer 3: debu pekat di tengah
+                for (let i = 0; i < 6; i++) {
+                    const a = (i / 6) * Math.PI * 2 + frame * 0.001;
+                    const dist = (20 + i * 12) * s;
+                    const x = Math.cos(a) * dist, y = Math.sin(a) * dist;
+                    const dustGrd = ctx.createRadialGradient(x, y, 0, x, y, 50 * s);
+                    dustGrd.addColorStop(0, `rgba(10,5,20,0.6)`);
+                    dustGrd.addColorStop(1, `rgba(10,5,20,0)`);
+                    ctx.beginPath(); ctx.arc(x, y, 50 * s, 0, Math.PI*2); ctx.fillStyle = dustGrd; ctx.fill();
+                }
+                // Layer 4: bintang proto di inti
+                const coreGlow = ctx.createRadialGradient(0, 0, 0, 0, 0, 30 * s);
+                coreGlow.addColorStop(0, `rgba(255,255,220,${0.7 + Math.sin(frame * 0.05) * 0.2})`);
+                coreGlow.addColorStop(0.4, `rgba(200,180,255,0.4)`);
+                coreGlow.addColorStop(1, `rgba(0,0,0,0)`);
+                ctx.beginPath(); ctx.arc(0, 0, 30 * s, 0, Math.PI*2); ctx.fillStyle = coreGlow; ctx.fill();
                 ctx.restore();
             }
 
@@ -542,23 +611,318 @@
             }
 
             function drawExoplanet(ctx, cx, cy, frame, w, h) {
-                ctx.beginPath(); ctx.arc(cx - w/4, cy - h/4, 50, 0, Math.PI*2);
-                ctx.fillStyle = "#f87171"; ctx.shadowBlur = 40; ctx.shadowColor = "#fca5a5"; ctx.fill(); ctx.shadowBlur = 0;
-                const r = Math.min(w,h)*0.4;
-                const pGrd = ctx.createRadialGradient(cx+r*0.2, cy+r*0.2, 0, cx, cy, r);
-                pGrd.addColorStop(0, "#14b8a6"); pGrd.addColorStop(0.7, "#0f766e"); pGrd.addColorStop(1, "#022c22");
-                ctx.beginPath(); ctx.arc(cx, cy + h/6, r, 0, Math.PI*2); ctx.fillStyle = pGrd; ctx.fill();
-                ctx.beginPath(); ctx.arc(cx, cy + h/6, r+10, 0, Math.PI*2);
-                ctx.strokeStyle = "rgba(45, 212, 191, 0.2)"; ctx.lineWidth = 8; ctx.stroke();
+                const s = deepZoom;
+                // Bintang induk bergerak mengorbit
+                const starOrbitR = 110 * s;
+                const starA = frame * 0.008;
+                const starX = cx + Math.cos(starA) * starOrbitR * 0.5 - w * 0.15;
+                const starY = cy + Math.sin(starA) * starOrbitR * 0.3 - h * 0.15;
+                const starGrd = ctx.createRadialGradient(starX, starY, 0, starX, starY, 55 * s);
+                starGrd.addColorStop(0, "#fff8dc"); starGrd.addColorStop(0.3, "#f87171"); starGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(starX, starY, 55 * s, 0, Math.PI*2); ctx.fillStyle = starGrd; ctx.fill();
+
+                // Planet - rotasi, ukuran berubah dgn zoom
+                const pr = Math.min(w,h) * 0.3 * s;
+                const planetY = cy + h * 0.05;
+
+                // Shadow sisi planet (malam)
+                ctx.save(); ctx.translate(cx, planetY);
+                const pGrd = ctx.createRadialGradient(pr * 0.2, -pr * 0.2, 0, 0, 0, pr);
+                pGrd.addColorStop(0, "#2dd4bf"); pGrd.addColorStop(0.45, "#0f766e"); pGrd.addColorStop(0.75, "#064e3b"); pGrd.addColorStop(1, "#022c22");
+                ctx.beginPath(); ctx.arc(0, 0, pr, 0, Math.PI*2); ctx.fillStyle = pGrd; ctx.fill();
+
+                // Benua bergerak (simulasi rotasi)
+                ctx.save(); ctx.clip(); ctx.rotate(frame * 0.004);
+                for (let i = 0; i < 7; i++) {
+                    const ca = (i / 7) * Math.PI * 2;
+                    const cx2 = Math.cos(ca) * pr * 0.5, cy2 = Math.sin(ca) * pr * 0.4;
+                    ctx.beginPath(); ctx.arc(cx2, cy2, pr * (0.15 + i * 0.04), 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(5,46,37,${0.5 + Math.sin(i) * 0.2})`; ctx.fill();
+                }
+                ctx.restore();
+
+                // Awan bergerak
+                ctx.save(); ctx.clip(); ctx.rotate(-frame * 0.006);
+                for (let i = 0; i < 5; i++) {
+                    const ca = (i / 5) * Math.PI * 2 + 0.5;
+                    const cx3 = Math.cos(ca) * pr * 0.55, cy3 = Math.sin(ca) * pr * 0.55;
+                    ctx.beginPath(); ctx.arc(cx3, cy3, pr * 0.18, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(180,250,240,0.15)`; ctx.fill();
+                }
+                ctx.restore();
+
+                // Night side shadow
+                const nightGrd = ctx.createRadialGradient(pr * 0.4, 0, 0, -pr * 0.1, 0, pr * 1.1);
+                nightGrd.addColorStop(0, "transparent"); nightGrd.addColorStop(0.6, "transparent"); nightGrd.addColorStop(1, "rgba(0,0,0,0.7)");
+                ctx.beginPath(); ctx.arc(0, 0, pr, 0, Math.PI*2); ctx.fillStyle = nightGrd; ctx.fill();
+
+                // Atmosfer glow
+                const atmGrd = ctx.createRadialGradient(0, 0, pr, 0, 0, pr + 18 * s);
+                atmGrd.addColorStop(0, "rgba(45,212,191,0.3)"); atmGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(0, 0, pr + 18 * s, 0, Math.PI*2); ctx.fillStyle = atmGrd; ctx.fill();
+                ctx.restore();
+            }
+
+            function drawDarkMatter(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Filamen kosmik — jaring antar galaksi
+                ctx.save(); ctx.translate(cx, cy);
+                for (let i = 0; i < 18; i++) {
+                    const a = (i / 18) * Math.PI * 2;
+                    const len = Math.min(w,h) * 0.45 * s;
+                    const sway = Math.sin(frame * 0.008 + i * 0.5) * 20;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    const mx2 = Math.cos(a + 0.3) * len * 0.5 + sway;
+                    const my2 = Math.sin(a + 0.3) * len * 0.5 + sway;
+                    const ex = Math.cos(a) * len, ey = Math.sin(a) * len;
+                    ctx.quadraticCurveTo(mx2, my2, ex, ey);
+                    const opacity = 0.08 + Math.sin(frame * 0.015 + i) * 0.04;
+                    ctx.strokeStyle = `rgba(139,92,246,${opacity})`; ctx.lineWidth = 2; ctx.stroke();
+                }
+                // Node galaksi — titik terang di ujung filamen
+                for (let i = 0; i < 10; i++) {
+                    const a = (i / 10) * Math.PI * 2 + frame * 0.001;
+                    const d = (100 + i * 25) * s;
+                    const nx = Math.cos(a) * d, ny = Math.sin(a) * d;
+                    const ng = ctx.createRadialGradient(nx, ny, 0, nx, ny, 18 * s);
+                    ng.addColorStop(0, `rgba(196,181,253,0.7)`); ng.addColorStop(1, `transparent`);
+                    ctx.beginPath(); ctx.arc(nx, ny, 18 * s, 0, Math.PI*2); ctx.fillStyle = ng; ctx.fill();
+                }
+                // Halo gelap utama
+                const haloGrd = ctx.createRadialGradient(0, 0, 10, 0, 0, 120 * s);
+                haloGrd.addColorStop(0, `rgba(99,102,241,0.03)`);
+                haloGrd.addColorStop(0.5, `rgba(139,92,246,0.08)`);
+                haloGrd.addColorStop(1, `rgba(0,0,0,0)`);
+                ctx.beginPath(); ctx.arc(0, 0, 120 * s, 0, Math.PI*2); ctx.fillStyle = haloGrd; ctx.fill();
+                // Inti misterius — hampir tak terlihat, hanya shimmer
+                const pulse = Math.sin(frame * 0.03) * 0.15 + 0.1;
+                const coreGrd = ctx.createRadialGradient(0, 0, 0, 0, 0, 30 * s);
+                coreGrd.addColorStop(0, `rgba(199,210,254,${pulse})`); coreGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(0, 0, 30 * s, 0, Math.PI*2); ctx.fillStyle = coreGrd; ctx.fill();
+                ctx.restore();
+            }
+
+            function drawGalacticCollision(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Dua inti galaksi bergerak saling mendekati lalu menjauh (simulasi loop)
+                const t = (Math.sin(frame * 0.006) + 1) * 0.5;
+                const sep = (80 + t * 120) * s;
+                const cx1 = cx - sep * 0.5, cy1 = cy - 20;
+                const cx2 = cx + sep * 0.5, cy2 = cy + 20;
+
+                // Ekor pasang surut — partikel terseret
+                for (let i = 0; i < 200; i++) {
+                    const tt = i / 200;
+                    const tailA1 = frame * 0.005 + tt * Math.PI * 3;
+                    const tailR1 = tt * 160 * s;
+                    const tx1 = cx1 + Math.cos(tailA1) * tailR1 * 0.4;
+                    const ty1 = cy1 + Math.sin(tailA1) * tailR1 * 0.15;
+                    ctx.beginPath(); ctx.arc(tx1, ty1, 1, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(252,211,77,${(1-tt)*0.4})`; ctx.fill();
+
+                    const tailA2 = -frame * 0.005 + tt * Math.PI * 3;
+                    const tx2 = cx2 + Math.cos(tailA2) * tailR1 * 0.4;
+                    const ty2 = cy2 + Math.sin(tailA2) * tailR1 * 0.15;
+                    ctx.beginPath(); ctx.arc(tx2, ty2, 1, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(125,211,252,${(1-tt)*0.4})`; ctx.fill();
+                }
+
+                // Galaksi 1 (kuning)
+                const g1Arms = 2;
+                for (let arm = 0; arm < g1Arms; arm++) {
+                    const baseA = (arm / g1Arms) * Math.PI * 2 - frame * 0.003;
+                    for (let i = 0; i < 120; i++) {
+                        const tt = i / 120, spiral = tt * Math.PI * 4 + baseA;
+                        const r = tt * 70 * s;
+                        const sc = (Math.random() - 0.5) * 12;
+                        ctx.beginPath(); ctx.arc(cx1 + Math.cos(spiral)*r + sc, cy1 + Math.sin(spiral)*r*0.4 + sc*0.3, Math.random()*1.5, 0, Math.PI*2);
+                        ctx.fillStyle = `rgba(252,211,77,${(1-tt)*0.6+0.1})`; ctx.fill();
+                    }
+                }
+                // Core 1
+                const core1 = ctx.createRadialGradient(cx1, cy1, 0, cx1, cy1, 25*s);
+                core1.addColorStop(0, "#fff"); core1.addColorStop(0.4, "rgba(252,211,77,0.8)"); core1.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx1, cy1, 25*s, 0, Math.PI*2); ctx.fillStyle = core1; ctx.fill();
+
+                // Galaksi 2 (biru)
+                const g2Arms = 3;
+                for (let arm = 0; arm < g2Arms; arm++) {
+                    const baseA = (arm / g2Arms) * Math.PI * 2 + frame * 0.002;
+                    for (let i = 0; i < 120; i++) {
+                        const tt = i / 120, spiral = tt * Math.PI * 4 + baseA;
+                        const r = tt * 70 * s;
+                        const sc = (Math.random() - 0.5) * 12;
+                        ctx.beginPath(); ctx.arc(cx2 + Math.cos(spiral)*r + sc, cy2 + Math.sin(spiral)*r*0.35 + sc*0.3, Math.random()*1.5, 0, Math.PI*2);
+                        ctx.fillStyle = `rgba(125,211,252,${(1-tt)*0.6+0.1})`; ctx.fill();
+                    }
+                }
+                // Core 2
+                const core2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, 22*s);
+                core2.addColorStop(0, "#fff"); core2.addColorStop(0.4, "rgba(125,211,252,0.8)"); core2.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx2, cy2, 22*s, 0, Math.PI*2); ctx.fillStyle = core2; ctx.fill();
+
+                // Zona tumbukan — percikan bintang baru
+                if (sep < 130 * s) {
+                    const colX = (cx1 + cx2) / 2, colY = (cy1 + cy2) / 2;
+                    for (let i = 0; i < 30; i++) {
+                        const ba = Math.random() * Math.PI * 2;
+                        const br = Math.random() * 50 * s;
+                        ctx.beginPath(); ctx.arc(colX + Math.cos(ba)*br, colY + Math.sin(ba)*br, Math.random()*2+0.5, 0, Math.PI*2);
+                        ctx.fillStyle = `rgba(255,255,200,${Math.random() * 0.8})`; ctx.fill();
+                    }
+                }
+            }
+
+            function drawWhiteHole(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Semburan partikel keluar dari pusat
+                for (let i = 0; i < 120; i++) {
+                    const a = (i / 120) * Math.PI * 2 + frame * 0.002;
+                    const speed = (0.8 + (i % 5) * 0.3);
+                    const dist = ((frame * speed + i * 22) % (Math.min(w,h) * 0.55)) * s;
+                    const opacity = Math.max(0, 1 - dist / (Math.min(w,h) * 0.55 * s));
+                    const px = cx + Math.cos(a) * dist, py = cy + Math.sin(a) * dist;
+                    ctx.beginPath(); ctx.arc(px, py, 1.5, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(224,242,254,${opacity * 0.8})`; ctx.fill();
+                }
+                // Cincin pancaran
+                for (let r = 1; r <= 4; r++) {
+                    const ringR = ((frame * 1.2 + r * 40) % (Math.min(w,h) * 0.5)) * s;
+                    const ro = Math.max(0, 1 - ringR / (Math.min(w,h) * 0.5 * s));
+                    ctx.beginPath(); ctx.arc(cx, cy, ringR, 0, Math.PI*2);
+                    ctx.strokeStyle = `rgba(186,230,253,${ro * 0.5})`; ctx.lineWidth = 3; ctx.stroke();
+                }
+                // Anti-event horizon — lingkaran terang di pusat
+                const aehGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 55 * s);
+                aehGrd.addColorStop(0, `rgba(255,255,255,1)`);
+                aehGrd.addColorStop(0.3, `rgba(186,230,253,0.9)`);
+                aehGrd.addColorStop(0.7, `rgba(125,211,252,0.4)`);
+                aehGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(cx, cy, 55 * s, 0, Math.PI*2); ctx.fillStyle = aehGrd; ctx.fill();
+                // Inti putih menyilaukan
+                const blastPulse = Math.sin(frame * 0.08) * 5;
+                const coreGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, (22 + blastPulse) * s);
+                coreGrd.addColorStop(0, `#ffffff`); coreGrd.addColorStop(0.5, `rgba(224,242,254,0.95)`); coreGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(cx, cy, (22 + blastPulse) * s, 0, Math.PI*2); ctx.fillStyle = coreGrd; ctx.fill();
+            }
+
+            function drawProtostar(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Awan molekuler induk yang runtuh
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.0005);
+                for (let i = 0; i < 12; i++) {
+                    const a = (i / 12) * Math.PI * 2;
+                    const dist = (100 + Math.sin(frame * 0.01 + i) * 30) * s;
+                    const x = Math.cos(a) * dist, y = Math.sin(a) * dist * 0.6;
+                    const cr = (60 + i * 8) * s;
+                    const cg = ctx.createRadialGradient(x, y, 0, x, y, cr);
+                    cg.addColorStop(0, `rgba(120,53,15,0.25)`);
+                    cg.addColorStop(0.5, `rgba(180,83,9,0.12)`);
+                    cg.addColorStop(1, `transparent`);
+                    ctx.beginPath(); ctx.arc(x, y, cr, 0, Math.PI*2); ctx.fillStyle = cg; ctx.fill();
+                }
+                ctx.restore();
+                // Cakram akresi berputar
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.012); ctx.scale(1, 0.28);
+                for (let ring = 1; ring <= 5; ring++) {
+                    const rr = (35 + ring * 22) * s;
+                    const opacity = 0.5 - ring * 0.07;
+                    const diskGrd = ctx.createRadialGradient(0, 0, rr * 0.7, 0, 0, rr + 10*s);
+                    diskGrd.addColorStop(0, `rgba(251,191,36,${opacity})`);
+                    diskGrd.addColorStop(0.6, `rgba(217,119,6,${opacity * 0.6})`);
+                    diskGrd.addColorStop(1, `transparent`);
+                    ctx.beginPath(); ctx.arc(0, 0, rr + 10*s, 0, Math.PI*2); ctx.fillStyle = diskGrd; ctx.fill();
+                }
+                ctx.restore();
+                // Jet bipolar — dua semburan ke atas dan bawah
+                ctx.save(); ctx.translate(cx, cy);
+                [-1, 1].forEach(dir => {
+                    const jetLen = Math.min(w,h) * 0.38 * s;
+                    const jetGrd = ctx.createLinearGradient(0, 0, 0, dir * jetLen);
+                    jetGrd.addColorStop(0, `rgba(253,230,138,0.7)`);
+                    jetGrd.addColorStop(0.4, `rgba(251,191,36,0.3)`);
+                    jetGrd.addColorStop(1, `transparent`);
+                    ctx.beginPath();
+                    ctx.moveTo(-8, 0); ctx.lineTo(-3*s, dir * jetLen); ctx.lineTo(3*s, dir * jetLen); ctx.lineTo(8, 0);
+                    ctx.fillStyle = jetGrd; ctx.fill();
+                });
+                ctx.restore();
+                // Inti proto berdenyut
+                const pp = Math.sin(frame * 0.04) * 6;
+                const protoGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, (28 + pp) * s);
+                protoGrd.addColorStop(0, `#fffbeb`); protoGrd.addColorStop(0.4, `rgba(253,230,138,0.9)`); protoGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(cx, cy, (28 + pp) * s, 0, Math.PI*2); ctx.fillStyle = protoGrd; ctx.fill();
+            }
+
+            function drawDysonSphere(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                const sphereR = 130 * s;
+                // Bintang di dalam
+                const starGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 45 * s);
+                starGrd.addColorStop(0, `#ffffff`); starGrd.addColorStop(0.3, `#fef08a`); starGrd.addColorStop(0.7, `rgba(253,224,71,0.4)`); starGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(cx, cy, 45 * s, 0, Math.PI*2); ctx.fillStyle = starGrd; ctx.fill();
+                // Rangka megastruktur — garis kisi berputar
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.003);
+                for (let i = 0; i < 18; i++) {
+                    const a = (i / 18) * Math.PI * 2;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, sphereR, a, a + Math.PI * 2 / 18 - 0.04);
+                    ctx.strokeStyle = `rgba(163,230,53,0.55)`; ctx.lineWidth = 3; ctx.stroke();
+                }
+                ctx.restore();
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(-frame * 0.002);
+                for (let i = 0; i < 12; i++) {
+                    const lat = -Math.PI/2 + (i / 11) * Math.PI;
+                    const latR = Math.cos(lat) * sphereR;
+                    const latY = Math.sin(lat) * sphereR * 0.35;
+                    if (latR > 5) {
+                        ctx.beginPath(); ctx.ellipse(0, latY, latR, latR * 0.2, 0, 0, Math.PI*2);
+                        ctx.strokeStyle = `rgba(163,230,53,0.3)`; ctx.lineWidth = 1.5; ctx.stroke();
+                    }
+                }
+                ctx.restore();
+                // Panel surya — segmen berwarna
+                ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.005);
+                for (let i = 0; i < 24; i++) {
+                    const a = (i / 24) * Math.PI * 2;
+                    const panelX = Math.cos(a) * sphereR, panelY = Math.sin(a) * sphereR * 0.35;
+                    const panelGrd = ctx.createRadialGradient(panelX, panelY, 0, panelX, panelY, 18 * s);
+                    const brightness = 0.4 + Math.sin(frame * 0.05 + i) * 0.2;
+                    panelGrd.addColorStop(0, `rgba(163,230,53,${brightness})`); panelGrd.addColorStop(1, `transparent`);
+                    ctx.beginPath(); ctx.arc(panelX, panelY, 12 * s, 0, Math.PI*2); ctx.fillStyle = panelGrd; ctx.fill();
+                }
+                ctx.restore();
+                // Glow luar bola
+                const outerGrd = ctx.createRadialGradient(cx, cy, sphereR * 0.9, cx, cy, sphereR * 1.15);
+                outerGrd.addColorStop(0, `rgba(163,230,53,0.12)`); outerGrd.addColorStop(1, `transparent`);
+                ctx.beginPath(); ctx.arc(cx, cy, sphereR * 1.15, 0, Math.PI*2); ctx.fillStyle = outerGrd; ctx.fill();
             }
 
             // ==========================================
-            // 3. LOOPING KANVAS UTAMA
+            // STARFIELD — latar bintang untuk semua view
             // ==========================================
+            const STARS = Array.from({ length: 220 }, () => ({
+                x: Math.random(), y: Math.random(),
+                r: Math.random() * 1.3 + 0.2,
+                twinkle: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.03 + 0.01
+            }));
+
+            function drawStarfield(ctx, w, h, frame) {
+                for (const star of STARS) {
+                    const br = 0.3 + Math.sin(frame * star.speed + star.twinkle) * 0.25;
+                    ctx.beginPath(); ctx.arc(star.x * w, star.y * h, star.r, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(255,255,255,${br})`; ctx.fill();
+                }
+            }
             function loop() {
                 const w = canvas.width, h = canvas.height;
                 const cx = w / 2, cy = h / 2;
                 ctx.clearRect(0, 0, w, h);
+
+                // Starfield di semua view kecuali solar (solar punya bintang sendiri)
+                if (view !== "solar") drawStarfield(ctx, w, h, frame);
 
                 if (view === "blackhole") drawBlackHole(ctx, cx, cy, frame, w, h);
                 else if (view === "pulsar") drawPulsar(ctx, cx, cy, frame, w, h);
@@ -570,6 +934,8 @@
                 else if (view === "binary") drawBinaryStar(ctx, cx, cy, frame, w, h);
                 else if (view === "uyscuti") drawUYScuti(ctx, cx, cy, frame, w, h);
                 else if (view === "exoplanet") drawExoplanet(ctx, cx, cy, frame, w, h);
+                else if (view === "darkmatter") drawDarkMatter(ctx, cx, cy, frame, w, h);
+                else if (view === "collision") drawGalacticCollision(ctx, cx, cy, frame, w, h);
                 else if (view === "milky" || view === "andromeda") drawGalaxy(ctx, cx, cy, frame, w, h, view);
                 else {
                     // Mode Tata Surya (Solar)
