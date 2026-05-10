@@ -1,0 +1,250 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#020617"/>
+    </radialGradient>
+    <!-- Sun glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fffbeb;stop-opacity:1"/>
+      <stop offset="40%" style="stop-color:#FDB813;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#FDB813;stop-opacity:0"/>
+    </radialGradient>
+    <!-- Planet gradients -->
+    <radialGradient id="mercuryGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#cbd5e1"/>
+      <stop offset="100%" style="stop-color:#475569"/>
+    </radialGradient>
+    <radialGradient id="venusGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fef3c7"/>
+      <stop offset="100%" style="stop-color:#92400e"/>
+    </radialGradient>
+    <radialGradient id="earthGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#7dd3fc"/>
+      <stop offset="100%" style="stop-color:#1e3a5f"/>
+    </radialGradient>
+    <radialGradient id="marsGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fca5a5"/>
+      <stop offset="100%" style="stop-color:#7f1d1d"/>
+    </radialGradient>
+    <radialGradient id="jupiterGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fde68a"/>
+      <stop offset="100%" style="stop-color:#92400e"/>
+    </radialGradient>
+    <radialGradient id="saturnGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#fef08a"/>
+      <stop offset="100%" style="stop-color:#854d0e"/>
+    </radialGradient>
+    <radialGradient id="uranusGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#a5f3fc"/>
+      <stop offset="100%" style="stop-color:#164e63"/>
+    </radialGradient>
+    <radialGradient id="neptuneGrad" cx="35%" cy="35%">
+      <stop offset="0%" style="stop-color:#93c5fd"/>
+      <stop offset="100%" style="stop-color:#1e3a8a"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGrad)"/>
+
+  <!-- Stars -->
+  <g opacity="0.9">
+    <circle cx="45" cy="23" r="0.8" fill="white"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" repeatCount="indefinite"/></circle>
+    <circle cx="120" cy="67" r="1" fill="white"><animate attributeName="opacity" values="1;0.2;1" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cx="210" cy="18" r="0.7" fill="white"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+    <circle cx="340" cy="35" r="0.9" fill="white"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.7s" repeatCount="indefinite"/></circle>
+    <circle cx="490" cy="12" r="1.1" fill="white"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="4.1s" repeatCount="indefinite"/></circle>
+    <circle cx="590" cy="44" r="0.6" fill="white"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/></circle>
+    <circle cx="670" cy="25" r="0.9" fill="white"><animate attributeName="opacity" values="1;0.3;1" dur="2.9s" repeatCount="indefinite"/></circle>
+    <circle cx="740" cy="58" r="0.7" fill="white"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="780" cy="15" r="1" fill="white"><animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.3s" repeatCount="indefinite"/></circle>
+    <circle cx="30" cy="300" r="0.8" fill="white"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3.7s" repeatCount="indefinite"/></circle>
+    <circle cx="90" cy="350" r="1" fill="white"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.0s" repeatCount="indefinite"/></circle>
+    <circle cx="160" cy="380" r="0.7" fill="white"><animate attributeName="opacity" values="0.4;1;0.4" dur="4.5s" repeatCount="indefinite"/></circle>
+    <circle cx="420" cy="370" r="0.9" fill="white"><animate attributeName="opacity" values="1;0.3;1" dur="1.9s" repeatCount="indefinite"/></circle>
+    <circle cx="560" cy="385" r="1.1" fill="white"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="3.1s" repeatCount="indefinite"/></circle>
+    <circle cx="720" cy="360" r="0.8" fill="white"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.6s" repeatCount="indefinite"/></circle>
+    <circle cx="760" cy="330" r="0.6" fill="white"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.7s" repeatCount="indefinite"/></circle>
+    <circle cx="795" cy="290" r="1" fill="white"><animate attributeName="opacity" values="0.5;1;0.5" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="15" cy="180" r="0.7" fill="white"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.4s" repeatCount="indefinite"/></circle>
+    <circle cx="785" cy="200" r="0.8" fill="white"><animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite"/></circle>
+    <circle cx="400" cy="8" r="0.6" fill="white"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="265" cy="360" r="0.9" fill="white"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="630" cy="340" r="0.7" fill="white"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="3.5s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- Sun center X=110 Y=200 -->
+  <!-- Sun outer glow -->
+  <circle cx="110" cy="200" r="55" fill="url(#sunGlow)" opacity="0.4">
+    <animate attributeName="r" values="55;65;55" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0.6;0.4" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Sun body -->
+  <circle cx="110" cy="200" r="28" fill="#FDB813" filter="url(#softglow)">
+    <animate attributeName="r" values="28;30;28" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="110" cy="200" r="28" fill="url(#sunGlow)" opacity="0.6"/>
+
+  <!-- ORBIT RINGS (ellipses centered at 110,200) -->
+  <!-- Mercury orbit rx=55 -->
+  <ellipse cx="110" cy="200" rx="55" ry="16" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+  <!-- Venus orbit rx=90 -->
+  <ellipse cx="110" cy="200" rx="90" ry="26" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+  <!-- Earth orbit rx=130 -->
+  <ellipse cx="110" cy="200" rx="130" ry="38" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+  <!-- Mars orbit rx=170 -->
+  <ellipse cx="110" cy="200" rx="170" ry="50" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.8"/>
+  <!-- Jupiter orbit rx=230 -->
+  <ellipse cx="110" cy="200" rx="230" ry="68" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+  <!-- Saturn orbit rx=300 -->
+  <ellipse cx="110" cy="200" rx="300" ry="88" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+  <!-- Uranus orbit rx=370 -->
+  <ellipse cx="110" cy="200" rx="370" ry="110" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+  <!-- Neptune orbit rx=450 - clipped at edge -->
+  <ellipse cx="110" cy="200" rx="450" ry="133" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+
+  <!-- PLANETS using animateMotion along their elliptical paths -->
+
+  <!-- Mercury: period 4s -->
+  <g filter="url(#glow)">
+    <circle r="3.5" fill="url(#mercuryGrad)">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <mpath href="#mercuryPath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Venus: period 6.5s -->
+  <g filter="url(#glow)">
+    <circle r="5.5" fill="url(#venusGrad)">
+      <animateMotion dur="6.5s" repeatCount="indefinite">
+        <mpath href="#venusPath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Earth: period 10s -->
+  <g filter="url(#glow)">
+    <circle r="6" fill="url(#earthGrad)">
+      <animateMotion dur="10s" repeatCount="indefinite">
+        <mpath href="#earthPath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Moon orbiting Earth — offset animateMotion layered -->
+  <circle r="2" fill="#d4d4d8" opacity="0.85">
+    <animateMotion dur="10s" repeatCount="indefinite">
+      <mpath href="#earthPath"/>
+    </animateMotion>
+    <!-- extra micro orbit handled via transform trick: moon trails earth + 2.4s phase -->
+    <animateMotion dur="10s" begin="-2.4s" repeatCount="indefinite" additive="sum">
+      <mpath href="#moonLocalPath"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Mars: period 16s -->
+  <g filter="url(#glow)">
+    <circle r="5" fill="url(#marsGrad)">
+      <animateMotion dur="16s" repeatCount="indefinite">
+        <mpath href="#marsPath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Jupiter: period 26s -->
+  <g filter="url(#glow)">
+    <circle r="11" fill="url(#jupiterGrad)">
+      <animateMotion dur="26s" repeatCount="indefinite">
+        <mpath href="#jupiterPath"/>
+      </animateMotion>
+    </circle>
+    <!-- Jupiter belt stripes as overlay -->
+  </g>
+
+  <!-- Europa orbiting Jupiter -->
+  <circle r="2.5" fill="#fef08a" opacity="0.9">
+    <animateMotion dur="26s" repeatCount="indefinite">
+      <mpath href="#jupiterPath"/>
+    </animateMotion>
+    <animateMotion dur="26s" begin="-5s" repeatCount="indefinite" additive="sum">
+      <mpath href="#moonLocalPath"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Saturn: period 38s -->
+  <g filter="url(#glow)">
+    <g>
+      <!-- Saturn ring (drawn before planet so planet appears on top) -->
+      <ellipse rx="18" ry="5" fill="none" stroke="rgba(253,224,71,0.55)" stroke-width="3.5" opacity="0.8">
+        <animateMotion dur="38s" repeatCount="indefinite">
+          <mpath href="#saturnPath"/>
+        </animateMotion>
+      </ellipse>
+      <circle r="8.5" fill="url(#saturnGrad)">
+        <animateMotion dur="38s" repeatCount="indefinite">
+          <mpath href="#saturnPath"/>
+        </animateMotion>
+      </circle>
+    </g>
+  </g>
+
+  <!-- Titan orbiting Saturn -->
+  <circle r="2.5" fill="#fb923c" opacity="0.9">
+    <animateMotion dur="38s" repeatCount="indefinite">
+      <mpath href="#saturnPath"/>
+    </animateMotion>
+    <animateMotion dur="38s" begin="-8s" repeatCount="indefinite" additive="sum">
+      <mpath href="#moonLocalPath"/>
+    </animateMotion>
+  </circle>
+
+  <!-- Uranus: period 52s -->
+  <g filter="url(#glow)">
+    <circle r="7" fill="url(#uranusGrad)">
+      <animateMotion dur="52s" repeatCount="indefinite">
+        <mpath href="#uranusPath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Neptune: period 70s -->
+  <g filter="url(#glow)">
+    <circle r="6.5" fill="url(#neptuneGrad)">
+      <animateMotion dur="70s" repeatCount="indefinite">
+        <mpath href="#neptunePath"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- HIDDEN PATHS for animateMotion (all centered at 110,200) -->
+  <defs>
+    <path id="mercuryPath"  d="M 165,200 A 55,16 0 1 1 164.99,200 Z" fill="none"/>
+    <path id="venusPath"    d="M 200,200 A 90,26 0 1 1 199.99,200 Z" fill="none"/>
+    <path id="earthPath"    d="M 240,200 A 130,38 0 1 1 239.99,200 Z" fill="none"/>
+    <path id="marsPath"     d="M 280,200 A 170,50 0 1 1 279.99,200 Z" fill="none"/>
+    <path id="jupiterPath"  d="M 340,200 A 230,68 0 1 1 339.99,200 Z" fill="none"/>
+    <path id="saturnPath"   d="M 410,200 A 300,88 0 1 1 409.99,200 Z" fill="none"/>
+    <path id="uranusPath"   d="M 480,200 A 370,110 0 1 1 479.99,200 Z" fill="none"/>
+    <path id="neptunePath"  d="M 560,200 A 450,133 0 1 1 559.99,200 Z" fill="none"/>
+    <!-- Small local orbit for moons (relative offset) -->
+    <path id="moonLocalPath" d="M 14,0 A 14,6 0 1 1 13.99,0 Z" fill="none"/>
+  </defs>
+
+  <!-- Labels -->
+  <text x="110" y="237" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(253,184,19,0.8)">☀ Matahari</text>
+
+  <!-- Title overlay bottom -->
+  <rect x="0" y="368" width="800" height="32" fill="rgba(2,6,23,0.85)"/>
+  <text x="400" y="386" text-anchor="middle" font-family="monospace" font-size="11" fill="#22d3ee" letter-spacing="3">✦  SIMULASI ALAM SEMESTA  •  Solar Sistem for Razeerh  ✦</text>
+</svg>
