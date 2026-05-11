@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulasi Alam Semesta</title>
+  <title>Simulasi Alam Semesta Penuh</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { 
@@ -176,7 +176,10 @@
                 { id: "redgiant", label: "Raksasa Merah" }, { id: "neutronstar", label: "Bintang Neutron" }, { id: "gammaray", label: "Gamma-Ray Burst" },
                 { id: "blazar", label: "Blazar" }, { id: "tidalforce", label: "Pasang Gravitasi" }, { id: "solarsystem2", label: "Sistem Bintang Ganda" },
                 { id: "stellarbh", label: "BH Stellar" }, { id: "galaxycluster", label: "Klaster Galaksi" }, { id: "timeworm", label: "Cacing Waktu" },
-                { id: "hotjupiter", label: "Hot Jupiter" }, { id: "ringworld", label: "Ringworld" }, { id: "bigbang", label: "Big Bang" }
+                { id: "hotjupiter", label: "Hot Jupiter" }, { id: "ringworld", label: "Ringworld" }, { id: "bigbang", label: "Big Bang" },
+                { id: "lensing", label: "Gravitational Lensing" }, { id: "solstorm", label: "Badai Matahari" },
+                { id: "cataclysmic", label: "Bintang Kataklisman" }, { id: "voidregion", label: "Void Region" },
+                { id: "magnetosphere", label: "Magnetosfer Bumi" }, { id: "terraforming", label: "Terraforming Mars" }
             ];
 
             const SOLAR_DATA = {
@@ -227,7 +230,13 @@
                 "Lubang Cacing Waktu": { viewId: "timeworm", color: "#2dd4bf", info: { Kategori: "Perjalanan Waktu (Hipotetis)", Teori: "Closed Timelike Curve", Status: "Spekulatif Fisika" }, desc: "Versi wormhole yang menghubungkan dua titik berbeda dalam WAKTU, bukan hanya ruang. Dibayangkan bisa mengirim materi ke masa lalu atau masa depan — masih spekulatif.", layers:["Portal Masa Kini", "Lorong Kronologis", "Paradoks Waktu", "Portal Masa Lain"] },
                 "Hot Jupiter": { viewId: "hotjupiter", color: "#fb923c", info: { Kategori: "Exoplanet Raksasa Gas", Suhu: "1.000 - 3.000 K", Periode: "< 10 Hari" }, desc: "Planet gas raksasa yang mengorbit sangat dekat dengan bintang induknya — ribuan kali lebih dekat dari Jupiter ke Matahari. Sisi siangnya terpanggang ribuan derajat, sisi malamnya beku.", layers:["Atmosfer Supertermal", "Badai Abadi Zona Terminator", "Awan Besi Cair", "Inti Berbatu"] },
                 "Ringworld": { viewId: "ringworld", color: "#4ade80", info: { Kategori: "Megastruktur (Fiksi Ilmiah)", Konsep: "Larry Niven 1970", Radius: "~1 AU" }, desc: "Megastruktur berbentuk cincin raksasa yang mengelilingi bintang — menampung area permukaan jutaan kali lebih besar dari Bumi. Konsep rekayasa kosmik paling ambisius dalam sains fiksi.", layers:["Dinding Tepi Penahan Atmosfer", "Tanah & Lautan Artifisial", "Kerangka Superalloy", "Sistem Bayangan Malam"] },
-                "Big Bang": { viewId: "bigbang", color: "#fde68a", info: { Kategori: "Asal Usul Alam Semesta", Usia: "13.8 Miliar Tahun Lalu", Suhu: "10³² Kelvin (awal)" }, desc: "Titik awal alam semesta — ekspansi cepat dari singularitas yang tak terbatas panas dan padat. Dalam milidetik pertama, semua materi, energi, ruang, dan waktu tercipta.", layers:["Singularitas Awal (t=0)", "Inflasi Kosmik", "Quark-Gluon Plasma", "Rekombinasi & CMB"] }
+                "Big Bang": { viewId: "bigbang", color: "#fde68a", info: { Kategori: "Asal Usul Alam Semesta", Usia: "13.8 Miliar Tahun Lalu", Suhu: "10³² Kelvin (awal)" }, desc: "Titik awal alam semesta — ekspansi cepat dari singularitas yang tak terbatas panas dan padat. Dalam milidetik pertama, semua materi, energi, ruang, dan waktu tercipta.", layers:["Singularitas Awal (t=0)", "Inflasi Kosmik", "Quark-Gluon Plasma", "Rekombinasi & CMB"] },
+                "Gravitational Lensing": { viewId: "lensing", color: "#60a5fa", info: { Kategori: "Efek Relativitas Umum", Contoh: "Einstein Ring", Skala: "Galaksi - Klaster" }, desc: "Cahaya dari objek jauh dibelokkan oleh gravitasi massa besar di antaranya — menciptakan busur, cincin, atau bayangan berganda yang indah di langit.", layers:["Sumber Cahaya Latar", "Lensa Gravitasi (Galaksi/BH)", "Busur Einstein", "Pengamat (Bumi)"] },
+                "Badai Matahari": { viewId: "solstorm", color: "#fb923c", info: { Kategori: "Aktivitas Surya", Kecepatan: "400-800 km/s", Skala: "Seluruh Tata Surya" }, desc: "Semburan plasma dan partikel bermuatan dari Matahari yang melesat ke seluruh tata surya — memicu aurora di Bumi dan dapat merusak satelit.", layers:["Sunspot (Titik Hitam)", "Solar Flare (Semburan)", "Coronal Mass Ejection", "Angin Surya"] },
+                "Bintang Kataklisman": { viewId: "cataclysmic", color: "#f472b6", info: { Kategori: "Sistem Biner Dekat", Contoh: "SS Cygni", Periode: "Jam - Hari" }, desc: "Sistem dua bintang sangat dekat — katai putih menarik material dari bintang pendamping hingga meledak berulang-ulang dalam nova klasik yang spektakuler.", layers:["Katai Putih Pemakan", "Bintang Pendamping", "Cakram Akresi Panas", "Nova Berulang"] },
+                "Void Region": { viewId: "voidregion", color: "#1e293b", info: { Kategori: "Kekosongan Kosmik", Contoh: "Boötes Void", Diameter: "330 Juta tc" }, desc: "Wilayah alam semesta yang hampir sepenuhnya kosong — tidak ada galaksi, gas, atau materi terdeteksi. Void terbesar adalah Boötes Void yang membentang ratusan juta tahun cahaya.", layers:["Batas Void (Dinding Galaksi)", "Ruang Hampa Kosmik", "Dark Energy Dominan", "Filamen Kosmik Tepi"] },
+                "Magnetosfer Bumi": { viewId: "magnetosphere", color: "#38bdf8", info: { Kategori: "Medan Magnet Planet", Jarak: "10 RE (siang) / 60 RE (malam)", Fungsi: "Pelindung Kehidupan" }, desc: "Gelembung magnetik raksasa yang menyelimuti Bumi — menahan angin surya dan menciptakan sabuk radiasi Van Allen. Tanpanya, atmosfer Bumi sudah terkikis seperti Mars.", layers:["Magnetopause (Batas Terluar)", "Sabuk Radiasi Van Allen", "Plasmasfer", "Ionosfer"] },
+                "Terraforming Mars": { viewId: "terraforming", color: "#ef4444", info: { Kategori: "Rekayasa Planet (Hipotetis)", Target: "Mars", Waktu: "Ratusan - Ribuan Tahun" }, desc: "Proyek ambisius mengubah Mars menjadi planet layak huni — menebalkan atmosfer, mencairkan es, menciptakan lautan, dan menghijaukan permukaannya.", layers:["Fase 1: Pemanasan & CO₂", "Fase 2: Lautan & Hujan", "Fase 3: Oksigen & Tumbuhan", "Fase 4: Ekosistem Stabil"] }
             };
 
             const ALL_DATA = { ...SOLAR_DATA, ...DEEP_SPACE_DATA };
@@ -1627,6 +1636,365 @@
                 ctx.fillText(phaseLabel, cx, cy + Math.min(w,h)*0.38*s);
             }
 
+
+            function drawLensing(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Sumber cahaya latar (galaksi jauh) — bulat biru di belakang
+                const srcX = cx, srcY = cy;
+                // Lensa gravitasi — galaksi/massa besar, posisi sedikit offset
+                const lensX = cx + Math.sin(frame * 0.005) * 15 * s;
+                const lensY = cy + Math.cos(frame * 0.005) * 10 * s;
+
+                // Halo dark matter lensa
+                const haloG = ctx.createRadialGradient(lensX, lensY, 0, lensX, lensY, 160*s);
+                haloG.addColorStop(0, "rgba(99,102,241,0.06)");
+                haloG.addColorStop(0.5, "rgba(129,140,248,0.04)");
+                haloG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(lensX, lensY, 160*s, 0, Math.PI*2); ctx.fillStyle = haloG; ctx.fill();
+
+                // Einstein Ring — lingkaran cahaya sumber yang dibelokkan jadi cincin
+                const ringR = 80 * s;
+                const ringPulse = Math.sin(frame * 0.02) * 4;
+                for (let i = 0; i < 3; i++) {
+                    const rr = ringR + i * 6*s + ringPulse;
+                    const ro = 0.5 - i * 0.15;
+                    ctx.beginPath(); ctx.arc(lensX, lensY, rr, 0, Math.PI*2);
+                    ctx.strokeStyle = `rgba(96,165,250,${ro})`; ctx.lineWidth = 3 - i; ctx.stroke();
+                }
+                // Busur Einstein — 4 bayangan bercahaya di sekitar cincin
+                for (let arc = 0; arc < 4; arc++) {
+                    const arcA = (arc / 4) * Math.PI * 2 + frame * 0.003;
+                    const arcX = lensX + Math.cos(arcA) * ringR;
+                    const arcY = lensY + Math.sin(arcA) * ringR;
+                    const arcG = ctx.createRadialGradient(arcX, arcY, 0, arcX, arcY, 20*s);
+                    arcG.addColorStop(0, "rgba(147,197,253,0.9)");
+                    arcG.addColorStop(0.5, "rgba(96,165,250,0.4)");
+                    arcG.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(arcX, arcY, 20*s, 0, Math.PI*2); ctx.fillStyle = arcG; ctx.fill();
+                }
+                // Lensa utama — galaksi eliptikal kekuningan
+                ctx.save(); ctx.translate(lensX, lensY); ctx.scale(1, 0.6);
+                const lensG = ctx.createRadialGradient(0, 0, 0, 0, 0, 30*s);
+                lensG.addColorStop(0, "rgba(255,255,255,0.95)");
+                lensG.addColorStop(0.4, "rgba(253,230,138,0.7)");
+                lensG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(0, 0, 30*s, 0, Math.PI*2); ctx.fillStyle = lensG; ctx.fill();
+                ctx.restore();
+                // Sinar pembelokan — garis putus dari sumber ke busur (visualisasi path)
+                for (let i = 0; i < 4; i++) {
+                    const arcA = (i / 4) * Math.PI * 2 + frame * 0.003;
+                    const arcX2 = lensX + Math.cos(arcA) * ringR;
+                    const arcY2 = lensY + Math.sin(arcA) * ringR;
+                    ctx.beginPath();
+                    ctx.moveTo(cx - w*0.35, cy - h*0.3);
+                    ctx.quadraticCurveTo(lensX, lensY, arcX2, arcY2);
+                    ctx.strokeStyle = `rgba(96,165,250,0.06)`; ctx.lineWidth = 1; ctx.stroke();
+                }
+                // Sumber asli di latar — samar
+                const srcG = ctx.createRadialGradient(cx - w*0.35, cy - h*0.3, 0, cx - w*0.35, cy - h*0.3, 25*s);
+                srcG.addColorStop(0, "rgba(125,211,252,0.6)"); srcG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx - w*0.35, cy - h*0.3, 25*s, 0, Math.PI*2); ctx.fillStyle = srcG; ctx.fill();
+                ctx.fillStyle = "rgba(148,163,184,0.5)"; ctx.font = `${9*s}px monospace`; ctx.textAlign = "center";
+                ctx.fillText("Galaksi Latar", cx - w*0.35, cy - h*0.3 - 28*s);
+                ctx.fillText("Lensa Gravitasi", lensX, lensY + 38*s);
+            }
+
+            function drawSolStorm(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Matahari
+                const sunR = 60 * s + Math.sin(frame * 0.04) * 5;
+                const sunG = ctx.createRadialGradient(cx, cy, 0, cx, cy, sunR);
+                sunG.addColorStop(0, "#fffbeb"); sunG.addColorStop(0.3, "#FDB813"); sunG.addColorStop(0.7, "rgba(251,146,60,0.6)"); sunG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, sunR, 0, Math.PI*2); ctx.fillStyle = sunG; ctx.fill();
+
+                // Sunspot — titik gelap di permukaan
+                const spots = [[0.6, 0.3], [-0.4, 0.7], [0.8, -0.5], [-0.7, -0.4]];
+                spots.forEach(([ax, ay]) => {
+                    const spX = cx + Math.cos(frame*0.008 + ax) * sunR * 0.7;
+                    const spY = cy + Math.sin(frame*0.008 + ay) * sunR * 0.5;
+                    ctx.beginPath(); ctx.arc(spX, spY, 6*s, 0, Math.PI*2);
+                    ctx.fillStyle = "rgba(100,40,0,0.7)"; ctx.fill();
+                });
+
+                // Prominens — lidah plasma besar melengkung
+                for (let i = 0; i < 5; i++) {
+                    const pa = (i / 5) * Math.PI * 2 + frame * 0.006;
+                    const h2 = (40 + Math.sin(frame * 0.05 + i) * 20) * s;
+                    ctx.save(); ctx.translate(cx, cy); ctx.rotate(pa);
+                    ctx.beginPath();
+                    ctx.moveTo(sunR * 0.9, 0);
+                    ctx.quadraticCurveTo(sunR + h2, -h2 * 0.5, sunR + h2 * 0.3, h2 * 0.8);
+                    ctx.strokeStyle = `rgba(251,146,60,${0.5 + Math.sin(frame*0.1+i)*0.3})`; ctx.lineWidth = 4; ctx.stroke();
+                    ctx.restore();
+                }
+
+                // CME — Coronal Mass Ejection, gelombang plasma meletus keluar
+                const cmePhase = (frame * 0.006) % 1;
+                const cmeA = frame * 0.004;
+                const cmeR = (sunR + cmePhase * Math.min(w,h) * 0.4) * s;
+                if (cmeR < Math.min(w,h) * 0.5) {
+                    const cmeG = ctx.createRadialGradient(cx + Math.cos(cmeA) * cmeR * 0.5, cy + Math.sin(cmeA) * cmeR * 0.5, 0, cx + Math.cos(cmeA) * cmeR * 0.5, cy + Math.sin(cmeA) * cmeR * 0.5, cmeR * 0.4);
+                    cmeG.addColorStop(0, `rgba(251,191,36,${(1-cmePhase)*0.4})`);
+                    cmeG.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(cx + Math.cos(cmeA) * cmeR * 0.5, cy + Math.sin(cmeA) * cmeR * 0.5, cmeR * 0.4, 0, Math.PI*2);
+                    ctx.fillStyle = cmeG; ctx.fill();
+                }
+
+                // Angin surya — garis-garis partikel melesat keluar
+                for (let i = 0; i < 20; i++) {
+                    const wa = (i / 20) * Math.PI * 2;
+                    const wPhase = ((frame * 0.02 + i * 0.3) % 1);
+                    const wr1 = (sunR + wPhase * Math.min(w,h) * 0.38) * s;
+                    const wr2 = wr1 + 15 * s;
+                    const wOp = (1 - wPhase) * 0.3;
+                    ctx.beginPath();
+                    ctx.moveTo(cx + Math.cos(wa) * wr1, cy + Math.sin(wa) * wr1);
+                    ctx.lineTo(cx + Math.cos(wa) * wr2, cy + Math.sin(wa) * wr2);
+                    ctx.strokeStyle = `rgba(253,186,116,${wOp})`; ctx.lineWidth = 1.5; ctx.stroke();
+                }
+            }
+
+            function drawCataclysmic(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Dua bintang sangat dekat: katai putih + bintang normal
+                const a1 = frame * 0.025;
+                const sep = 45 * s;
+                const wd_x = cx + Math.cos(a1) * sep * 0.35, wd_y = cy + Math.sin(a1) * sep * 0.35;
+                const comp_x = cx + Math.cos(a1 + Math.PI) * sep * 0.65, comp_y = cy + Math.sin(a1 + Math.PI) * sep * 0.65;
+
+                // Bintang pendamping (merah-oranye)
+                const cg = ctx.createRadialGradient(comp_x, comp_y, 0, comp_x, comp_y, 25*s);
+                cg.addColorStop(0, "#fff7ed"); cg.addColorStop(0.4, "#f97316"); cg.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(comp_x, comp_y, 25*s, 0, Math.PI*2); ctx.fillStyle = cg; ctx.fill();
+
+                // Cakram akresi — spiral material ke katai putih
+                ctx.save(); ctx.translate(wd_x, wd_y); ctx.rotate(frame * 0.04); ctx.scale(1, 0.3);
+                for (let r2 = 1; r2 <= 6; r2++) {
+                    const rr = (10 + r2 * 9) * s;
+                    const heat = 1 - r2 * 0.13;
+                    const dg = ctx.createRadialGradient(0, 0, rr*0.8, 0, 0, rr*1.2);
+                    dg.addColorStop(0, `rgba(255,${Math.floor(220*heat)},${Math.floor(80*heat)},${0.9*heat})`);
+                    dg.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(0, 0, rr*1.2, 0, Math.PI*2); ctx.fillStyle = dg; ctx.fill();
+                }
+                ctx.restore();
+
+                // Katai putih inti — kecil dan sangat terang
+                const wdG = ctx.createRadialGradient(wd_x, wd_y, 0, wd_x, wd_y, 10*s);
+                wdG.addColorStop(0, "#ffffff"); wdG.addColorStop(0.5, "rgba(186,230,253,0.9)"); wdG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(wd_x, wd_y, 10*s, 0, Math.PI*2); ctx.fillStyle = wdG; ctx.fill();
+
+                // Aliran material (accretion stream)
+                ctx.beginPath();
+                ctx.moveTo(comp_x, comp_y);
+                const midX = (comp_x + wd_x) / 2 + Math.sin(frame * 0.025) * 20 * s;
+                const midY = (comp_y + wd_y) / 2 + Math.cos(frame * 0.025) * 20 * s;
+                ctx.quadraticCurveTo(midX, midY, wd_x + Math.cos(a1 + Math.PI*0.7)*20*s, wd_y + Math.sin(a1 + Math.PI*0.7)*20*s);
+                ctx.strokeStyle = "rgba(251,146,60,0.5)"; ctx.lineWidth = 3*s; ctx.stroke();
+
+                // Nova explosion — flash periodik dahsyat
+                const novaPhase = (frame * 0.003) % 1;
+                if (novaPhase < 0.25) {
+                    const novaR = novaPhase * 200 * s;
+                    const novaO = 1 - novaPhase * 4;
+                    const novaG = ctx.createRadialGradient(wd_x, wd_y, 0, wd_x, wd_y, novaR);
+                    novaG.addColorStop(0, `rgba(255,255,255,${novaO})`);
+                    novaG.addColorStop(0.3, `rgba(244,114,182,${novaO*0.6})`);
+                    novaG.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(wd_x, wd_y, novaR, 0, Math.PI*2); ctx.fillStyle = novaG; ctx.fill();
+                }
+                ctx.fillStyle = "rgba(148,163,184,0.6)"; ctx.font = `${9*s}px monospace`; ctx.textAlign = "center";
+                ctx.fillText("Katai Putih", wd_x, wd_y - 15*s);
+            }
+
+            function drawVoidRegion(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Void utama — kekosongan mutlak, sangat gelap di tengah
+                const voidG = ctx.createRadialGradient(cx, cy, 0, cx, cy, 200*s);
+                voidG.addColorStop(0, "rgba(0,0,0,0.97)");
+                voidG.addColorStop(0.6, "rgba(2,6,23,0.9)");
+                voidG.addColorStop(0.85, "rgba(15,23,42,0.5)");
+                voidG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 200*s, 0, Math.PI*2); ctx.fillStyle = voidG; ctx.fill();
+
+                // Dinding galaksi di tepi void — klaster galaksi padat
+                const wallGalaxies = 32;
+                for (let i = 0; i < wallGalaxies; i++) {
+                    const wa = (i / wallGalaxies) * Math.PI * 2 + frame * 0.0008;
+                    const wallR = (175 + Math.sin(i * 2.3) * 30 + Math.sin(frame * 0.005 + i) * 8) * s;
+                    const gx = cx + Math.cos(wa) * wallR, gy = cy + Math.sin(wa) * wallR;
+                    const size = (2 + (i % 4) * 1.5) * s;
+                    const bright = 0.4 + Math.sin(frame * 0.015 + i) * 0.2;
+                    const galColors = ["rgba(253,230,138", "rgba(125,211,252", "rgba(196,181,253", "rgba(167,243,208"];
+                    ctx.beginPath(); ctx.arc(gx, gy, size, 0, Math.PI*2);
+                    ctx.fillStyle = `${galColors[i%4]},${bright})`; ctx.fill();
+                }
+
+                // Filamen kosmik yang membentuk batas void
+                ctx.save(); ctx.translate(cx, cy);
+                for (let i = 0; i < 6; i++) {
+                    const fa = (i / 6) * Math.PI * 2;
+                    ctx.beginPath();
+                    ctx.moveTo(Math.cos(fa) * 170*s, Math.sin(fa) * 170*s);
+                    ctx.lineTo(Math.cos(fa + 0.5) * 220*s, Math.sin(fa + 0.5) * 220*s);
+                    ctx.strokeStyle = `rgba(196,181,253,${0.08 + Math.sin(frame*0.01+i)*0.04})`; ctx.lineWidth = 2; ctx.stroke();
+                }
+                ctx.restore();
+
+                // Dark energy shimmer di dalam void — sangat samar
+                for (let i = 0; i < 8; i++) {
+                    const da = (i / 8) * Math.PI * 2 + frame * 0.002;
+                    const dr = (30 + i * 18) * s;
+                    const dp = Math.sin(frame * 0.03 + i * 0.7) * 0.015 + 0.01;
+                    ctx.beginPath(); ctx.arc(cx + Math.cos(da)*dr, cy + Math.sin(da)*dr, 2, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(99,102,241,${dp})`; ctx.fill();
+                }
+                ctx.fillStyle = "rgba(148,163,184,0.4)"; ctx.font = `${10*s}px monospace`; ctx.textAlign = "center";
+                ctx.fillText("Boötes Void", cx, cy);
+                ctx.font = `${8*s}px monospace`;
+                ctx.fillText("(330 Juta Tahun Cahaya)", cx, cy + 18*s);
+            }
+
+            function drawMagnetosphere(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Bumi di tengah
+                const eR = 30 * s;
+                const earthG = ctx.createRadialGradient(cx - eR*0.3, cy - eR*0.3, 0, cx, cy, eR);
+                earthG.addColorStop(0, "#7dd3fc"); earthG.addColorStop(0.4, "#1d4ed8"); earthG.addColorStop(1, "#1e3a5f");
+                ctx.beginPath(); ctx.arc(cx, cy, eR, 0, Math.PI*2); ctx.fillStyle = earthG; ctx.fill();
+                // Garis khatulistiwa
+                ctx.beginPath(); ctx.ellipse(cx, cy, eR, eR*0.15, 0, 0, Math.PI*2);
+                ctx.strokeStyle = "rgba(125,211,252,0.4)"; ctx.lineWidth = 1.5; ctx.stroke();
+
+                // Medan magnet dipol — garis lengkung dari kutub ke kutub
+                for (let i = 0; i < 14; i++) {
+                    const lat = -Math.PI*0.45 + (i / 13) * Math.PI*0.9;
+                    ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.003);
+                    ctx.beginPath();
+                    for (let t = 0; t <= 1; t += 0.02) {
+                        const fieldA = lat + Math.sin(t * Math.PI) * (0.8 + i * 0.05);
+                        const fieldR = (eR + 20*s + i * 15*s) * (1 + Math.sin(t * Math.PI) * 0.3);
+                        const fx = Math.cos(fieldA) * fieldR, fy = Math.sin(fieldA) * fieldR * 0.5;
+                        if (t === 0) ctx.moveTo(fx, fy); else ctx.lineTo(fx, fy);
+                    }
+                    const fieldBright = 0.07 + Math.sin(frame * 0.02 + i * 0.4) * 0.03;
+                    ctx.strokeStyle = `rgba(56,189,248,${fieldBright})`; ctx.lineWidth = 1.2; ctx.stroke();
+                    ctx.restore();
+                }
+
+                // Sabuk Van Allen — dua torus bercahaya
+                [50, 90].forEach((rb, idx) => {
+                    ctx.save(); ctx.translate(cx, cy); ctx.scale(1, 0.3);
+                    const vg = ctx.createRadialGradient(0, 0, rb*s*0.7, 0, 0, rb*s*1.2);
+                    vg.addColorStop(0, `rgba(${idx===0?'56,189,248':'168,85,247'},0.3)`);
+                    vg.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(0, 0, rb*s*1.2, 0, Math.PI*2); ctx.fillStyle = vg; ctx.fill();
+                    ctx.restore();
+                });
+
+                // Angin surya dari kiri — partikel membombardir magnetopause
+                for (let i = 0; i < 25; i++) {
+                    const swY = cy - h*0.35 + ((frame * 0.8 + i * 30) % (h*0.7));
+                    const swX = cx - w*0.45 + Math.sin(i * 1.7) * 20*s;
+                    const swOp = 0.2 + Math.sin(i * 0.8) * 0.1;
+                    ctx.beginPath(); ctx.moveTo(swX, swY); ctx.lineTo(swX + 15*s, swY);
+                    ctx.strokeStyle = `rgba(253,186,116,${swOp})`; ctx.lineWidth = 1.5; ctx.stroke();
+                }
+
+                // Magnetopause — batas terkompresi angin surya
+                ctx.beginPath(); ctx.ellipse(cx + 10*s, cy, 160*s, 120*s, 0, 0, Math.PI*2);
+                ctx.strokeStyle = "rgba(56,189,248,0.12)"; ctx.lineWidth = 3; ctx.stroke();
+
+                // Aurora — cahaya di kutub
+                [-1, 1].forEach(dir => {
+                    const auroraY = cy + dir * eR * 0.85;
+                    for (let j = 0; j < 8; j++) {
+                        const ax = cx + (j - 3.5) * 7 * s;
+                        const aH = (15 + Math.sin(frame * 0.1 + j) * 8) * s;
+                        const aColors = ["rgba(52,211,153", "rgba(56,189,248", "rgba(167,139,250"];
+                        const ag = ctx.createLinearGradient(ax, auroraY, ax, auroraY - dir*aH);
+                        ag.addColorStop(0, `${aColors[j%3]},0.6)`);
+                        ag.addColorStop(1, `${aColors[j%3]},0)`);
+                        ctx.beginPath(); ctx.moveTo(ax, auroraY); ctx.lineTo(ax + 2*s, auroraY - dir*aH);
+                        ctx.strokeStyle = ag; ctx.lineWidth = 2.5; ctx.stroke();
+                    }
+                });
+            }
+
+            function drawTerraforming(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Fase terraforming yang berganti
+                const totalPhase = (frame * 0.003) % 4;
+                const phase = Math.floor(totalPhase);
+                const t = totalPhase - phase;
+
+                // Mars — planet dasar, warnanya berubah sesuai fase
+                const marsColors = [
+                    ["#7f1d1d", "#dc2626", "#f87171"],   // Fase 0: merah kering
+                    ["#7c2d12", "#c2410c", "#60a5fa"],   // Fase 1: merah + es/air muncul
+                    ["#065f46", "#059669", "#38bdf8"],   // Fase 2: hijau + lautan
+                    ["#166534", "#16a34a", "#7dd3fc"],   // Fase 3: hijau penuh
+                ];
+                const mc = marsColors[phase];
+                const mR = Math.min(w,h) * 0.28 * s;
+                const mG = ctx.createRadialGradient(cx - mR*0.3, cy - mR*0.3, 0, cx, cy, mR);
+                mG.addColorStop(0, mc[2]); mG.addColorStop(0.5, mc[1]); mG.addColorStop(1, mc[0]);
+                ctx.beginPath(); ctx.arc(cx, cy, mR, 0, Math.PI*2); ctx.fillStyle = mG; ctx.fill();
+
+                // Lautan — muncul ab fase 1
+                if (phase >= 1) {
+                    const oceanOp = Math.min(1, (phase - 1 + t) * 0.6);
+                    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, mR, 0, Math.PI*2); ctx.clip();
+                    ctx.fillStyle = `rgba(56,189,248,${oceanOp * 0.4})`;
+                    ctx.beginPath(); ctx.ellipse(cx - mR*0.3, cy + mR*0.2, mR*0.5, mR*0.3, frame*0.003, 0, Math.PI*2);
+                    ctx.fill(); ctx.restore();
+                }
+
+                // Tanaman / vegetasi — muncul ab fase 2
+                if (phase >= 2) {
+                    const vegOp = Math.min(1, (phase - 2 + t) * 0.8);
+                    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, mR, 0, Math.PI*2); ctx.clip();
+                    for (let i = 0; i < 12; i++) {
+                        const va = (i/12)*Math.PI*2 + 0.5;
+                        const vx = cx + Math.cos(va) * mR * 0.5, vy = cy + Math.sin(va) * mR * 0.4;
+                        ctx.beginPath(); ctx.arc(vx, vy, mR * 0.1, 0, Math.PI*2);
+                        ctx.fillStyle = `rgba(34,197,94,${vegOp * 0.6})`; ctx.fill();
+                    }
+                    ctx.restore();
+                }
+
+                // Atmosfer — tebal sesuai fase
+                const atmThick = (0.3 + phase * 0.2 + t * 0.2) * 25 * s;
+                const atmG = ctx.createRadialGradient(cx, cy, mR, cx, cy, mR + atmThick);
+                const atmColors = ["rgba(239,68,68", "rgba(251,146,60", "rgba(56,189,248", "rgba(125,211,252"];
+                atmG.addColorStop(0, `${atmColors[phase]},${0.2 + phase*0.05})`);
+                atmG.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, mR + atmThick, 0, Math.PI*2); ctx.fillStyle = atmG; ctx.fill();
+
+                // Awan — muncul ab fase 1
+                if (phase >= 1) {
+                    ctx.save(); ctx.translate(cx, cy); ctx.rotate(frame * 0.003);
+                    for (let i = 0; i < 6; i++) {
+                        const ca = (i/6)*Math.PI*2 + i*0.4;
+                        const cr = mR * 0.85;
+                        const cG = ctx.createRadialGradient(Math.cos(ca)*cr, Math.sin(ca)*cr, 0, Math.cos(ca)*cr, Math.sin(ca)*cr, 18*s);
+                        cG.addColorStop(0, "rgba(255,255,255,0.3)"); cG.addColorStop(1, "transparent");
+                        ctx.beginPath(); ctx.arc(Math.cos(ca)*cr, Math.sin(ca)*cr, 18*s, 0, Math.PI*2); ctx.fillStyle = cG; ctx.fill();
+                    }
+                    ctx.restore();
+                }
+
+                // Label fase
+                const labels = ["Fase 1: Pemanasan Awal", "Fase 2: Lautan Pertama", "Fase 3: Vegetasi Tumbuh", "Fase 4: Mars Layak Huni!"];
+                ctx.fillStyle = "rgba(148,163,184,0.8)"; ctx.font = `bold ${11*s}px monospace`; ctx.textAlign = "center";
+                ctx.fillText(labels[phase], cx, cy + mR + 30*s);
+                // Progress bar fase
+                ctx.fillStyle = "rgba(30,41,59,0.7)";
+                ctx.fillRect(cx - 80*s, cy + mR + 40*s, 160*s, 8*s);
+                ctx.fillStyle = `rgba(${phase < 2 ? '239,68,68' : '34,197,94'},0.8)`;
+                ctx.fillRect(cx - 80*s, cy + mR + 40*s, t * 160*s, 8*s);
+            }
+
             // ==========================================
             // STARFIELD — latar bintang untuk semua view
             // ==========================================
@@ -1682,6 +2050,12 @@
                 else if (view === "hotjupiter") drawHotJupiter(ctx, cx, cy, frame, w, h);
                 else if (view === "ringworld") drawRingworld(ctx, cx, cy, frame, w, h);
                 else if (view === "bigbang") drawBigBang(ctx, cx, cy, frame, w, h);
+                else if (view === "lensing") drawLensing(ctx, cx, cy, frame, w, h);
+                else if (view === "solstorm") drawSolStorm(ctx, cx, cy, frame, w, h);
+                else if (view === "cataclysmic") drawCataclysmic(ctx, cx, cy, frame, w, h);
+                else if (view === "voidregion") drawVoidRegion(ctx, cx, cy, frame, w, h);
+                else if (view === "magnetosphere") drawMagnetosphere(ctx, cx, cy, frame, w, h);
+                else if (view === "terraforming") drawTerraforming(ctx, cx, cy, frame, w, h);
                 else if (view === "milky" || view === "andromeda") drawGalaxy(ctx, cx, cy, frame, w, h, view);
                 else {
                     // Mode Tata Surya (Solar)
