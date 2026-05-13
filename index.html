@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulasi Alam Semesta</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Simulasi Alam Semesta Penuh</title>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <style>
     body { 
         background-color: #020617; 
@@ -18,6 +18,188 @@
     .pointer-events-none > * { pointer-events: auto; }
     .fade-enter { opacity: 0; transform: scale(0.95); transition: all 0.3s ease; pointer-events: none; }
     .fade-enter-active { opacity: 1; transform: scale(1); pointer-events: auto; }
+
+    /* Fallback kritis jika Tailwind CDN gagal dimuat */
+    .hidden { display: none !important; }
+    .fixed { position: fixed; }
+    .absolute { position: absolute; }
+    .relative { position: relative; }
+    .inset-0 { top:0; right:0; bottom:0; left:0; }
+    .z-50 { z-index: 50; }
+    .z-30 { z-index: 30; }
+    .z-20 { z-index: 20; }
+    .z-10 { z-index: 10; }
+    .z-0 { z-index: 0; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-center { justify-content: center; }
+    .grid { display: grid; }
+    .w-full { width: 100%; }
+    .h-full { height: 100%; }
+    .overflow-hidden { overflow: hidden; }
+    .pointer-events-none { pointer-events: none; }
+    .pointer-events-auto { pointer-events: auto; }
+    .block { display: block; }
+    .text-center { text-align: center; }
+    .text-white { color: #ffffff; }
+    .text-transparent { color: transparent; }
+    .bg-clip-text { -webkit-background-clip: text; background-clip: text; }
+    .cursor-pointer { cursor: pointer; }
+    .outline-none { outline: none; }
+    .backdrop-blur-md { backdrop-filter: blur(12px); }
+    .backdrop-blur-xl { backdrop-filter: blur(24px); }
+    .rounded-full { border-radius: 9999px; }
+    .rounded-2xl { border-radius: 1rem; }
+    .rounded-3xl { border-radius: 1.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .border { border-width: 1px; border-style: solid; }
+    .border-2 { border-width: 2px; border-style: solid; }
+    .border-4 { border-width: 4px; border-style: solid; }
+    .border-t-4 { border-top-width: 4px; border-top-style: solid; }
+    .border-b-4 { border-bottom-width: 4px; border-bottom-style: solid; }
+    .border-l-4 { border-left-width: 4px; border-left-style: solid; }
+    .border-r-4 { border-right-width: 4px; border-right-style: solid; }
+    .border-b-2 { border-bottom-width: 2px; border-bottom-style: solid; }
+    .border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+    .overflow-y-auto { overflow-y: auto; }
+    .overflow-x-auto { overflow-x: auto; }
+    .transition { transition: all 0.15s ease; }
+    .font-black { font-weight: 900; }
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .font-medium { font-weight: 500; }
+    .font-mono { font-family: monospace; }
+    .tracking-widest { letter-spacing: 0.2em; }
+    .uppercase { text-transform: uppercase; }
+    .whitespace-nowrap { white-space: nowrap; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .p-1 { padding: 0.25rem; }
+    .p-1\.5 { padding: 0.375rem; }
+    .p-2 { padding: 0.5rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .pb-2 { padding-bottom: 0.5rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-5 { margin-bottom: 1.25rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
+    .w-px { width: 1px; }
+    .h-px { height: 1px; }
+    .w-2\.5 { width: 0.625rem; }
+    .h-2\.5 { height: 0.625rem; }
+    .w-4 { width: 1rem; }
+    .h-4 { height: 1rem; }
+    .w-6 { width: 1.5rem; }
+    .h-6 { height: 1.5rem; }
+    .w-12 { width: 3rem; }
+    .h-12 { height: 3rem; }
+    .w-16 { width: 4rem; }
+    .h-16 { height: 4rem; }
+    .w-24 { width: 6rem; }
+    .h-24 { height: 6rem; }
+    .w-max { width: max-content; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .last\:border-0:last-child { border: none; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+    .col-span-3 { grid-column: span 3; }
+    .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .before\:absolute::before { position: absolute; }
+    .before\:inset-y-0::before { top: 0; bottom: 0; }
+    .before\:left-3::before { left: 0.75rem; }
+    .before\:w-px::before { width: 1px; }
+    .max-h-60 { max-height: 15rem; }
+    .max-h-\[40vh\] { max-height: 40vh; }
+    .max-h-\[45vh\] { max-height: 45vh; }
+    .min-h-\[180px\] { min-height: 180px; }
+    .translate-x-1\/2 { transform: translateX(50%); }
+    .-translate-x-1\/2 { transform: translateX(-50%); }
+    .-translate-y-1\/2 { transform: translateY(-50%); }
+    .top-1\/2 { top: 50%; }
+    .top-4 { top: 1rem; }
+    .top-24 { top: 6rem; }
+    .top-\[60\%\] { top: 60%; }
+    .bottom-6 { bottom: 1.5rem; }
+    .bottom-28 { bottom: 7rem; }
+    .left-4 { left: 1rem; }
+    .left-\[44\%\] { left: 44%; }
+    .left-1\/2 { left: 50%; }
+    .right-4 { right: 1rem; }
+    .right-6 { right: 1.5rem; }
+    .md\:top-6 { top: 1.5rem; }
+    .md\:top-1\/2 { top: 50%; }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    .from-cyan-400 { --tw-gradient-from: #22d3ee; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent); }
+    .to-purple-500 { --tw-gradient-to: #a855f7; }
+    .bg-\[\#020617\] { background-color: #020617; }
+    .bg-slate-900\/80 { background-color: rgba(15,23,42,0.8); }
+    .bg-slate-900\/85 { background-color: rgba(15,23,42,0.85); }
+    .bg-slate-900\/95 { background-color: rgba(15,23,42,0.95); }
+    .bg-slate-900\/97 { background-color: rgba(15,23,42,0.97); }
+    .bg-slate-900\/70 { background-color: rgba(15,23,42,0.7); }
+    .bg-slate-800 { background-color: rgb(30,41,59); }
+    .bg-slate-800\/60 { background-color: rgba(30,41,59,0.6); }
+    .bg-slate-800\/80 { background-color: rgba(30,41,59,0.8); }
+    .bg-black\/50 { background-color: rgba(0,0,0,0.5); }
+    .border-slate-700\/60 { border-color: rgba(51,65,85,0.6); }
+    .border-slate-700\/50 { border-color: rgba(51,65,85,0.5); }
+    .border-slate-600\/50 { border-color: rgba(71,85,105,0.5); }
+    .border-slate-800\/50 { border-color: rgba(30,41,59,0.5); }
+    .border-cyan-500\/80 { border-color: rgba(6,182,212,0.8); }
+    .border-cyan-500\/40 { border-color: rgba(6,182,212,0.4); }
+    .border-cyan-400 { border-color: #22d3ee; }
+    .border-transparent { border-color: transparent; }
+    .text-cyan-400 { color: #22d3ee; }
+    .text-cyan-300 { color: #67e8f9; }
+    .text-cyan-500\/70 { color: rgba(6,182,212,0.7); }
+    .text-slate-400 { color: #94a3b8; }
+    .text-slate-500 { color: #64748b; }
+    .text-slate-300 { color: #cbd5e1; }
+    .text-slate-200 { color: #e2e8f0; }
+    .text-slate-100 { color: #f1f5f9; }
+    .hover\:text-white:hover { color: #fff; }
+    .hover\:text-cyan-300:hover { color: #67e8f9; }
+    .hover\:text-slate-200:hover { color: #e2e8f0; }
+    .hover\:text-slate-300:hover { color: #cbd5e1; }
+    .hover\:bg-slate-800:hover { background-color: rgb(30,41,59); }
+    .hover\:bg-slate-800\/80:hover { background-color: rgba(30,41,59,0.8); }
+    .hover\:bg-slate-700:hover { background-color: rgb(51,65,85); }
+    .bg-cyan-500\/20 { background-color: rgba(6,182,212,0.2); }
+    .shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.05); }
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); }
+    .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .text-\[10px\] { font-size: 10px; }
+    .text-\[11px\] { font-size: 11px; }
+    .text-\[9px\] { font-size: 9px; }
+    .leading-relaxed { line-height: 1.625; }
+    .duration-300 { transition-duration: 300ms; }
+    .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4,0,0.2,1); transition-duration: 150ms; }
+    .flex-1 { flex: 1 1 0%; }
+    .opacity-80 { opacity: 0.8; }
+    .opacity-60 { opacity: 0.6; }
+    .w-\[calc\(100\%-2rem\)\] { width: calc(100% - 2rem); }
+    .max-w-\[80vw\] { max-width: 80vw; }
+    .before\:bg-slate-700\/50::before { background-color: rgba(51,65,85,0.5); content: ''; display: block; }
 
     /* Loading screen spin animation */
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -148,7 +330,13 @@
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
                     uiLayer.classList.remove('hidden');
-                    initApp();
+                    uiLayer.style.display = 'block';
+                    try {
+                        initApp();
+                    } catch(err) {
+                        console.error('initApp error:', err);
+                        document.body.innerHTML += `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e293b;color:#f87171;padding:24px;border-radius:12px;font-family:monospace;z-index:999;max-width:80vw;text-align:center">Error: ${err.message}</div>`;
+                    }
                 }, 500);
             }
         }, interval);
@@ -185,7 +373,11 @@
                 { id: "hypernovae", label: "Hypernova" }, { id: "cosmicstring", label: "Cosmic String" },
                 { id: "planetnebula", label: "Nebula Planeter" }, { id: "xraybinary", label: "Biner Sinar-X" },
                 { id: "milkywaycenter", label: "Pusat Galaksi" }, { id: "jupiteraurora", label: "Aurora Jupiter" },
-                { id: "starcluster", label: "Gugus Bintang" }, { id: "lightyear", label: "Perjalanan Cahaya" }
+                { id: "starcluster", label: "Gugus Bintang" }, { id: "lightyear", label: "Perjalanan Cahaya" },
+                { id: "triton", label: "Triton (Neptunus)" }, { id: "oortcloud", label: "Awan Oort" },
+                { id: "laniakea", label: "Supergugus Laniakea" }, { id: "einsteinring", label: "Cincin Einstein" },
+                { id: "magnetarsgr", label: "Magnetar SGR 1806" }, { id: "iovolcanic", label: "Io Vulkanik" },
+                { id: "quarkstar", label: "Quark Star" }, { id: "cmb", label: "CMB (Latar Kosmik)" }, { id: "ganymede", label: "Ganymede" }
             ];
 
             const SOLAR_DATA = {
@@ -254,7 +446,16 @@
                 "Pusat Galaksi": { viewId: "milkywaycenter", color: "#fbbf24", info: { Kategori: "Inti Galaksi Bima Sakti", Jarak: "26.000 Tahun Cahaya", BH: "Sagittarius A* (4 Juta M☉)" }, desc: "Jantung Bima Sakti — dipenuhi jutaan bintang terpadat di galaksi, dikelilingi cincin molekuler raksasa, dan di pusatnya bersemayam Sagittarius A*, lubang hitam supermasif kita.", layers:["Halo Nuklir (Bintang Tua)", "Gugus Bintang Padat", "Cincin Molekuler Pusat", "Sagittarius A* (Black Hole)"] },
                 "Aurora Jupiter": { viewId: "jupiteraurora", color: "#818cf8", info: { Kategori: "Aurora Planet Raksasa", Ukuran: "Lebih Besar dari Bumi", Sumber: "Io + Angin Surya" }, desc: "Aurora paling spektakuler di tata surya — Jupiter memiliki medan magnet terkuat di antara planet dan aurorannya bisa menelan seluruh Bumi. Dipicu oleh partikel dari bulan Io.", layers:["Kutub Magnetik Jupiter", "Oval Aurora UV", "Spot Io (Jejak Bulan)", "Medan Magnet Raksasa"] },
                 "Gugus Bintang": { viewId: "starcluster", color: "#fde68a", info: { Kategori: "Gugus Terbuka & Bola", Contoh: "Pleiades / Omega Centauri", Anggota: "Ribuan - Jutaan Bintang" }, desc: "Kumpulan bintang-bintang yang lahir dari awan gas yang sama dan masih terikat gravitasi — dari gugus terbuka muda hingga gugus bola kuno berusia hampir setua alam semesta.", layers:["Inti Gugus (Sangat Padat)", "Halo Bintang", "Tidal Tail (Ekor Pasang)", "Bintang Pelarian"] },
-                "Perjalanan Cahaya": { viewId: "lightyear", color: "#a5f3fc", info: { Kategori: "Visualisasi Skala Kosmik", Kecepatan: "299.792 km/s", Jarak: "9.461 Triliun km/tahun" }, desc: "Visualisasi interaktif seberapa jauh cahaya bisa menjangkau — dari Bumi ke Bulan (1,3 detik), ke Matahari (8 menit), ke bintang terdekat (4,2 tahun), hingga tepi alam semesta teramati.", layers:["Bumi → Bulan (1,3 detik)", "Bumi → Matahari (8 menit)", "Bumi → Alpha Centauri (4,2 tahun)", "Bumi → Tepi Alam Semesta (13,8 miliar tahun)"] }
+                "Perjalanan Cahaya": { viewId: "lightyear", color: "#a5f3fc", info: { Kategori: "Visualisasi Skala Kosmik", Kecepatan: "299.792 km/s", Jarak: "9.461 Triliun km/tahun" }, desc: "Visualisasi interaktif seberapa jauh cahaya bisa menjangkau — dari Bumi ke Bulan (1,3 detik), ke Matahari (8 menit), ke bintang terdekat (4,2 tahun), hingga tepi alam semesta teramati.", layers:["Bumi → Bulan (1,3 detik)", "Bumi → Matahari (8 menit)", "Bumi → Alpha Centauri (4,2 tahun)", "Bumi → Tepi Alam Semesta (13,8 miliar tahun)"] },
+                "Triton (Neptunus)": { viewId: "triton", color: "#7dd3fc", info: { Kategori: "Satelit Neptunus", Suhu: "-235°C (Terdingin)", Orbit: "Retrograde (Terbalik)" }, desc: "Bulan terbesar Neptunus yang mengorbit berlawanan arah rotasi planet induknya — satu-satunya bulan besar di tata surya dengan orbit retrograde. Permukaannya dipenuhi geyser nitrogen beku yang menyembur setinggi 8 km.", layers:["Inti Silikat & Besi", "Mantel Es Air", "Kerak Nitrogen Beku", "Geyser Nitrogen Aktif"] },
+                "Awan Oort": { viewId: "oortcloud", color: "#94a3b8", info: { Kategori: "Cangkang Komet Terluar", Jarak: "2.000 - 200.000 AU", Objek: "Triliunan Benda Es" }, desc: "Cangkang bulat raksasa yang menyelimuti seluruh tata surya di bagian terluar — reservoir komet berperiode panjang yang sesekali terganggu gravitasi bintang terdekat dan jatuh ke arah Matahari.", layers:["Awan Oort Dalam (Disk Hills)", "Awan Oort Luar (Sferis)", "Komet Periode Panjang", "Batas Heliosfer Terluar"] },
+                "Supergugus Laniakea": { viewId: "laniakea", color: "#c4b5fd", info: { Kategori: "Supergugus Galaksi", Diameter: "520 Juta tc", Massa: "10¹⁷ M☉" }, desc: "Rumah kosmik kita yang sesungguhnya — supergugus galaksi yang menampung lebih dari 100.000 galaksi termasuk Bima Sakti. Semua galaksi di dalamnya bergerak menuju Great Attractor di pusatnya.", layers:["Great Attractor (Pusat)", "Superklaster Virgo (Rumah Kita)", "Filamen Galaksi Raksasa", "Batas Void Terluar"] },
+                "Cincin Einstein": { viewId: "einsteinring", color: "#60a5fa", info: { Kategori: "Lensa Gravitasi Sempurna", Contoh: "LRG 3-757", Kondisi: "Sumber-Lensa-Pengamat Sejajar" }, desc: "Fenomena langka saat sumber cahaya, lensa gravitasi, dan pengamat berada tepat dalam satu garis lurus — cahaya dibelokkan membentuk cincin sempurna bercahaya di sekeliling objek lensa.", layers:["Sumber Galaksi Latar (Jauh)", "Lensa Galaksi/BH (Tengah)", "Busur Cahaya Terbelok", "Cincin Einstein Penuh"] },
+                "Magnetar SGR 1806": { viewId: "magnetarsgr", color: "#e879f9", info: { Kategori: "Magnetar Paling Aktif", Magnet: "10¹⁵ Gauss", Peristiwa: "Flare 2004 (Menerangi Ionosfer)" }, desc: "Salah satu magnetar paling berbahaya yang dikenal — letusannya pada 2004 terdeteksi dari jarak 50.000 tahun cahaya dan energinya cukup untuk menerangi ionosfer Bumi. Berputar 7,5 kali per detik.", layers:["Inti Neutron Superpadat", "Kerak Kristal Neutron", "Medan Magnet 10¹⁵ Gauss", "Flare Lunak Gamma Berulang"] },
+                "Io Vulkanik": { viewId: "iovolcanic", color: "#fbbf24", info: { Kategori: "Bulan Paling Vulkanik", Induk: "Jupiter", "Gunung Berapi": "> 400 Aktif" }, desc: "Bulan Jupiter yang paling bergolak — objek paling aktif secara vulkanik di seluruh tata surya. Tarikan gravitasi Jupiter, Europa, dan Ganymede memanaskan interiornya hingga menciptakan lebih dari 400 gunung berapi aktif yang melontarkan belerang setinggi ratusan kilometer.", layers:["Inti Besi & Besi-Sulfida", "Mantel Silikat Panas", "Samudra Magma Bawah Tanah", "Kerak Belerang & SO₂ Beku"] },
+                "Quark Star": { viewId: "quarkstar", color: "#f472b6", info: { Kategori: "Bintang Eksotis (Hipotetis)", Massa: "~1-2 M☉", Kepadatan: "Melebihi Bintang Neutron" }, desc: "Objek kosmik yang lebih padat dari bintang neutron — jika tekanan cukup besar, neutron di dalam bintang neutron bisa hancur menjadi quark bebas yang membentuk plasma quark-gluon. Belum terkonfirmasi secara observasional, tapi kandidatnya sudah ada.", layers:["Plasma Quark-Gluon (Inti)", "Lapisan Strange Quark", "Kerak Quark Padat", "Medan Magnet Ekstrem"] },
+                "CMB (Latar Kosmik)": { viewId: "cmb", color: "#fde68a", info: { Kategori: "Radiasi Latar Belakang Kosmik", Usia: "380.000 Tahun Setelah Big Bang", Suhu: "2,725 Kelvin" }, desc: "Cahaya tertua di alam semesta — sisa panas Big Bang yang kini terdeteksi sebagai gelombang mikro sangat dingin di seluruh langit. Peta CMB menunjukkan fluktuasi suhu kecil yang menjadi benih pembentukan galaksi, bintang, dan semua struktur kosmik.", layers:["Singularitas → Plasma Panas", "Zaman Rekombinasi (380.000 thn)", "Foton CMB Dilepas", "Terdeteksi Hari Ini (2,725 K)"] },
+                "Ganymede": { viewId: "ganymede", color: "#94a3b8", info: { Kategori: "Bulan Terbesar Tata Surya", Induk: "Jupiter", Radius: "2.634 km (> Merkurius)" }, desc: "Bulan terbesar di seluruh tata surya — lebih besar dari planet Merkurius dan memiliki medan magnetnya sendiri. Di bawah permukaannya yang tertutup es dan kawah, diperkirakan terdapat lautan air asin cair yang lebih besar dari semua lautan Bumi digabungkan.", layers:["Inti Besi Cair (Bermagnet)", "Mantel Silikat", "Lautan Air Cair (Bawah Tanah)", "Kerak Es Tebal"] }
             };
 
             const ALL_DATA = { ...SOLAR_DATA, ...DEEP_SPACE_DATA };
@@ -2723,6 +2924,487 @@
                 ctx.fillText("► Cahaya bergerak 299.792 km setiap detik", cx, cy - 90*s);
             }
             // ==========================================
+            // DRAW — TRITON (Bulan Neptunus)
+            // ==========================================
+            function drawTriton(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Neptune in background
+                const nepGrd = ctx.createRadialGradient(cx - 120*s, cy + 60*s, 0, cx - 120*s, cy + 60*s, 55*s);
+                nepGrd.addColorStop(0, "#7dd3fc"); nepGrd.addColorStop(0.5, "#3b82f6"); nepGrd.addColorStop(1, "#1e3a5f");
+                ctx.beginPath(); ctx.arc(cx - 120*s, cy + 60*s, 55*s, 0, Math.PI*2);
+                ctx.fillStyle = nepGrd; ctx.fill();
+                ctx.fillStyle = "rgba(59,130,246,0.15)"; ctx.font = `${10*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Neptunus", cx - 120*s, cy + 125*s);
+
+                // Triton orbit ring
+                ctx.beginPath(); ctx.ellipse(cx, cy, 160*s, 50*s, -0.3, 0, Math.PI*2);
+                ctx.strokeStyle = "rgba(125,211,252,0.1)"; ctx.lineWidth = 1; ctx.stroke();
+
+                // Triton body
+                const tr = 38 * s;
+                const tGrd = ctx.createRadialGradient(cx - tr*0.3, cy - tr*0.3, 0, cx, cy, tr);
+                tGrd.addColorStop(0, "#e0f7ff"); tGrd.addColorStop(0.4, "#7dd3fc"); tGrd.addColorStop(1, "#1e40af");
+                ctx.beginPath(); ctx.arc(cx, cy, tr, 0, Math.PI*2); ctx.fillStyle = tGrd; ctx.fill();
+
+                // Frozen nitrogen surface patches
+                for (let i = 0; i < 6; i++) {
+                    const ang = (i / 6) * Math.PI * 2 + frame * 0.003;
+                    const px = cx + Math.cos(ang) * tr * 0.55, py = cy + Math.sin(ang) * tr * 0.3;
+                    ctx.beginPath(); ctx.ellipse(px, py, tr*0.18, tr*0.09, ang, 0, Math.PI*2);
+                    ctx.fillStyle = "rgba(240,255,255,0.35)"; ctx.fill();
+                }
+
+                // Nitrogen geyser plumes
+                for (let i = 0; i < 3; i++) {
+                    const geyserX = cx + (-1 + i) * 18*s;
+                    const geyserH = (40 + Math.sin(frame * 0.04 + i) * 10) * s;
+                    const grd = ctx.createLinearGradient(geyserX, cy - tr, geyserX, cy - tr - geyserH);
+                    grd.addColorStop(0, "rgba(200,240,255,0.9)"); grd.addColorStop(1, "rgba(200,240,255,0)");
+                    ctx.beginPath(); ctx.moveTo(geyserX - 2*s, cy - tr);
+                    ctx.lineTo(geyserX + 2*s, cy - tr);
+                    ctx.lineTo(geyserX + 5*s, cy - tr - geyserH);
+                    ctx.lineTo(geyserX - 5*s, cy - tr - geyserH);
+                    ctx.fillStyle = grd; ctx.fill();
+                }
+
+                ctx.fillStyle = "rgba(125,211,252,0.7)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Triton", cx, cy + tr + 20*s);
+                ctx.fillStyle = "rgba(125,211,252,0.4)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Geyser Nitrogen Beku", cx, cy + tr + 35*s);
+            }
+
+            // ==========================================
+            // DRAW — OORT CLOUD
+            // ==========================================
+            function drawOortCloud(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Outer Oort cloud — diffuse shell
+                for (let i = 0; i < 300; i++) {
+                    const ang = Math.random() * Math.PI * 2;
+                    const dist = (130 + Math.random() * 110) * s;
+                    const px = cx + Math.cos(ang) * dist;
+                    const py = cy + Math.sin(ang) * dist * 0.55;
+                    const sz = Math.random() * 1.8 + 0.3;
+                    ctx.beginPath(); ctx.arc(px, py, sz, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(148,163,184,${Math.random()*0.6+0.1})`; ctx.fill();
+                }
+                // Inner Oort Hill cloud
+                for (let i = 0; i < 120; i++) {
+                    const ang = Math.random() * Math.PI * 2;
+                    const dist = (60 + Math.random() * 60) * s;
+                    const px = cx + Math.cos(ang) * dist;
+                    const py = cy + Math.sin(ang) * dist * 0.45;
+                    ctx.beginPath(); ctx.arc(px, py, Math.random()*1.2+0.3, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(186,230,253,${Math.random()*0.5+0.15})`; ctx.fill();
+                }
+                // Sun at center
+                const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 14*s);
+                sunGrd.addColorStop(0, "#fff7c0"); sunGrd.addColorStop(0.5, "#FDB813"); sunGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 14*s, 0, Math.PI*2); ctx.fillStyle = sunGrd; ctx.fill();
+
+                // Animated comet falling inward
+                const cometAng = (frame * 0.006) % (Math.PI * 2);
+                const cometDist = (230 - (frame * 0.4) % 230) * s;
+                const cmx = cx + Math.cos(cometAng) * cometDist;
+                const cmy = cy + Math.sin(cometAng) * cometDist * 0.55;
+                for (let t = 0; t < 18; t++) {
+                    const tp = t / 18;
+                    const tx = cmx + Math.cos(cometAng + Math.PI) * t * 5*s;
+                    const ty = cmy + Math.sin(cometAng + Math.PI) * t * 2.5*s;
+                    ctx.beginPath(); ctx.arc(tx, ty, (1-tp)*2.5, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(186,230,253,${(1-tp)*0.7})`; ctx.fill();
+                }
+                ctx.beginPath(); ctx.arc(cmx, cmy, 4*s, 0, Math.PI*2);
+                ctx.fillStyle = "#e0f2fe"; ctx.fill();
+
+                ctx.fillStyle = "rgba(148,163,184,0.8)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Awan Oort", cx, cy - 240*s);
+                ctx.fillStyle = "rgba(148,163,184,0.4)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Cangkang Komet Terluar Tata Surya", cx, cy - 225*s);
+            }
+
+            // ==========================================
+            // DRAW — SUPERGUGUS LANIAKEA
+            // ==========================================
+            function drawLaniakea(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                const t = frame * 0.002;
+                // Great Attractor core glow
+                const gaGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 35*s);
+                gaGrd.addColorStop(0, "rgba(255,230,150,0.9)"); gaGrd.addColorStop(0.4, "rgba(192,132,252,0.5)"); gaGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 35*s, 0, Math.PI*2); ctx.fillStyle = gaGrd; ctx.fill();
+
+                // Filament streams flowing toward center
+                const filaments = [
+                    {ax:0.25, ay:-0.3, bx:0.05, by:-0.05, col:"rgba(196,181,253,0.5)"},
+                    {ax:-0.35, ay:0.1, bx:-0.07, by:0.03, col:"rgba(147,197,253,0.45)"},
+                    {ax:0.1, ay:0.35, bx:0.03, by:0.07, col:"rgba(253,186,116,0.4)"},
+                    {ax:-0.15, ay:-0.35, bx:-0.04, by:-0.08, col:"rgba(134,239,172,0.4)"},
+                    {ax:0.38, ay:0.2, bx:0.08, by:0.04, col:"rgba(196,181,253,0.45)"},
+                    {ax:-0.3, ay:-0.18, bx:-0.06, by:-0.04, col:"rgba(147,197,253,0.4)"},
+                ];
+                const R = Math.min(w,h) * 0.45;
+                filaments.forEach(f => {
+                    ctx.beginPath();
+                    ctx.moveTo(cx + f.ax*R, cy + f.ay*R);
+                    ctx.quadraticCurveTo(cx + (f.ax+f.bx)*R*0.5, cy + (f.ay+f.by)*R*0.5, cx + f.bx*R, cy + f.by*R);
+                    ctx.strokeStyle = f.col; ctx.lineWidth = 2*s; ctx.stroke();
+                    // Galaxies along filament
+                    for (let i = 0; i < 8; i++) {
+                        const u = i/7;
+                        const gx = cx + (f.ax*(1-u) + f.bx*u)*R;
+                        const gy = cy + (f.ay*(1-u) + f.by*u)*R;
+                        ctx.beginPath(); ctx.arc(gx, gy, (2+Math.sin(frame*0.03+i))*s, 0, Math.PI*2);
+                        ctx.fillStyle = f.col.replace("0.4","0.9"); ctx.fill();
+                    }
+                });
+                // Virgo Cluster marker
+                const vx = cx + 0.13*R, vy = cy - 0.08*R;
+                ctx.beginPath(); ctx.arc(vx, vy, 7*s, 0, Math.PI*2);
+                ctx.fillStyle = "rgba(253,224,71,0.9)"; ctx.fill();
+                ctx.fillStyle = "rgba(253,224,71,0.7)"; ctx.font = `${9*s}px sans-serif`; ctx.textAlign="left";
+                ctx.fillText("Virgo (Rumah Kita)", vx+10*s, vy+3*s);
+
+                ctx.fillStyle = "rgba(196,181,253,0.8)"; ctx.font = `bold ${13*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Supergugus Laniakea", cx, cy - 200*s);
+                ctx.fillStyle = "rgba(196,181,253,0.4)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("100.000+ Galaksi · 520 Juta Tahun Cahaya", cx, cy - 185*s);
+            }
+
+            // ==========================================
+            // DRAW — CINCIN EINSTEIN
+            // ==========================================
+            function drawEinsteinRing(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Background source galaxy
+                const srcGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 15*s);
+                srcGrd.addColorStop(0, "#fde68a"); srcGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 20*s, 0, Math.PI*2); ctx.fillStyle = srcGrd; ctx.fill();
+
+                // Lens galaxy (elliptical)
+                const lensGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 28*s);
+                lensGrd.addColorStop(0, "#f8fafc"); lensGrd.addColorStop(0.4, "#cbd5e1"); lensGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.ellipse(cx, cy, 28*s, 20*s, 0.3, 0, Math.PI*2); ctx.fillStyle = lensGrd; ctx.fill();
+
+                // Einstein ring — animated shimmer
+                const ringR = 80 * s;
+                const shimmer = Math.sin(frame * 0.04) * 4 * s;
+                const ringGrd = ctx.createRadialGradient(cx, cy, ringR - 8*s + shimmer, cx, cy, ringR + 8*s + shimmer);
+                ringGrd.addColorStop(0, "transparent"); ringGrd.addColorStop(0.3, "rgba(96,165,250,0.5)");
+                ringGrd.addColorStop(0.5, "rgba(191,219,254,0.95)"); ringGrd.addColorStop(0.7, "rgba(96,165,250,0.5)"); ringGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, ringR + shimmer, 0, Math.PI*2); ctx.strokeStyle = "transparent";
+                ctx.fillStyle = ringGrd; ctx.fill();
+
+                // Hot spots on ring (4 bright arcs)
+                for (let i = 0; i < 4; i++) {
+                    const ang = (i / 4) * Math.PI * 2 + frame * 0.008;
+                    const bx = cx + Math.cos(ang) * ringR, by = cy + Math.sin(ang) * ringR;
+                    const bGrd = ctx.createRadialGradient(bx, by, 0, bx, by, 12*s);
+                    bGrd.addColorStop(0, "rgba(224,242,254,0.95)"); bGrd.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(bx, by, 12*s, 0, Math.PI*2); ctx.fillStyle = bGrd; ctx.fill();
+                }
+
+                // Lensing rays
+                for (let i = 0; i < 12; i++) {
+                    const a = (i/12)*Math.PI*2;
+                    ctx.beginPath(); ctx.moveTo(cx + Math.cos(a)*22*s, cy + Math.sin(a)*22*s);
+                    ctx.lineTo(cx + Math.cos(a)*ringR*0.85, cy + Math.sin(a)*ringR*0.85);
+                    ctx.strokeStyle = "rgba(147,197,253,0.08)"; ctx.lineWidth = 1; ctx.stroke();
+                }
+
+                ctx.fillStyle = "rgba(96,165,250,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Cincin Einstein", cx, cy - ringR - 20*s);
+                ctx.fillStyle = "rgba(96,165,250,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Lensa Gravitasi Sempurna", cx, cy - ringR - 6*s);
+            }
+
+            // ==========================================
+            // DRAW — MAGNETAR SGR 1806
+            // ==========================================
+            function drawMagnetarSGR(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Background X-ray pulse rings
+                for (let i = 0; i < 6; i++) {
+                    const r = ((frame*2 + i*40) % 300) * s;
+                    const op = Math.max(0, 1 - r/(300*s));
+                    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+                    ctx.strokeStyle = `rgba(232,121,249,${op*0.4})`; ctx.lineWidth = 2; ctx.stroke();
+                }
+                // Rotating magnetic field lines
+                for (let i = 0; i < 8; i++) {
+                    const ang = (i/8)*Math.PI*2 + frame*0.05;
+                    ctx.save(); ctx.translate(cx, cy); ctx.rotate(ang);
+                    ctx.beginPath(); ctx.moveTo(0, 20*s);
+                    ctx.bezierCurveTo(40*s, 40*s, 40*s, -40*s, 0, -20*s);
+                    ctx.strokeStyle = `rgba(232,121,249,${0.15+Math.sin(frame*0.07+i)*0.05})`; ctx.lineWidth=1.5; ctx.stroke();
+                    ctx.restore();
+                }
+                // Gamma flare burst
+                const flareIntensity = Math.max(0, Math.sin(frame * 0.12));
+                if (flareIntensity > 0.5) {
+                    for (let j = 0; j < 4; j++) {
+                        const fAng = j * Math.PI/2 + frame*0.1;
+                        const fLen = (flareIntensity - 0.5) * 2 * 100 * s;
+                        ctx.beginPath();
+                        ctx.moveTo(cx, cy);
+                        ctx.lineTo(cx + Math.cos(fAng)*fLen, cy + Math.sin(fAng)*fLen);
+                        ctx.strokeStyle = `rgba(253,224,71,${(flareIntensity-0.5)*1.8})`; ctx.lineWidth = 3*s; ctx.stroke();
+                    }
+                }
+                // Core
+                const coreGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 22*s);
+                coreGrd.addColorStop(0, "#ffffff"); coreGrd.addColorStop(0.3, "#e879f9"); coreGrd.addColorStop(0.7, "#7c3aed"); coreGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 22*s, 0, Math.PI*2); ctx.fillStyle = coreGrd; ctx.fill();
+
+                ctx.fillStyle = "rgba(232,121,249,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Magnetar SGR 1806-20", cx, cy - 140*s);
+                ctx.fillStyle = "rgba(232,121,249,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("10¹⁵ Gauss · Flare Lunak Gamma", cx, cy - 125*s);
+            }
+
+            // ==========================================
+            // DRAW — IO VULKANIK
+            // ==========================================
+            function drawIoVolcanic(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Jupiter looming in background
+                const jupR = 90 * s;
+                const jx = cx - 160*s, jy = cy + 80*s;
+                const jupGrd = ctx.createRadialGradient(jx, jy, 0, jx, jy, jupR);
+                jupGrd.addColorStop(0, "#fef3c7"); jupGrd.addColorStop(0.3, "#d97706"); jupGrd.addColorStop(0.7, "#92400e"); jupGrd.addColorStop(1, "#451a03");
+                ctx.beginPath(); ctx.arc(jx, jy, jupR, 0, Math.PI*2); ctx.fillStyle = jupGrd; ctx.fill();
+                // Jupiter bands
+                for (let b = 0; b < 5; b++) {
+                    ctx.beginPath(); ctx.ellipse(jx, jy - jupR*0.5 + b*jupR*0.25, jupR, 4*s, 0, 0, Math.PI*2);
+                    ctx.strokeStyle = "rgba(120,60,0,0.35)"; ctx.lineWidth = 6*s; ctx.stroke();
+                }
+
+                // Io body
+                const ioR = 46 * s;
+                const ioGrd = ctx.createRadialGradient(cx - ioR*0.3, cy - ioR*0.3, 0, cx, cy, ioR);
+                ioGrd.addColorStop(0, "#fef08a"); ioGrd.addColorStop(0.4, "#f59e0b"); ioGrd.addColorStop(0.75, "#92400e"); ioGrd.addColorStop(1, "#1a0a00");
+                ctx.beginPath(); ctx.arc(cx, cy, ioR, 0, Math.PI*2); ctx.fillStyle = ioGrd; ctx.fill();
+
+                // Sulfur patches on surface
+                const patches = [[0.4,0.2,"#4ade80"],[-0.3,0.5,"#a3e635"],[0.6,-0.3,"#fde68a"],[-0.5,-0.4,"#fb923c"]];
+                patches.forEach(([ox,oy,col]) => {
+                    const px = cx + ox*ioR, py = cy + oy*ioR;
+                    ctx.beginPath(); ctx.arc(px, py, ioR*0.18, 0, Math.PI*2);
+                    ctx.fillStyle = col+"55"; ctx.fill();
+                });
+
+                // Volcanic eruption plumes
+                const volcanos = [
+                    {ax: 0, ay: -1},
+                    {ax: 0.85, ay: -0.52},
+                    {ax: -0.85, ay: -0.52}
+                ];
+                volcanos.forEach((v, vi) => {
+                    const vx = cx + v.ax * ioR * 0.9, vy = cy + v.ay * ioR * 0.9;
+                    const plumeH = (70 + Math.sin(frame * 0.05 + vi * 2.1) * 25) * s;
+                    const plumeW = plumeH * 0.6;
+                    const pGrd = ctx.createRadialGradient(vx, vy - plumeH*0.5, 0, vx, vy, plumeH);
+                    pGrd.addColorStop(0, "rgba(253,186,116,0.9)"); pGrd.addColorStop(0.4, "rgba(251,146,60,0.5)"); pGrd.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.ellipse(vx, vy - plumeH*0.5, plumeW*0.4, plumeH*0.5, 0, 0, Math.PI*2);
+                    ctx.fillStyle = pGrd; ctx.fill();
+                    // Sparks
+                    for (let sp = 0; sp < 5; sp++) {
+                        const sa = Math.random()*Math.PI - Math.PI*0.5 + v.ax*0.5;
+                        const sd = (20 + Math.random()*50) * s;
+                        ctx.beginPath(); ctx.arc(vx + Math.cos(sa)*sd, vy + Math.sin(sa)*sd*0.4, 1.5, 0, Math.PI*2);
+                        ctx.fillStyle = `rgba(251,191,36,${Math.random()*0.8+0.2})`; ctx.fill();
+                    }
+                });
+
+                ctx.fillStyle = "rgba(251,191,36,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign="center";
+                ctx.fillText("Io — Bulan Vulkanik Jupiter", cx, cy + ioR + 22*s);
+                ctx.fillStyle = "rgba(251,191,36,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("> 400 Gunung Berapi Aktif", cx, cy + ioR + 37*s);
+            }
+
+            // ==========================================
+            // DRAW — QUARK STAR
+            // ==========================================
+            function drawQuarkStar(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Pulsating quark plasma glow
+                const pulse = Math.sin(frame * 0.07) * 8 * s;
+                for (let i = 5; i > 0; i--) {
+                    const r = (18 + i * 14) * s + pulse;
+                    const op = (0.06 - i * 0.008);
+                    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(244,114,182,${op})`; ctx.fill();
+                }
+                // Rotating quark streams (3 colors = 3 quark colors: red, green, blue)
+                const quarkColors = ["rgba(239,68,68,0.7)", "rgba(34,197,94,0.7)", "rgba(59,130,246,0.7)"];
+                for (let q = 0; q < 3; q++) {
+                    const baseAng = (q / 3) * Math.PI * 2 + frame * 0.04;
+                    ctx.save(); ctx.translate(cx, cy);
+                    ctx.beginPath();
+                    for (let t = 0; t < 60; t++) {
+                        const a = baseAng + t * 0.12;
+                        const r = (8 + t * 1.1) * s;
+                        const x = Math.cos(a) * r, y = Math.sin(a) * r * 0.5;
+                        t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = quarkColors[q]; ctx.lineWidth = 1.5; ctx.stroke();
+                    ctx.restore();
+                }
+                // Core — dense quark matter
+                const coreGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18 * s);
+                coreGrd.addColorStop(0, "#ffffff");
+                coreGrd.addColorStop(0.2, "#f472b6");
+                coreGrd.addColorStop(0.6, "#9333ea");
+                coreGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 18 * s, 0, Math.PI * 2);
+                ctx.fillStyle = coreGrd; ctx.fill();
+                // Jet
+                for (let side = -1; side <= 1; side += 2) {
+                    const jetLen = (90 + Math.sin(frame * 0.05) * 15) * s;
+                    const jetGrd = ctx.createLinearGradient(cx, cy, cx, cy + side * jetLen);
+                    jetGrd.addColorStop(0, "rgba(244,114,182,0.9)");
+                    jetGrd.addColorStop(1, "transparent");
+                    ctx.beginPath();
+                    ctx.moveTo(cx - 4*s, cy);
+                    ctx.lineTo(cx + 4*s, cy);
+                    ctx.lineTo(cx + 1*s, cy + side * jetLen);
+                    ctx.lineTo(cx - 1*s, cy + side * jetLen);
+                    ctx.fillStyle = jetGrd; ctx.fill();
+                }
+                ctx.fillStyle = "rgba(244,114,182,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign = "center";
+                ctx.fillText("Quark Star", cx, cy - 110 * s);
+                ctx.fillStyle = "rgba(244,114,182,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Plasma Quark-Gluon Bebas", cx, cy - 96 * s);
+            }
+
+            // ==========================================
+            // DRAW — CMB (Cosmic Microwave Background)
+            // ==========================================
+            function drawCMB(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Full-sky CMB map rendered as colored ellipse (Mollweide-like projection)
+                const rx = Math.min(w, h) * 0.42, ry = rx * 0.5;
+                // Base ellipse
+                const bgGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, rx);
+                bgGrd.addColorStop(0, "#1a0533"); bgGrd.addColorStop(1, "#000000");
+                ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+                ctx.fillStyle = bgGrd; ctx.fill();
+                // CMB temperature fluctuation patches
+                const patches = [
+                    { ox: 0.55, oy: 0.1, r: 0.18, col: "#ef4444", op: 0.6 },
+                    { ox: -0.6, oy: -0.15, r: 0.15, col: "#3b82f6", op: 0.55 },
+                    { ox: 0.1, oy: 0.3, r: 0.12, col: "#f97316", op: 0.5 },
+                    { ox: -0.3, oy: 0.2, r: 0.2, col: "#3b82f6", op: 0.45 },
+                    { ox: 0.7, oy: -0.2, r: 0.1, col: "#fbbf24", op: 0.5 },
+                    { ox: -0.5, oy: 0.3, r: 0.13, col: "#ef4444", op: 0.4 },
+                    { ox: 0.3, oy: -0.25, r: 0.16, col: "#60a5fa", op: 0.45 },
+                    { ox: -0.1, oy: -0.3, r: 0.14, col: "#f87171", op: 0.5 },
+                    { ox: 0.2, oy: 0.1, r: 0.09, col: "#fde68a", op: 0.4 },
+                    { ox: -0.75, oy: 0.05, r: 0.08, col: "#818cf8", op: 0.45 },
+                    { ox: 0.45, oy: 0.35, r: 0.1, col: "#34d399", op: 0.35 },
+                    { ox: -0.2, oy: 0.4, r: 0.11, col: "#f472b6", op: 0.35 },
+                ];
+                ctx.save(); ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.clip();
+                patches.forEach(p => {
+                    const px = cx + p.ox * rx, py = cy + p.oy * ry;
+                    const pr = p.r * rx;
+                    // Slow drift animation
+                    const drift = Math.sin(frame * 0.005 + p.ox * 5) * 2 * s;
+                    const pGrd = ctx.createRadialGradient(px + drift, py, 0, px + drift, py, pr);
+                    pGrd.addColorStop(0, p.col + Math.round(p.op * 255).toString(16).padStart(2, "0"));
+                    pGrd.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(px + drift, py, pr, 0, Math.PI * 2);
+                    ctx.fillStyle = pGrd; ctx.fill();
+                });
+                ctx.restore();
+                // Ellipse border
+                ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = "rgba(253,230,138,0.3)"; ctx.lineWidth = 1.5; ctx.stroke();
+                // Temperature scale legend
+                const legX = cx - rx * 0.4, legY = cy + ry + 22 * s;
+                const legW = rx * 0.8;
+                const legGrd = ctx.createLinearGradient(legX, legY, legX + legW, legY);
+                legGrd.addColorStop(0, "#3b82f6"); legGrd.addColorStop(0.5, "#fde68a"); legGrd.addColorStop(1, "#ef4444");
+                ctx.fillStyle = legGrd;
+                ctx.fillRect(legX, legY, legW, 6 * s);
+                ctx.fillStyle = "rgba(253,230,138,0.6)"; ctx.font = `${8*s}px monospace`; ctx.textAlign = "left";
+                ctx.fillText("Dingin (−0.0002 K)", legX, legY + 18 * s);
+                ctx.textAlign = "right";
+                ctx.fillText("Panas (+0.0002 K)", legX + legW, legY + 18 * s);
+
+                ctx.fillStyle = "rgba(253,230,138,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign = "center";
+                ctx.fillText("CMB — Cahaya Tertua Alam Semesta", cx, cy - ry - 16 * s);
+                ctx.fillStyle = "rgba(253,230,138,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Peta Langit Penuh · 380.000 Tahun Setelah Big Bang", cx, cy - ry - 3 * s);
+            }
+
+            // ==========================================
+            // DRAW — GANYMEDE
+            // ==========================================
+            function drawGanymede(ctx, cx, cy, frame, w, h) {
+                const s = deepZoom;
+                // Jupiter background (partial, large)
+                const jx = cx + 220 * s, jy = cy - 60 * s, jr = 130 * s;
+                const jupGrd = ctx.createRadialGradient(jx, jy, 0, jx, jy, jr);
+                jupGrd.addColorStop(0, "#fef3c7"); jupGrd.addColorStop(0.4, "#d97706");
+                jupGrd.addColorStop(0.8, "#92400e"); jupGrd.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(jx, jy, jr, 0, Math.PI * 2); ctx.fillStyle = jupGrd; ctx.fill();
+
+                // Ganymede body
+                const gr = 52 * s;
+                const gGrd = ctx.createRadialGradient(cx - gr * 0.3, cy - gr * 0.3, 0, cx, cy, gr);
+                gGrd.addColorStop(0, "#d1d5db");
+                gGrd.addColorStop(0.35, "#9ca3af");
+                gGrd.addColorStop(0.7, "#6b7280");
+                gGrd.addColorStop(1, "#374151");
+                ctx.beginPath(); ctx.arc(cx, cy, gr, 0, Math.PI * 2); ctx.fillStyle = gGrd; ctx.fill();
+
+                // Dark ancient terrain (regio gelap)
+                const darkRegions = [
+                    { ox: -0.3, oy: 0.2, rx: 0.35, ry: 0.25 },
+                    { ox: 0.25, oy: -0.3, rx: 0.28, ry: 0.18 },
+                    { ox: -0.1, oy: -0.15, rx: 0.2, ry: 0.15 },
+                ];
+                darkRegions.forEach(d => {
+                    ctx.beginPath();
+                    ctx.ellipse(cx + d.ox * gr, cy + d.oy * gr, d.rx * gr, d.ry * gr, d.ox, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(55,65,81,0.55)"; ctx.fill();
+                });
+                // Bright grooved terrain (sulci)
+                for (let i = 0; i < 8; i++) {
+                    const ang = (i / 8) * Math.PI * 2 + 0.3;
+                    const r1 = gr * 0.2, r2 = gr * 0.85;
+                    ctx.beginPath();
+                    ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1 * 0.6);
+                    ctx.lineTo(cx + Math.cos(ang + 0.25) * r2, cy + Math.sin(ang + 0.25) * r2 * 0.6);
+                    ctx.strokeStyle = `rgba(209,213,219,0.18)`; ctx.lineWidth = 2 * s; ctx.stroke();
+                }
+                // Craters
+                const craters = [[0.4, -0.3, 0.1], [-0.45, 0.1, 0.08], [0.1, 0.45, 0.07], [-0.2, -0.45, 0.06], [0.55, 0.2, 0.05]];
+                craters.forEach(([ox, oy, rs]) => {
+                    const cx2 = cx + ox * gr, cy2 = cy + oy * gr, cr = rs * gr;
+                    ctx.beginPath(); ctx.arc(cx2, cy2, cr, 0, Math.PI * 2);
+                    ctx.strokeStyle = "rgba(209,213,219,0.5)"; ctx.lineWidth = 1.5; ctx.stroke();
+                    ctx.beginPath(); ctx.arc(cx2, cy2, cr * 0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(156,163,175,0.3)"; ctx.fill();
+                });
+                // Magnetic field lines (unique feature for a moon)
+                for (let i = 0; i < 5; i++) {
+                    const a = (i / 5) * Math.PI + frame * 0.008;
+                    ctx.save(); ctx.translate(cx, cy);
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, (gr + 20 + i * 10) * s, (gr * 0.4 + i * 6) * s, a, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(56,189,248,${0.06 + i * 0.02})`; ctx.lineWidth = 1; ctx.stroke();
+                    ctx.restore();
+                }
+                // Label
+                ctx.fillStyle = "rgba(209,213,219,0.85)"; ctx.font = `bold ${12*s}px sans-serif`; ctx.textAlign = "center";
+                ctx.fillText("Ganymede", cx, cy + gr + 22 * s);
+                ctx.fillStyle = "rgba(209,213,219,0.45)"; ctx.font = `${9*s}px sans-serif`;
+                ctx.fillText("Bulan Terbesar Tata Surya · Lebih Besar dari Merkurius", cx, cy + gr + 37 * s);
+            }
+
+            // ==========================================
             // STARFIELD — latar bintang untuk semua view
             // ==========================================
             const STARS = Array.from({ length: 220 }, () => ({
@@ -2795,6 +3477,15 @@
                 else if (view === "jupiteraurora") drawJupiterAurora(ctx, cx, cy, frame, w, h);
                 else if (view === "starcluster") drawStarCluster(ctx, cx, cy, frame, w, h);
                 else if (view === "lightyear") drawLightYear(ctx, cx, cy, frame, w, h);
+                else if (view === "triton") drawTriton(ctx, cx, cy, frame, w, h);
+                else if (view === "oortcloud") drawOortCloud(ctx, cx, cy, frame, w, h);
+                else if (view === "laniakea") drawLaniakea(ctx, cx, cy, frame, w, h);
+                else if (view === "einsteinring") drawEinsteinRing(ctx, cx, cy, frame, w, h);
+                else if (view === "magnetarsgr") drawMagnetarSGR(ctx, cx, cy, frame, w, h);
+                else if (view === "iovolcanic") drawIoVolcanic(ctx, cx, cy, frame, w, h);
+                else if (view === "quarkstar") drawQuarkStar(ctx, cx, cy, frame, w, h);
+                else if (view === "cmb") drawCMB(ctx, cx, cy, frame, w, h);
+                else if (view === "ganymede") drawGanymede(ctx, cx, cy, frame, w, h);
                 else if (view === "milky" || view === "andromeda") drawGalaxy(ctx, cx, cy, frame, w, h, view);
                 else {
                     // Mode Tata Surya (Solar)
